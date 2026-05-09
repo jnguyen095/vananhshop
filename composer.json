@@ -1,0 +1,11 @@
+{
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.29",
+        "ramsey/uuid": "^4.7"
+    },
+    "config": {
+        "platform": {
+            "php": "8.0.6"
+        }
+    }
+}

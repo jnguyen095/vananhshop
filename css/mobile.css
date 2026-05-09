@@ -1,0 +1,134 @@
+@media (max-width: 767px) {
+	body{
+		background: none !important;
+	}
+	.banner {
+		background: none !important;
+	}
+
+	#carousel-custom {
+		width: 100% !important;
+	}
+
+	#carousel-custom .carousel-inner img {
+		height: auto !important;
+	}
+	.margin-left-10{
+		margin-left: 5px;
+	}
+
+	.mobile-block{
+		display: block;
+		text-align: left;
+		margin-bottom: -15px;
+	}
+
+	.hasInfo #mapInfo{
+		width: 100%;
+		height: auto;
+	}
+
+	.hasInfo #map{
+		width: 100%;
+	}
+	.nearme{
+		height: auto;
+		margin-top: 10px;
+	}
+	.nav-tabs>li.active>a{
+		border: none !important;
+		text-decoration: underline;
+	}
+	#mapTabs >li {
+		display: inline-block;
+		margin-bottom: -1px;
+	}
+
+	.no-padding-mobile{
+		padding: 0px !important;
+	}
+
+	.no-padding-right-mobile{
+		padding-right: 0px !important;
+	}
+	.text-left-mobile{
+		text-align: left !important;
+	}
+
+	.brief-box-item{
+		height: 82px;
+	}
+
+	.pc-hide{
+		display: block;
+	}
+
+	.brief-box-item .brief-detail h3 {
+		max-height: 37px;
+		overflow: hidden;
+	}
+	.briefHome{
+		height: auto !important;
+	}
+	.no-padding-left-mobile{
+		padding-left: 0px !important;
+	}
+	.breadcrumb > li{
+		display: none;
+	}
+	.breadcrumb.always > li{
+		display: inline-block;
+	}
+
+	.quickSearch{
+		width: 100%;
+	}
+	.quickSearch form input{
+		min-width: 50px;
+	}
+	img.imgBrief{
+		width: 100%;
+	}
+	.category-panel.affix{
+		position: static;
+	}
+	.affix .container.mcontainer{
+		border-bottom: none;
+	}
+	.category-panel.affix{
+		background: #f5f5f5;
+	}
+	.product-list{
+		margin-bottom:0px !important;
+		border-top: none !important;
+	}
+	.product-list:first-child{
+		border-top: solid 1px #d3d5d8 !important;
+	}
+	.product-list .product-title{
+		text-transform: none;
+	}
+	.bold{
+		font-weight: normal !important;
+	}
+
+	.home-group .block-header{
+		margin-bottom: 0px !important;
+	}
+
+	.product-title h3{
+		color: #555;
+	}
+}
+
+@media (max-width: 120px) {
+	.ipad-hide{
+		display: none !important;
+	}
+}
+
+@media (min-width: 992px){
+	.ipad-hide{
+		display: none !important;
+	}
+}
