@@ -87,7 +87,7 @@
 				<div class="product-panel col-md-12  no-margin no-padding">
 					<table id="tbProducts" class="table table-responsive table-bordered">
 						<thead>
-						<tr class="bg-success">
+						<tr class="bg-info">
 							<td class="col-sm-1">#</td>
 							<td class="col-sm-2"></td>
 							<td>Sản phẩm</td>

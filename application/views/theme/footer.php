@@ -21,6 +21,7 @@
 				<div class="menu_bottom">
 					<ul>
 						<li><a href="<?=base_url('/bao-gia-si.html')?>">Báo giá</a></li>
+						<li><a href="<?=base_url('/doi-tra-hang.html')?>">Đổi trả hàng</a></li>
 						<li><a href="<?=base_url('/dieu-khoan-su-dung.html')?>">Điều khoản thỏa thuận</a></li>
 						<li><a href="<?=base_url('/quy-che-hoat-dong.html')?>">Quy chế hoạt động</a></li>
 						<li><a href="<?=base_url('/cau-hoi-thuong-gap.html')?>">Câu hỏi thường gặp</a></li>
@@ -34,15 +35,32 @@
 	</div>
 
 	<div class="container container-bottom">
-		<div class="copyright text-center">
-			<div>Vân Anh Shop © 2026</div>
-			<div>Hotline: <b>0865.053.860</b> | Email: info@vananhshop.com</div>
-			<div>
-				<a href="http://zalo.me/0778763790"><i class="fa fa-zalo"></i>
-				<a href="https://www.facebook.com/vanhanhshopbmt" target="_blank"><i class="fa fa-face"></i></a>
+		<div class="row">
+			<div class="col-lg-5">
+				<div class="footer-logo"></div>
+				<div class="footer-address">
+					<div class="h2title">Vân Anh Shop</div>
+					<ul>
+						<li><i class="glyphicon glyphicon-map-marker text-danger"></i> C/c 4S, Đường 30, Phường Hiệp Bình, Tp Hồ Chí Minh </li>
+						<li><i class="glyphicon glyphicon-map-marker text-danger"></i> 101 Phạm Ngũ Lão, Buôn Ma Thuột, ĐăkLăk</li>
+					</ul>
+				</div>
+				<div class="clear-both"></div>
+
 			</div>
-			<div>Mua sỉ liên hệ zalo hoặc vào đây <a class="text-primary" href="<?=base_url('/bao-gia-si.html')?>">BÁO GIÁ</a> để chọn sản phẩm gửi báo giá</div>
+			<div class="col-lg-7">
+				<div class="copyright text-center">
+					<div><strong>© 2026</strong></div>
+					<div>Hotline: <b>0865.053.860</b> | Email: info@vananhshop.com</div>
+					<div>
+						<a href="http://zalo.me/0778763790"><img src="<?=base_url('/img/zalo-icon.png')?>"/></a>
+						<a href="https://www.facebook.com/vanhanhshopbmt" target="_blank"><img src="<?=base_url('/img/face-icon.png')?>"/></a>
+					</div>
+					<div>Mua sỉ liên hệ zalo hoặc vào đây <a class="text-primary" href="<?=base_url('/bao-gia-si.html')?>">BÁO GIÁ</a> để chọn sản phẩm gửi báo giá</div>
+				</div>
+			</div>
 		</div>
+
 	</div>
 </nav>
 

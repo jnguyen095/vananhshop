@@ -11,7 +11,7 @@
 </head>
 <body>
 <?php $this->load->view('/common/analyticstracking')?>
-<div class="container-fluid">
+<div class="container-fluid no-padding-left no-padding-right">
 	<?php $this->load->view('/theme/header')?>
 
 	<div class="row no-margin">

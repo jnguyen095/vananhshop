@@ -293,7 +293,8 @@ a:focus, a{
 
 .container-bottom{
 	background-color: #FFFFFF !important;
-	color: #000000;
+	color: #365899;
+	margin-bottom: 5px;
 }
 
 .margin-left-10{
@@ -1753,7 +1754,7 @@ div.main-image{
 }
 
 .fa-zalo{
-	background-image: url('../img/zalo_icon.png');
+	background-image: url('../img/zalo-icon.png');
 	width: 24px;
 	height: 24px;
 	vertical-align: bottom;
@@ -1761,17 +1762,29 @@ div.main-image{
 	display: block;
 }
 .fa-face{
-	background-image: url('../img/face_icon.png');
-	width: 24px;
-	height: 24px;
-	vertical-align: bottom;
-	background-color: #ffffff;
-	display: block;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEyOCAxMjgiIGhlaWdodD0iMTI4cHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxMjggMTI4IiB3aWR0aD0iMTI4cHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxnPjxyZWN0IGZpbGw9IiMwMDg0RkYiIGhlaWdodD0iMTI4IiB3aWR0aD0iMTI4Ii8+PC9nPjxwYXRoIGQ9Ik02NCwxNy41MzFjLTI1LjQwNSwwLTQ2LDE5LjI1OS00Niw0My4wMTVjMCwxMy41MTUsNi42NjUsMjUuNTc0LDE3LjA4OSwzMy40NnYxNi40NjIgIGwxNS42OTgtOC43MDdjNC4xODYsMS4xNzEsOC42MjEsMS44LDEzLjIxMywxLjhjMjUuNDA1LDAsNDYtMTkuMjU4LDQ2LTQzLjAxNUMxMTAsMzYuNzksODkuNDA1LDE3LjUzMSw2NCwxNy41MzF6IE02OC44NDUsNzUuMjE0ICBMNTYuOTQ3LDYyLjg1NUwzNC4wMzUsNzUuNTI0bDI1LjEyLTI2LjY1N2wxMS44OTgsMTIuMzU5bDIyLjkxLTEyLjY3TDY4Ljg0NSw3NS4yMTR6IiBmaWxsPSIjRkZGRkZGIiBpZD0iQnViYmxlX1NoYXBlIi8+PC9zdmc+) center no-repeat #0084ff;
+	width: 60px;
+	height: 60px;
+	text-align: center;
+	bottom: 24px;
+	border: 0;
+	outline: 0;
+	-webkit-border-radius: 60px;
+	box-shadow: 0 1px 6px rgba(0, 0, 0, .06), 0 2px 32px rgba(0, 0, 0, .16);
+	-webkit-transition: box-shadow .2s ease;
+	background-size: 80%;
+	transition: all .2s ease-in-out;
 }
 
 .copyright div > a{
 	display: inline-block;
 	margin-left: 5px;
+}
+
+.copyright div > a > img{
+	width: 40px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 form.inde-value{
@@ -1785,6 +1798,23 @@ form.inde-value #decrease, .decreaseBtn{
 	border-radius: 8px 0 0 8px;
 	height: 36px;
 	margin-top:-3px;
+}
+
+.footer-logo{
+	width: 130px;
+	height: 130px;
+	border-radius: 120px;
+	background: url(../img/vananh-sm-icon.png) no-repeat center;
+	display: block;
+	float: left;
+	margin-right: 10px;
+	margin-top: 5px;
+}
+.footer-address{
+	margin-top: 20px;
+}
+.footer-address .h2title{
+	margin-bottom: 10px;
 }
 
 form.inde-value #increase, .increaseBtn{
