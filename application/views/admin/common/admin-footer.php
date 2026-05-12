@@ -13,5 +13,5 @@
 	Developed by <a href="mailto:nguyennhukhangvn@gmail.com">Khang Nguyen</a>
 	</div>
 	<!-- Default to the left -->
-	<strong>Copyright &copy; 2025 <a href="http://lamnongvui.com">Vân Anh Shop</a>.</strong> All rights reserved.
+	<strong>Copyright &copy; 2026 <a href="http://vananhshop.com">Vân Anh Shop</a>.</strong> All rights reserved.
 </footer>

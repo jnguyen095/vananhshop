@@ -95,24 +95,20 @@
 				?>
 			</div>
 			<div class="row margin-top-20">
-				<div class="col-lg-12">
+				<div class="col-lg-12 inline-btns">
 					<label class="form-check-label" for="inlineFormCheck">
 						Số lượng:
 					</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-sm-4 col-xs-4">
 					<form class="inde-value">
 						<div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
 						<input type="number" id="quantity" name="quantity" value="1" class="form-control"/>
 						<div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
 					</form>
+					<a id="btnBuy" productId="<?=$product->ProductID?>" href="#" class="btn btn-primary buyableBtn">Thêm Vào Giỏ Hàng</a>
 				</div>
-				<div class="col-lg-6 col-sm-6 col-xs-4"><a id="btnBuy" productId="<?=$product->ProductID?>" href="#" class="btn btn-primary buyableBtn">Thêm Vào Giỏ Hàng</a></div>
 			</div>
 
-			<div class="row">
+			<div class="row productDetails">
 				<?=$product->Brief?>
 			</div>
 		</div>

@@ -15,7 +15,7 @@
 
 	<div class="container-fluid no-padding-left no-padding-right">
 		<div class="row no-margin">
-			<div id='carousel-custom' class='carousel slide hot-product fix-height-standard' data-interval="5000" data-ride='carousel'>
+			<div id='carousel-custom' class='carousel slide hot-product' data-interval="5000" data-ride='carousel'>
 				<div class='carousel-outer'>
 					<ol class="carousel-indicators">
 						<?php

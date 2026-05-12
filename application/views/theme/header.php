@@ -10,13 +10,14 @@
 <nav class="navbar navbar-default m-navbar">
 	<div class="container no-background-color">
 		<div class="row no-margin display-flex">
-			<div class="col-md-3">
-				<a class="navbar-brand brandName ipad-mini-hide hidden-md" href="<?=base_url('/')?>">
+			<div class="col-md-3 col-sm-12">
+				<a class="navbar-brand brandName" href="<?=base_url('/')?>">
 					<img src="<?=base_url('/img/vananh_logo.png')?>" atl="Vân Anh Shop Logo"/>
 				</a>
+				<div class="clear-both"></div>
 			</div>
 			
-			<div class="col-md-9 text-right">
+			<div class="col-md-9 col-sm-12 text-right">
 				<div class="top-header-icon-container">
 					<img class="top-header-hotline-icon" src="<?=base_url('/img/hotline-icon.png')?>" alt="Hotline"/>
 				</div>
@@ -24,14 +25,14 @@
 					<div><strong>Hotline:</strong></div>
 					<div>0865.053.860</div>
 				</div>
-			
+
 				<div class="top-header-icon-container">
 					<img class="top-header-truck-icon" src="<?=base_url('/img/truck-icon.png')?>" alt="Hotline"/>
 				</div>
 				<div class="top-header-hotline text-left">
 					<div>Giao hàng toàn quốc</div>
 				</div>
-			
+
 				<ul class="nav navbar-nav navbar-right">
 					<li role="presentation" class="dropdown">
 						<a id="myHeaderCart" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">

@@ -1788,9 +1788,9 @@ div.main-image{
 }
 
 form.inde-value{
-	width: 150px;
-	margin: 0 auto;
 	text-align: center;
+	margin-right: 10px;
+	margin-left: 10px;
 }
 
 form.inde-value #decrease, .decreaseBtn{
@@ -1798,6 +1798,10 @@ form.inde-value #decrease, .decreaseBtn{
 	border-radius: 8px 0 0 8px;
 	height: 36px;
 	margin-top:-3px;
+}
+
+.form-check-label{
+	margin-top: 10px;
 }
 
 .footer-logo{
@@ -1988,6 +1992,17 @@ input[type=number]{
     grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
     margin-bottom: 0;
 }
+@media (max-width: 767px) {
+	.ul-cate-collections {
+		grid-template-columns: 25% 25% 25% 25%;
+	}
+}
+
+@media (min-width: 767px) and (max-width: 1199px) {
+	.ul-cate-collections {
+		grid-template-columns: 20% 20% 20% 20% 20%;
+	}
+}
 
 .ul-cate-collections li {
     display: inline-block;
@@ -2033,4 +2048,11 @@ input[type=number]{
     margin-bottom: 10px;
 }
 
+.productDetails{
+	padding: 15px;
+}
+
+.inline-btns{
+	display: inline-flex;
+}
 
