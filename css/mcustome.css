@@ -73,11 +73,6 @@ img.middleHorizontalBanner {
 	background-color: #0190db;
 }
 
-.breadcrumb{
-	margin-left: -15px;
-	margin-right: -15px;
-}
-
 .breadcrumb .container li{
 	display: inline-block;
 }

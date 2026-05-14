@@ -47,7 +47,7 @@
 
 				<div class="card">
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item text-center">
+						<li class="list-group-item text-center mobile-hide">
 							<div class="progresses">
 								<?php
 								if($order->Status == ORDER_STATUS_CANCEL) {
@@ -85,7 +85,7 @@
 							</div>
 						</li>
 						<li class="list-group-item no-padding">
-							<div class="card-body">
+							<div class="card-body  table-responsive">
 								<table class="productDetailTable table no-margin">
 									<thead class="thead-table">
 									<tr class="bg-info">
@@ -163,8 +163,8 @@
 						<li class="list-group-item">
 							<form>
 								<div class="form-group row">
-									<label class="col-sm-2 col-form-label">Người nhận hàng:</label>
-									<div class="col-sm-10"><?=$shippingAddr->Receiver?></div>
+									<label class="col-lg-2 col-sm-4 col-form-label">Người nhận hàng:</label>
+									<div class="col-lg-10 col-sm-6"><?=$shippingAddr->Receiver?></div>
 								</div>
 								<div class="form-group row">
 									<label for="inputPassword" class="col-sm-2 col-form-label">Số ĐT:</label>
