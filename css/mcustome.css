@@ -358,7 +358,7 @@ a:focus, a{
 
 .cat-image{
 	width: 100%;
-	height: 200px;
+	max-height: 200px;
 	margin-bottom: 13px;
 }
 

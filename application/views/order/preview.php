@@ -11,9 +11,7 @@
 <head>
 	<head>
 		<meta charset = "utf-8">
-		<meta name="description" content="Tin Bất động sản, Rao tin miễn phí, tin bất động sản miễn phí">
-		<meta name="keywords" content="Tin Bất động sản, Rao tin miễn phí, tin bất động sản miễn phí">
-		<title>Vân Anh Shop | Đăng Tin Rao Miễn Phí | Tạo Tin Bất Động Sản</title>
+		<title>Vân Anh Shop | Xem Chi Tiết Đơn Hàng</title>
 		<?php $this->load->view('common_header')?>
 		<link rel="stylesheet" href="<?=base_url('/css/stepbar.css')?>">
 		<link rel="stylesheet" href="<?=base_url('/css/jquery.mCustomScrollbar.min.css')?>" />

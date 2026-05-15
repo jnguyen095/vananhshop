@@ -2,20 +2,8 @@
 <html lang = "en">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta http-equiv="audience" content="general" />
-	<meta name="resource-type" content="document" />
-	<meta name="abstract" content="Hạt giống hoa, cây trồng, dụng cụ làm vườn" />
-	<meta name="classification" content="Hạt giống hoa, cây trồng, dụng cụ làm vườn" />
-	<meta name="area" content="Hạt giống hoa, cây trồng, dụng cụ làm vườn" />
-	<meta name="placename" content="Việt Nam" />
-	<meta name="author" content="lamvuonvui.com" />
-	<meta name="copyright" content="©2025 lamvuonvui.com" />
-	<meta name="owner" content="lamvuonvui.com" />
-	<meta name="distribution" content="Global" />
 	<meta name="description" content="Báo giá sản phẩm">
 	<meta name="keywords" content="<?=keyword_maker('Báo giá sản phẩm')?>">
-	<meta name="revisit-after" content="1 days" />
-	<meta name="robots" content="follow" />
 	<title>Báo giá sản phẩm</title>
 	<?php $this->load->view('common_header')?>
 	<?php $this->load->view('/common/googleadsense')?>
@@ -30,7 +18,7 @@
 		<ul class="breadcrumb">
 			<div class="container">
 				<li><a href="<?=base_url().'trang-chu.html'?>">Trang Chủ</a></li>
-				<li class="active">Báo Giá Sỉ</li>
+				<li class="active">Báo Giá</li>
 			</div>
 		</ul>
 
@@ -59,7 +47,7 @@
 			}?>
 
 			<div class="col-md-8 no-margin no-padding">
-				<div class="search-result-panel col-md-12">Báo Giá Sỉ</div>
+				<div class="search-result-panel col-md-12">Báo Giá</div>
 				<div class="product-panel col-md-5 no-padding-left margin-bottom-20">
 					<select id="cmCatId" class="form-control" name="CatId">
 						<option value="-1">Tất cả danh mục</option>

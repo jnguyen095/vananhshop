@@ -8,12 +8,12 @@
 </head>
 <body>
 
-<div class="container-fluid">
+<div class="container-fluid no-padding-left no-padding-right">
 	<?php $this->load->view('/theme/header')?>
+	<?php $this->load->view('/common/user-menu')?>
+
 
 	<div class="container no-padding">
-		<?php $this->load->view('/common/user-menu')?>
-
 		<div class="row no-margin">
 			<div class="col-lg-12">
 				<div class="col-md-6 well login-panel no-background">

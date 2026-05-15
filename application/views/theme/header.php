@@ -35,7 +35,7 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<li role="presentation" class="dropdown">
-						<a id="myHeaderCart" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
+						<a id="myHeaderCart" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
 							<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;<?=$this->cart->total_items();?> sản phẩm <?=number_format($this->cart->total())?>đ
 							<span class="caret"></span>
 						</a>
@@ -47,7 +47,7 @@
 					if($this->session->userdata('phone') != null){
 						?>
 						<li role="presentation" class="dropdown">
-							<a href="<?=base_url('/thong-tin-ca-nhan.html')?>" role="button" aria-haspopup="true" aria-expanded="false">
+							<a href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
 								<i class="glyphicon glyphicon-user"></i>&nbsp;<?=$this->session->userdata('fullname')?>
 								<span class="caret"></span>
 							</a>
@@ -55,7 +55,7 @@
 								<?php
 								if($this->session->userdata('usergroup') != null && $this->session->userdata('usergroup') == 'ADMIN') {
 									?>
-									<li><a href="<?= base_url('/admin/dashboard.html') ?>">Admin</a></li>
+									<li><a href="<?= base_url('/admin/dashboard.html') ?>">Quản Lý</a></li>
 									<?php
 								}
 								?>
@@ -98,7 +98,7 @@
 					foreach($categories as $parent) {
 						if(count($parent['nodes']) > 0){
 							echo '<li role="presentation" class="dropdown">
-								<a  href="'.base_url().seo_url($parent['CatName']).'-c'.$parent['CategoryID']. '.html" role="button" aria-haspopup="true" aria-expanded="false">
+								<a href="'.base_url().seo_url($parent['CatName']).'-c'.$parent['CategoryID']. '.html" role="button" aria-haspopup="true" aria-expanded="false">
 											'.$parent['CatName'].' <span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">';

@@ -11,7 +11,7 @@
 <head>
 	<head>
 		<meta charset = "utf-8">
-		<title>Vân Anh Shop | Quản Lý Đơn Hàng</title>
+		<title>Vân Anh Shop | Quản Lý Đơn Hàng - <?=$order->Code?></title>
 		<?php $this->load->view('common_header')?>
 		<script src="<?= base_url('/js/createpost.js') ?>"></script>
 		<script src="<?=base_url('/js/bootbox.min.js')?>"></script>
@@ -20,23 +20,27 @@
 </head>
 <body>
 <?php $this->load->view('/common/analyticstracking')?>
-<div class="container-fluid">
+<div class="container-fluid no-padding-left no-padding-right">
 	<?php $this->load->view('/theme/header')?>
+	<?php $this->load->view('/common/user-menu')?>
 
+	<div class="col-lg-12 col-sm-12 no-padding-left no-padding-right">
+		<ul itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb always">
+			<div class="container">
+				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="<?php echo base_url('/quan-ly-don-hang.html')?>"><span itemprop="name">Đơn hàng</span></a></li>
+				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="active mobile-hide"><span itemprop="item"><span itemprop="name">Chi tiết đơn hàng <?=$order->Code?></span></span></li>
+			</div>
+		</ul>
+	</div>
 
 	<div class="container no-padding">
-		<?php $this->load->view('/common/user-menu')?>
-
 		<div class="row no-margin">
 			<?php
 			$attributes = array("id" => "frmOrder", "class" => "custom-input");
 			echo form_open("don-hang-".$order->OrderID, $attributes);
 			?>
 			<div class="col-lg-12 col-sm-12">
-				<ul itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb always">
-					<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="<?php echo base_url('/quan-ly-don-hang.html')?>"><span itemprop="name">Đơn hàng</span></a></li>
-					<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="active mobile-hide"><span itemprop="item"><span itemprop="name">Chi tiết đơn hàng <?=$order->Code?></span></span></li>
-				</ul>
+
 
 				<?php if(!empty($message_response)){
 					echo '<div class="alert alert-success">';
