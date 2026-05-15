@@ -79,8 +79,8 @@
 									?>
 
 									<div class="col-lg-3">
-										<div class="cat-wrap">
-											<div class="cat-img"><img src="<?=base_url('/img/category/'.$item['Image'])?>"></div>
+										<div class="cat-wrap text-center">
+											<div class="cat-img"><a href="<?=base_url(seo_url($item['CatName'].'-c'.$item['CategoryID']).'.html')?>"><img src="<?=base_url('/img/category/'.$item['Image'])?>"></a></div>
 											<div class="cat-header-title text-center">
 												<a href="<?=base_url(seo_url($item['CatName'].'-c'.$item['CategoryID']).'.html')?>"><?=$item['CatName']?></a>
 											</div>

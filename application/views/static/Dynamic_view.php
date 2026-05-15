@@ -42,7 +42,7 @@
 				</div>
 				<div class="col-md-9 no-margin no-padding">
 					<div class="search-result-panel col-md-12"><?=$page->Title?></div>
-					<div class="product-panel col-md-12  no-margin no-padding">
+					<div class="product-panel col-md-12 no-margin no-padding">
 						<?=$page->Description?>
 					</div>
 				</div>

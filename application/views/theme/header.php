@@ -17,7 +17,7 @@
 				<div class="clear-both"></div>
 			</div>
 			
-			<div class="col-md-9 col-sm-12 text-right">
+			<div class="col-md-9 col-sm-12 text-sm-right text-left">
 				<div class="top-header-icon-container">
 					<img class="top-header-hotline-icon" src="<?=base_url('/img/hotline-icon.png')?>" alt="Hotline"/>
 				</div>
@@ -84,6 +84,7 @@
 		<div class="container">
 			
 			<div class="navbar-header">
+				<span id="category" class="visible-xs">Danh Mục Sản Phẩm</span>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar4">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
@@ -111,7 +112,7 @@
 						}
 					}
 					?>
-					<li role="presentation"><a href="<?=base_url('bao-gia-si.html')?>">Mua Sỉ</a> </li>
+					<li role="presentation"><a href="<?=base_url('bao-gia-si.html')?>">Báo giá</a> </li>
 					<li role="presentation"><a href="<?=base_url('ve-chung-toi.html')?>">Về chúng tôi</a> </li>
 				</ul>
 

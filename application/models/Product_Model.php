@@ -468,7 +468,7 @@ class Product_Model extends CI_Model
 		$this->db->update('product', $updateData);
 
 		$this->saveProductAssets($productId, $assets);
-		$this->saveProductDetail($productId, $newdatadetail);
+		// $this->saveProductDetail($productId, $newdatadetail);
 		// update
 		return $productId;
 	}
@@ -568,9 +568,9 @@ class Product_Model extends CI_Model
 
 	public function deleteById($productId){
 		$this->db->delete('productasset', array('ProductID' => $productId));
-		$this->db->delete('productdetail', array('ProductID' => $productId));
-		$this->db->delete('sitemap', array('ProductID' => $productId));
-		$this->db->delete('purchasehistory', array('ProductID' => $productId));
+		// $this->db->delete('productdetail', array('ProductID' => $productId));
+		//$this->db->delete('sitemap', array('ProductID' => $productId));
+		//$this->db->delete('purchasehistory', array('ProductID' => $productId));
 		$this->db->delete('product', array('ProductID' => $productId));
 	}
 

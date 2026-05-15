@@ -54,7 +54,7 @@ img.img-sm {
 .m-navbar{
 	background-color: transparent; /*#365899;*/
 	margin-bottom: 0px;
-	margin-top: 15px;
+	margin-top: 8px;
 }
 
 .m-navbar li a{
@@ -1923,9 +1923,10 @@ input[type=number]{
 }
 
 .carousel-category .item img{
-	width: 100%;
+	max-width: 250px;
 	height: 200px;
 	padding: 15px;
+	overflow: hidden;
 }
 
 .carousel-control-prev-icon,
@@ -1991,12 +1992,35 @@ input[type=number]{
 	.ul-cate-collections {
 		grid-template-columns: 25% 25% 25% 25%;
 	}
+	div.main-image{
+		width: 200px
+	}
 }
 
 @media (min-width: 767px) and (max-width: 1199px) {
 	.ul-cate-collections {
 		grid-template-columns: 20% 20% 20% 20% 20%;
 	}
+	div.main-image{
+		width: 300px
+	}
+}
+
+.navbar-header #category {
+	float: left;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 40px;
+	color: #fff;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+	margin-top:5px;
+}
+
+.navbar-default .navbar-toggle{
+	border-color: #fff!important;
+}
+.navbar-default .navbar-toggle .icon-bar{
+	background-color: #fff!important;
 }
 
 .ul-cate-collections li {

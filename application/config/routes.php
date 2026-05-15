@@ -154,7 +154,7 @@ $route['tuyen-dung'] = "StaticPage_controller/carer";
 $route['cau-hoi-thuong-gap'] = "StaticPage_controller/qna";
 $route['bao-gia-dich-vu'] = "StaticPage_controller/payment";
 $route['ve-chung-toi'] = "StaticPage_controller/about";
-$route['doi-tra-hang'] = "StaticPage_controller/return";
+$route['doi-tra-hang'] = "StaticPage_controller/returnRefund";
 $route['khong-tim-thay'] = "Notfound_controller";
 
 //Advertise handle

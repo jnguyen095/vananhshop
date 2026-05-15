@@ -156,4 +156,23 @@ class StaticPage_controller extends CI_Controller
 		$this->StaticPage_Model->updateViewForPageWithCode('ABOUTUS');
 		$this->load->view("/static/Dynamic_view", $data);
 	}
+
+	// doi tra hang
+	public function returnRefund(){
+// begin file cached
+		$this->load->driver('cache');
+		$categories = $this->cache->file->get('categories');
+		if(!$categories){
+			$categories = $this->Category_Model->getActiveCategories();
+			$this->cache->file->save('categories', $categories, 1440);
+		}
+
+		$data['categories'] = $categories;
+		// end file cached
+
+		$page = $this->StaticPage_Model->findByCode('RETURN-REFUND');
+		$data['page'] = $page;
+		$this->StaticPage_Model->updateViewForPageWithCode('RETURN-REFUND');
+		$this->load->view("/static/Dynamic_view", $data);
+	}
 }

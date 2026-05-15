@@ -46,7 +46,7 @@
 	
 	<div class="container">
 	<div class="row margin-bottom-20 margin-top-20">
-		<div class="col-sm-6">
+		<div class="col-lg-6">
 			<div class="thumbnails">
 				<?php
 				if(count($product->Assets) > 0){
@@ -65,7 +65,7 @@
 			</div>
 			<div class="clear-both"></div>
 		</div>
-		<div class="col-sm-6">
+		<div class="col-lg-6">
 			<div class="product-title">
 				<h1 class="h1Class" itemprop="name"><?php echo $product->Title?></h1>
 			</div>
