@@ -7,14 +7,16 @@
 	<meta name="keywords" content="<?=keyword_maker($category->CatName)?>">
 	<meta name="revisit-after" content="1 days" />
 	<meta name="robots" content="follow" />
-	<title><?php echo $category->CatName?></title>
+	<title><?php echo $category->CatName?> | Vân Anh Shop</title>
 	<?php $this->load->view('common_header')?>
 	<?php $this->load->view('/common/googleadsense')?>
 	<?php $this->load->view('/common/facebook-pixel-tracking')?>
 </head>
 
 <body>
+
 <?php $this->load->view('/common/analyticstracking')?>
+
 <div class="container-fluid no-padding-left no-padding-right">
 
 <?php $this->load->view('/theme/header')?>

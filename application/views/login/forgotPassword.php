@@ -3,7 +3,7 @@
 <head>
 	<head>
 		<meta charset = "utf-8">
-		<title>Vân Anh Shop - Quên Mật Khẩu</title>
+		<title>Quên Mật Khẩu | Vân Anh Shop</title>
 		<?php $this->load->view('common_header')?>
 		<?php $this->load->view('/common/googleadsense')?>
 		<link rel="stylesheet" href="<?=base_url('/css/iCheck/all.css')?>">

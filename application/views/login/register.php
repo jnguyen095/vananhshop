@@ -3,7 +3,7 @@
 <head>
 	<head>
 		<meta charset = "utf-8">
-		<title>Vân Anh Shop | Đăng Ký</title>
+		<title>Đăng Ký Tài Khoản | Vân Anh Shop</title>
 		<?php $this->load->view('common_header')?>
 		<?php $this->load->view('/common/googleadsense')?>
 	</head>

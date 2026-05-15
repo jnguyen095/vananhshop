@@ -3,21 +3,11 @@
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta http-equiv="audience" content="general" />
-	<meta name="resource-type" content="document" />
-	<meta name="abstract" content="Hạt giống hoa, cây trồng, dụng cụ làm vườn" />
-	<meta name="classification" content="Hạt giống hoa, cây trồng, dụng cụ làm vườn" />
-	<meta name="area" content="Hạt giống hoa, cây trồng, dụng cụ làm vườn" />
-	<meta name="placename" content="Việt Nam" />
-	<meta name="author" content="lamnongvui.com" />
-	<meta name="copyright" content="©2015 lamnongvui.com" />
-	<meta name="owner" content="lamnongvui.com" />
-	<meta name="distribution" content="Global" />
 	<meta name="description" content="<?=$product->Title?>">
 	<meta name="keywords" content="<?=keyword_maker($product->Title)?>">
 	<meta name="revisit-after" content="1 days" />
 	<meta name="robots" content="follow" />
-	<title><?php echo $product->Title?></title>
+	<title><?php echo $product->Title?> | Vân Anh Shop</title>
 	<?php $this->load->view('common_header')?>
 	<link rel="stylesheet" href="<?=base_url('/css/jquery.mCustomScrollbar.min.css')?>" />
 	<link rel="stylesheet" href="<?=base_url('/css/iCheck/all.css')?>">
@@ -28,6 +18,9 @@
 </head>
 
 <body>
+
+<?php $this->load->view('/common/analyticstracking')?>
+
 <div class="container-fluid productDetailPage no-padding-left no-padding-right">
 <?php $this->load->view('/theme/header')?>
 

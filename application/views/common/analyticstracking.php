@@ -6,7 +6,7 @@
  * Time: 5:57 PM
  */
 ?>
-<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?=GOOGLE_ANALYTIC_ID?>"></script>
 <script>
 	window.dataLayer = window.dataLayer || [];

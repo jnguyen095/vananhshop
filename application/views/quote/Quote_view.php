@@ -4,7 +4,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="description" content="Báo giá sản phẩm">
 	<meta name="keywords" content="<?=keyword_maker('Báo giá sản phẩm')?>">
-	<title>Báo giá sản phẩm</title>
+	<title>Báo giá sản phẩm | Vân Anh Shop</title>
 	<?php $this->load->view('common_header')?>
 	<?php $this->load->view('/common/googleadsense')?>
 	<?php $this->load->view('/common/facebook-pixel-tracking')?>
