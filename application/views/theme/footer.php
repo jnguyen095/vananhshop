@@ -56,7 +56,7 @@
 						<a href="http://zalo.me/0778763790"><img src="<?=base_url('/img/zalo-icon.png')?>"/></a>
 						<a href="https://www.facebook.com/vanhanhshopbmt" target="_blank"><img src="<?=base_url('/img/face-icon.png')?>"/></a>
 					</div>
-					<div>Mua sỉ liên hệ zalo hoặc vào đây <a class="text-primary" href="<?=base_url('/bao-gia-si.html')?>">BÁO GIÁ</a> để chọn sản phẩm gửi báo giá</div>
+					<div>Mua sỉ liên hệ zalo hoặc vào<a class="text-primary" href="<?=base_url('/bao-gia-si.html')?>">BÁO GIÁ</a> để chọn sản phẩm gửi báo giá</div>
 				</div>
 			</div>
 		</div>
