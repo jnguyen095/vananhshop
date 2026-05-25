@@ -154,7 +154,7 @@ class StaticPage_controller extends CI_Controller
 		$page = $this->StaticPage_Model->findByCode('ABOUTUS');
 		$data['page'] = $page;
 		$this->StaticPage_Model->updateViewForPageWithCode('ABOUTUS');
-		$this->load->view("/static/Dynamic_view", $data);
+		$this->load->view("/static/AboutUs_view", $data);
 	}
 
 	// doi tra hang
