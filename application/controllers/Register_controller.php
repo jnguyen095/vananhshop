@@ -66,12 +66,12 @@ class Register_controller extends CI_Controller
 					$newdata['email'] = $email;
 					$newdata['phone'] = $phone;
 
-					$this->User_Model->addNewUser($newdata, USER_GROUP_CUSTOMER);
+					// $this->User_Model->addNewUser($newdata, USER_GROUP_CUSTOMER);
 					$this->session->set_flashdata('message_response', 'Đăng ký tài khoản thành công, hãy đăng nhập');
 					if($email != null && valid_email($email)){
 						my_send_email($email,"Vananhshop.com - Đăng ký tài khoản thành công", "<p>Đăng nhập tại đây: https://vananhshop.com/dang-nhap.html</p>" );
 					}
-					redirect('dang-nhap');
+					// redirect('dang-nhap');
 				}
 			}
 		}

@@ -162,7 +162,7 @@ class Login_controller extends CI_Controller
 					$tempRandomStr = random_string('alnum', 10);
 					$tempPassword = md5($tempRandomStr);
 					$this->User_Model->updatePasswordByEmail($email, $tempPassword);
-					my_send_email($email,base_url() . " - Quên Mật Khẩu " . $phone, "<p>Mật khẩu mới: $tempRandomStr</p><p>Đăng nhập tại đây: " . APP_DOMAIN . "/dang-nhap.html</p>" );
+					my_send_email($email,"Vananhshop.com - Quên Mật Khẩu", "<p>Mật khẩu mới: $tempRandomStr</p><p>Đăng nhập tại đây: " . APP_DOMAIN . "/dang-nhap.html</p>" );
 					$this->session->set_flashdata('message_response', 'Mật khẩu mới đã gửi vào email, vui lòng kiểm tra');
 					redirect('dang-nhap');
 					//$data['message_response'] = 'Mật khẩu mới đã gửi vào email, vui lòng kiểm tra';

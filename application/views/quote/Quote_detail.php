@@ -21,8 +21,8 @@
 	<div style="margin-top:10px" >
 		<table style="width: 100%;margin-bottom: 10px">
 			<tr>
-				<td><a href="<?=base_url('/')?>"><img style="width: 80px" src="<?=base_url('/img/logo_tree_only.png')?>"></a></td>
-				<td style="font-size: 20px;text-align: left">Vân Anh Shop - Báo Giá</td>
+				<td style="width: 150px; text-align: center"><a href="<?=base_url('/')?>"><img style="width: 80px" src="<?=base_url('/img/vananh_logo_trans.png')?>" alt="Vân Anh Shop Logo"/><br/>https://vananhshop.com</a></td>
+				<td style="font-size: 28px;text-align: center;vertical-align: top;">Báo Giá</td>
 			</tr>
 		</table>
 

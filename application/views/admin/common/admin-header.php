@@ -11,10 +11,10 @@
 	<!-- Logo -->
 	<a href="<?=base_url('/')?>" class="logo">
 		<!-- mini logo for sidebar mini 50x50 pixels -->
-		<span class="logo-mini"><b>LNVui</b></span>
+		<span class="logo-mini"><b>VA</b></span>
 		<!-- logo for regular state and mobile devices -->
 		<span class="logo-lg">
-			<img src="<?=base_url('/img/vananh_logo_trans.png')?>" atl="Vân Anh Shop Logo"/>
+			<img src="<?=base_url('/img/vananhshop_transparent_yellow.png')?>" atl="Vân Anh Shop Logo"/>
 		</span>
 	</a>
 

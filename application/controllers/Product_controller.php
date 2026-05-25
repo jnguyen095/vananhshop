@@ -30,19 +30,24 @@ class Product_controller extends CI_Controller
 		$data = array_merge($data, $search_data);
 
 		$thisCat = $this->Category_Model->findById($catId);
-		$data['category'] = $thisCat;
-		$data['sameLevels'] = $this->Category_Model->findByParentId($thisCat->ParentID, $catId);
+		if(!isset($thisCat) || $thisCat->CategoryID == null){
+			$this->load->view('Notfound_view', $data);
+		} else {
+			$data['category'] = $thisCat;
+			$data['sameLevels'] = $this->Category_Model->findByParentId($thisCat->ParentID, $catId);
 
-		$config = pagination();
-		$config['base_url'] = base_url(seo_url($data['category']->CatName).'-c'.$catId.'.html');
-		$config['total_rows'] = $data['total'];
-		$config['per_page'] = MAX_PAGE_ITEM;
+			$config = pagination();
+			$config['base_url'] = base_url(seo_url($data['category']->CatName).'-c'.$catId.'.html');
+			$config['total_rows'] = $data['total'];
+			$config['per_page'] = MAX_PAGE_ITEM;
 
-		$this->pagination->initialize($config);
-		$data['pagination'] = $this->pagination->create_links();
+			$this->pagination->initialize($config);
+			$data['pagination'] = $this->pagination->create_links();
 
-		$this->load->helper('url');
-		$this->load->view('product/Product_list', $data);
+			$this->load->helper('url');
+			$this->load->view('product/Product_list', $data);
+		}
+
 	}
 
 	public function detailItem($productId) {
@@ -50,15 +55,16 @@ class Product_controller extends CI_Controller
 		$data['categories'] = $this->Category_Model->getActiveCategories();
 		$product = $this->Product_Model->findByDetailId($productId);
 		$data['product'] = $product;
-		// print_r($product);
-		$category = $this->Category_Model->findById($product->CategoryID);
-		$data['category'] = $category;
 
 		if(!isset($product) || $product->ProductID == null){
 			// redirect("/khong-tim-thay");
 			 $this->load->view('Notfound_view', $data);
+		} else {
+			$category = $this->Category_Model->findById($product->CategoryID);
+			$data['category'] = $category;
+			$this->load->view('product/Product_detail', $data);
 		}
-		$this->load->view('product/Product_detail', $data);
+
 	}
 
 	public function justUpdateItems($offset=0) {

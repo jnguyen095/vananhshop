@@ -145,7 +145,7 @@ if (!function_exists('my_send_email')) {
 		$ci = get_instance();
 		$ci->load->library('email');
 
-		$config['protocol'] = MAIL_PROTOCAL;
+		/*$config['protocol'] = MAIL_PROTOCAL;
 		$config['smtp_host'] = MAIL_HOST; // Replace with your SMTP server
 		$config['smtp_user'] = MAIL_SMTP_USER; // Your SMTP username
 		$config['smtp_pass'] = MAIL_SMTP_PASS; // Your SMTP password
@@ -154,11 +154,22 @@ if (!function_exists('my_send_email')) {
 		$config['mailtype'] = 'html'; // Send email as HTML
 		$config['charset'] = 'utf-8'; // Character set
 		$config['wordwrap'] = TRUE; // Wordwrap for email content
-		$config['newline'] = "\r\n"; // Set newline character for email
+		$config['newline'] = "\r\n"; // Set newline character for email*/
+
+		// Send mail local(server & email server same server)
+		$config = array(
+			'protocol' => 'sendmail',
+			'mailpath' => '/usr/sbin/sendmail',
+			'mailtype' => 'html',
+			'charset' => 'utf-8',
+			'wordwrap' => TRUE,
+			'newline' => "\r\n",
+			'crlf' => "\r\n"
+		);
 
 		$ci->email->initialize($config);
 		///
-		$ci->email->from('info@nhadatancu.com', 'Vân Anh Shop');
+		$ci->email->from('info@vananhshop.com', 'Vân Anh Shop');
 		$ci->email->to($toEmail);
 
 		$ci->email->subject($subject);
@@ -167,8 +178,8 @@ if (!function_exists('my_send_email')) {
 		if ($ci->email->send()) {
 			return true;
 		} else {
-			//echo "Email sending failed.";
-			//echo $this->email->print_debugger();
+			// echo "Email sending failed.";
+			//echo $ci->email->print_debugger();
 			return false;
 		}
 	}
