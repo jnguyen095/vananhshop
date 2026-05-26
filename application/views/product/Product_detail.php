@@ -40,7 +40,7 @@
 	<div class="container">
 	<div class="row margin-bottom-20 margin-top-20">
 		<div class="col-lg-6">
-			<div class="thumbnails">
+			<div class="thumbnails thumbnail-scroll">
 				<?php
 				if(count($product->Assets) > 0){
 					echo '<ul class="popup-gallery">';
@@ -65,11 +65,11 @@
 			<div class="product-price">
 				<p class="price"><?=number_format($product->Price)?>đ</p>
 			</div>
-			<div class="product-property row">
+			<div class="product-property">
 				<?php
 				foreach ($product->Properties as $k => $v){
 					?>
-					<div class="product-property col-lg-4 col-sm-6">
+					<div class="product-property-group">
 						<div class="property-name"><?=($k)?></div>
 					<?php
 					$i = 1;
@@ -86,6 +86,7 @@
 					<?php
 				}
 				?>
+				<div class="clear-both"></div>
 			</div>
 			<div class="row margin-top-20">
 				<div class="col-lg-12 inline-btns">
@@ -128,7 +129,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$(".mCustomScrollbar").mCustomScrollbar({axis:"x"});
+		
 		$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
 			checkboxClass: 'icheckbox_minimal-blue',
 			radioClass: 'iradio_minimal-blue'
@@ -150,6 +151,8 @@
 				}
 			}
 		});
+
+		$('.thumbnail-scroll').mCustomScrollbar({axis: 'y'});
 	});
 </script>
 

@@ -1663,6 +1663,12 @@ h3 {
 .product-property{
 	margin-top: 10px;
 }
+
+.product-property .product-property-group{
+	display: block;
+	margin-right: 15px;
+	float: left;
+}
 input[type=checkbox], input[type=radio] {
 	margin-top: 2px !important;
 }
@@ -1672,6 +1678,17 @@ input[type=checkbox], input[type=radio] {
 }
 .product-property .property-item{
 	margin-left: 20px;
+}
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
+	background-color: #0190db !important;
+}
+.popup-gallery{
+	display: inline;
+
+}
+.thumbnail-scroll{
+	height: 400px;
+	margin-bottom: 15px;
 }
 li.thumbnail {
 	/*display: inline-block;*/
@@ -1687,7 +1704,7 @@ div.thumbnails{
 }
 div.main-image{
 	width: 430px;
-	float: right;
+	float: left;
 }
 
 .progresses{

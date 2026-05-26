@@ -2,7 +2,7 @@
 <html lang = "en">
 
 <head>
-	<title>Vân Anh Shop - Thời Trang, Đồ Lót, Nội Y, Đồ Bộ Mặc Nhà</title>
+	<title>Thời Trang, Đồ Lót, Nội Y, Đồ Bộ Mặc Nhà | Vân Anh Shop</title>
 	<link rel="icon" sizes="48x48" href="<?=base_url('/img/favicon_va.ico')?>">
 
 	<?php $this->load->view('common_header')?>
