@@ -51,7 +51,7 @@
 			<div class="col-lg-7">
 				<div class="copyright text-center">
 					<div><strong>© 2026</strong></div>
-					<div>Hotline: <b>0865.053.860</b> | Email: info@vananhshop.com</div>
+					<div>Hotline: <b>0865.053.860</b> | Email: contact@vananhshop.com</div>
 					<div>
 						<a href="http://zalo.me/0778763790"><img src="<?=base_url('/img/zalo-icon.png')?>"/></a>
 						<a href="https://www.facebook.com/vanhanhshopbmt" target="_blank"><img src="<?=base_url('/img/face-icon.png')?>"/></a>
