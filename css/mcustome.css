@@ -246,7 +246,7 @@ img.middleHorizontalBanner {
 }
 
 .breadcrumb{
-	margin-bottom: 15px !important;
+	margin-bottom: 0px !important;
 	border-radius: 0px;
 }
 
@@ -1651,7 +1651,7 @@ h3 {
 	border: none;
 	display: inline-block;
 	float: left;
-	color: #888;
+	color: #0190dbab;
 	line-height: 38px;
 	font-weight: bold;
 	text-align: center;
@@ -1941,8 +1941,8 @@ input[type=number]{
 
 .carousel-category .item img{
 	max-width: 250px;
-	height: 200px;
-	padding: 15px;
+	height: 178px;
+	padding: 5px 0px;
 	overflow: hidden;
 }
 
@@ -1961,8 +1961,13 @@ input[type=number]{
 	width: 0%;
 	font-size: large;
 	text-align: center;
-	opacity: .0;
+	opacity: 1;
 	transition: opacity .15s ease;
+}
+
+.section-category-main a {
+	font-size: 16px;
+	font-weight: 500;
 }
 
 .carousel-control-next-icon{
@@ -1995,7 +2000,6 @@ input[type=number]{
 .cat-header-title{
 	color: #068643;
 	font-size: 1em;
-	text-transform: uppercase;
 }
 
 .ul-cate-collections{

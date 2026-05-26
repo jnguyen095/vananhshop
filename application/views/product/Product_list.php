@@ -35,8 +35,8 @@
 	</ul>
 
 	<div class="container">
-	<div class="row no-margin">
 
+	<div class="row">
 		<?php
 		if(isset($category->Banner) && !empty($category->Banner)){
 			?>
@@ -44,7 +44,7 @@
 			<img class="cat-image" src="<?=base_url('/img/category/'.$category->Banner)?>"/>
 		</div>
 		<?php
-		} else if(isset($category->Parent->Banner)){
+		} else if(isset($category->Parent->Banner) && !empty($category->Parent->Banner)){
 			?>
 			<div class="col-md-12 no-margin no-padding">
 				<img class="cat-image" src="<?=base_url('/img/category/'.$category->Parent->Banner)?>"/>
@@ -53,7 +53,7 @@
 		}
 		?>
 
-		<div class="col-md-12 no-margin no-padding">
+		<div class="col-md-12">
 			<div class="collections">
 				<ul class="ul-cate-collections">
 					<?php

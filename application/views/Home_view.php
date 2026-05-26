@@ -114,16 +114,12 @@
 							<?php
 							if(count($catImg['nodes']) > 4) {
 								?>
-								<a class="carousel-control-prev" href="#carousel-category-<?= $catImg['CategoryID'] ?>"
-								   role="button" data-slide="prev">
-									<span class="carousel-control-prev-icon glyphicon glyphicon-chevron-left"
-										  aria-hidden="true"></span>
+								<a class="carousel-control-prev" href="#carousel-category-<?= $catImg['CategoryID'] ?>" role="button" data-slide="prev">
+									<span class="carousel-control-prev-icon glyphicon glyphicon-chevron-left" ></span>
 									<span class="sr-only">Previous</span>
 								</a>
-								<a class="carousel-control-next" href="#carousel-category-<?= $catImg['CategoryID'] ?>"
-								   role="button" data-slide="next">
-									<span class="carousel-control-next-icon glyphicon glyphicon-chevron-right"
-										  aria-hidden="true"></span>
+								<a class="carousel-control-next" href="#carousel-category-<?= $catImg['CategoryID'] ?>" role="button" data-slide="next">
+									<span class="carousel-control-next-icon glyphicon glyphicon-chevron-right" ></span>
 									<span class="sr-only">Next</span>
 								</a>
 								<?php
@@ -194,14 +190,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.carousel').carousel();
-		$(".carousel-category").mouseenter(function(){
-			$('.carousel-control-prev-icon').css('opacity', '1');
-			$('.carousel-control-next-icon').css('opacity', '1');
-		});
-		$(".carousel-category").mouseleave(function(){
-			$('.carousel-control-prev-icon').css('opacity', '0');
-			$('.carousel-control-next-icon').css('opacity', '0');
-		});
 	});
 </script>
 </body>
