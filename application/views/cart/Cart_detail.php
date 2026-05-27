@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>Giỏ Hàng</title>
+	<title>Giỏ Hàng | Vân Anh Shop</title>
 	<?php $this->load->view('common_header')?>
 	<link rel="stylesheet" href="<?=base_url('/css/jquery.mCustomScrollbar.min.css')?>" />
 	<link rel="stylesheet" href="<?=base_url('/css/iCheck/all.css')?>">
