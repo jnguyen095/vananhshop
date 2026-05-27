@@ -40,19 +40,22 @@
 	<div class="container">
 	<div class="row margin-bottom-20 margin-top-20">
 		<div class="col-lg-6">
-			<div class="thumbnails thumbnail-scroll">
 				<?php
 				if(count($product->Assets) > 0){
-					echo '<ul class="popup-gallery">';
-					foreach ($product->Assets as $asset){
+					?>
+					<div class="thumbnails thumbnail-scroll">
+						<ul class="popup-gallery">
+						<?php foreach ($product->Assets as $asset) {
 						?>
-						<li class="thumbnail"> <a href="<?php echo base_url(str_replace('_thumb', '', $asset->Url))?>" class="image-link" title="<?=$product->Title?>"> <img  src="<?php echo base_url($asset->Url)?>"?></a></li>
+							<li class="thumbnail"> <a href="<?php echo base_url(str_replace('_thumb', '', $asset->Url))?>" class="image-link" title="<?=$product->Title?>"> <img  src="<?php echo base_url($asset->Url)?>"?></a></li>
 						<?php
-					}
-					echo '</ul>';
+						}
+						?>
+						</ul>
+					</div>
+				<?php
 				}
 				?>
-			</div>
 			<div class="main-image">
 				<img src="<?=base_url(str_replace('_thumb', '', $product->Thumb))?>" class="img-responsive-large" >
 			</div>

@@ -90,7 +90,7 @@
 								?>
 								<tr id="tr-<?=$product['ProductID']?>" class="prodItem">
 									<td><?=$counter++?></td>
-									<td><img class="img-sm" src="<?=base_url($product['Thumb'])?>"></td>
+									<td class="text-center"><img class="img-sm" src="<?=base_url($product['Thumb'])?>"></td>
 									<td><?=$product['Title']?></td>
 									<td><input id="qty-<?=$product['ProductID']?>" name="products[<?=$product['ProductID']?>]qty" type="number" value="<?=$product['Quantity']?>" class="form-control"/></td>
 								</tr>
@@ -137,7 +137,7 @@
 						<div class="form-group row text-left">
 							<label for="example-text-input" class="col-sm-4 text-left col-form-label">Địa chỉ</label>
 							<div class="col-sm-8">
-								<input id="txtAddress" class="form-control" type="text" placeholder="Address" name="address" value="<?php echo set_value('address'); ?>"/>
+								<input id="txtAddress" class="form-control" type="text" placeholder="Địa chỉ" name="address" value="<?php echo set_value('address'); ?>"/>
 							</div>
 						</div>
 						<div class="form-group row text-left">
@@ -203,13 +203,13 @@
 				var index = $("#tbProducts tr").length;
 				var html = '<tr id="tr-' + productId + '" class="prodItem">';
 				html += '<td>' + index + '</td>';
-				html += '<td><img class="img-sm" src="<?=base_url()?>' + item['Thumb'] + '"/></td>';
+				html += '<td class="text-center"><img class="img-sm" src="<?=base_url()?>' + item['Thumb'] + '"/></td>';
 				html += '<td>'+item['Title']+'</td>';
 				html += '<td><input id="qty-'+productId+'" name="products['+productId+']qty" type="number" value="10" class="form-control"/></td>';
 				html += '</tr>';
 				$("#tbProducts tbody").append(html);
 			} else {
-				$("#qty-" + productId).val(parseInt($("#qty-" + productId).val() == '' ? 0 : $("#qty-" + productId).val()) + 1);
+				$("#qty-" + productId).val(parseInt($("#qty-" + productId).val() == '' ? 0 : $("#qty-" + productId).val()) + 10);
 			}
 
 		})

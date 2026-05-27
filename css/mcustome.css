@@ -16,7 +16,7 @@ body > .container, body > .container-fluid > .container{
 }
 
 img.img-sm {
-	width: 80px;
+	max-width: 80px;
 	max-height: 80px;
 }
 
@@ -1698,12 +1698,12 @@ li.thumbnail img, .img-thumbnail {
 }
 
 div.thumbnails{
-	width: 120px;
+	width: 135px;
 	float: left;
 	padding-right: 5px;
 }
 div.main-image{
-	width: 430px;
+	width: 400px;
 	float: left;
 }
 
