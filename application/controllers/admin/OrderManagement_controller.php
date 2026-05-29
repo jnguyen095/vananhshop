@@ -29,6 +29,7 @@ class OrderManagement_controller extends MY_Controller
 		$this->load->model('OrderTracking_Model');
 		$this->load->library('pagination');
 		$this->load->helper("bootstrap_pagination_admin");
+		$this->load->helper("my_email");
 	}
 
 	public function index()
