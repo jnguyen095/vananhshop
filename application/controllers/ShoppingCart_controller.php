@@ -25,6 +25,7 @@ class ShoppingCart_controller extends CI_Controller
 		$this->load->model('MyOrder_Model');
 		$this->load->model('OrderShipping_Model');
 		$this->load->model('ShippingFee_Model');
+		$this->load->model('Promotion_Model');
 		$this->load->helper('my_email');
 	}
 
@@ -42,13 +43,14 @@ class ShoppingCart_controller extends CI_Controller
 		if($crudaction == 'insert'){
 			$note = $this->input->post("note");
 			$payment = $this->input->post("payment");
+			$proCode = trim($this->input->post("proCode"));
+			
 			// order
 			$loginID = $this->session->userdata('loginid');
 			$newOrder = [];
 			$newOrder['UserID'] = $loginID;
 			$newOrder['Status'] = ORDER_STATUS_NEW;
 			$newOrder['ShippingFee'] = $shippingFee;
-			$newOrder['TotalPrice'] = $this->cart->total() + $shippingFee;
 			$newOrder['TotalItems'] = $this->cart->total_items();
 			$newOrder['Note'] = $note;
 			$newOrder['Payment'] = $payment;
@@ -57,6 +59,20 @@ class ShoppingCart_controller extends CI_Controller
 			$newOrder['CreatedBy'] = $loginID;
 			$newOrder['UpdatedBy'] = $loginID;
 			$newOrder['Code'] = $this->MyOrder_Model->getNewOrderCode();
+
+			// Apply promotion if provided
+			$discount = 0;
+			$appliedPromotion = null;
+			if (!empty($proCode)) {
+				$validationResult = $this->Promotion_Model->validatePromotion($proCode, $this->cart->total(), $loginID);
+				if ($validationResult['valid']) {
+					$appliedPromotion = $validationResult['promotion'];
+					$discount = $this->Promotion_Model->calculateDiscount($appliedPromotion, $this->cart->total(), $shippingFee);
+				}
+			}
+
+			$newOrder['Discount'] = $discount;
+			$newOrder['TotalPrice'] = $this->cart->total() + $shippingFee - $discount;
 
 			// order items
 			$orderItems = [];
@@ -91,22 +107,33 @@ class ShoppingCart_controller extends CI_Controller
 
 			// tracking
 			$user = $this->User_Model->getUserById($loginID);
-			//print_r($user);
+			$trackingMessage = $user->FullName. ' tạo đơn hàng';
+			if (isset($note) && strlen($note) > 0) {
+				$trackingMessage .= ' với ghi chú: <i>'. $note .'</i>';
+			}
+			if ($appliedPromotion) {
+				$trackingMessage .= ' (Mua khuyến mãi: ' . $appliedPromotion->Name . ', giảm giá: ' . number_format($discount) . 'đ)';
+			}
 			$orderTracking = array(
 				'CreatedDate' => date('Y-m-d H:i:s'),
-				'Message' => $user->FullName. ' tạo đơn hàng' . (isset($note) && strlen($note) > 0 ? ' với ghi chú: <b>'. $note .'</b>' : '')
+				'Message' => $trackingMessage
 			);
 
-			$data['orderId'] = $this->MyOrder_Model->createOrder($newOrder, $orderItems, $shippingInfo, $orderTracking);
+			$orderId = $this->MyOrder_Model->createOrder($newOrder, $orderItems, $shippingInfo, $orderTracking);
+
+			// Record promotion application if applied
+			if ($appliedPromotion && $discount > 0) {
+				$this->Promotion_Model->recordPromotionApplication($appliedPromotion->PromotionsID, $orderId, $discount);
+			}
 
 			// send email to inform customer
 			$customerEmail = $user->Email;
 			if($customerEmail != null && strlen($customerEmail) > 0){
-				my_send_email($customerEmail,APP_DOMAIN . " - Đặt hàng thành công", "<p>Bạn vừa đặt hàng thành công tại: " . APP_DOMAIN . ", mã đơn hàng: <b>" . $newOrder['Code'] . "</b></p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $data['orderId']."html</p>" );
+				my_send_email($customerEmail,APP_DOMAIN . " - Đặt hàng thành công", "<p>Bạn vừa đặt hàng thành công tại: " . APP_DOMAIN . ", mã đơn hàng: <b>" . $newOrder['Code'] . "</b></p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
 			}
 
 			//return;
-			redirect('/check-out/success?orderId=' . $data['orderId']);
+			redirect('/check-out/success?orderId=' . $orderId);
 		}
 		$data['categories'] = $this->Category_Model->getActiveCategories();
 		$data['txt_receiver'] = $shippingAddr['txt_receiver'];
@@ -273,6 +300,37 @@ class ShoppingCart_controller extends CI_Controller
 					$html .= '</li>';
 
 		echo $html;
+	}
+
+	public function validatePromoCode(){
+		$this->output->set_content_type('application/json');
+		$proCode = trim($this->input->post("proCode"));
+		$cartTotal = (float)$this->input->post("cartTotal");
+		$shippingFee = (float)$this->input->post("shippingFee");
+		$loginID = $this->session->userdata('loginid');
+
+		$result = array('valid' => false, 'message' => 'Lỗi không xác định');
+
+		if (empty($proCode)) {
+			$result = array('valid' => false, 'message' => 'Vui lòng nhập mã khuyến mãi');
+		} else {
+			$validationResult = $this->Promotion_Model->validatePromotion($proCode, $cartTotal, $loginID);
+			if ($validationResult['valid']) {
+				$promotion = $validationResult['promotion'];
+				$discount = $this->Promotion_Model->calculateDiscount($promotion, $cartTotal, $shippingFee);
+				$result = array(
+					'valid' => true,
+					'message' => 'Áp dụng khuyến mãi thành công',
+					'promotionName' => $promotion->Name,
+					'discountAmount' => $discount,
+					'discountFormatted' => number_format($discount)
+				);
+			} else {
+				$result = $validationResult;
+			}
+		}
+
+		echo json_encode($result);
 	}
 
 }

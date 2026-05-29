@@ -99,9 +99,13 @@
 						<td colspan="2">Phí giao hàng</td>
 						<td class="text-right"><?=number_format($ShippingFee)?></td>
 					</tr>
+					<tr id="discountRow" style="display: none;">
+						<td colspan="2">Giảm giá</td>
+						<td class="text-right" id="discountAmount">0</td>
+					</tr>
 					<tr>
-						<td colspan="2">Tổng cộng</td>
-						<td class="text-right"><?=number_format($this->cart->total() + $ShippingFee)?>(VNĐ)</td>
+						<td colspan="2"><strong>Tổng cộng</strong></td>
+						<td class="text-right"><strong id="totalPrice"><?=number_format($this->cart->total() + $ShippingFee)?></strong>(VNĐ)</td>
 					</tr>
 
 					</tbody>
@@ -126,7 +130,7 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12">
-						<h3><b>Thanh toán:</b></h3>
+						<h3>Thanh toán:</h3>
 					</div>
 					<div class="col-xs-12">
 						<label><input type="radio" name="payment" value="COD" checked> Lúc nhận hàng </label>
@@ -138,10 +142,25 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12">
-						<h3><b>Ghi chú cho đơn hàng:</b></h3>
+						<h3>Mã khuyến mãi:</h3>
 					</div>
 					<div class="col-xs-12">
-						<textarea name="note" value="COD" placeholder="ví dụ: giao hàng giờ hành chính" style="width: 100%;height: 40px;resize: none;border: solid 1px #ccc"></textarea>
+						<div class="form-group no-margin">
+							<input type="text" name="proCode" class="form-control" placeholder="Nhập mã khuyến mãi" id="proCode">
+							<small id="proCodeMessage" style="color: #999;"></small>
+						</div>
+					</div>
+					<div class="clear-both"></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<h3>Ghi chú cho đơn hàng:</h3>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group no-margin">
+							<textarea name="note" value="COD" placeholder="ví dụ: giao hàng giờ hành chính" style="width: 100%;height: 40px;resize: none;border: solid 1px #ccc"></textarea>
+							<small id="proCodeMessage" style="color: #999;"></small>
+						</div>
 					</div>
 					<div class="clear-both"></div>
 				</div>
@@ -173,7 +192,60 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		var cartTotal = <?=$this->cart->total()?>;
+		var shippingFee = <?=$ShippingFee?>;
+		var baseTotal = cartTotal + shippingFee;
 
+		$('#proCode').on('blur', function() {
+			var proCode = $.trim($(this).val());
+			if (proCode.length > 0) {
+				validatePromoCode(proCode, cartTotal, shippingFee);
+			} else {
+				resetPromotion();
+			}
+		});
+
+		function validatePromoCode(proCode, cartTotal, shippingFee) {
+			$.ajax({
+				url: '<?=base_url("check-out/validate-promo-code")?>',
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					proCode: proCode,
+					cartTotal: cartTotal,
+					shippingFee: shippingFee
+				},
+				success: function(response) {
+					if (response.valid) {
+						var discountAmount = response.discountAmount;
+						var newTotal = baseTotal - discountAmount;
+						
+						$('#discountRow').show();
+						$('#discountAmount').text(response.discountFormatted);
+						$('#totalPrice').text(number_format(newTotal));
+						$('#proCodeMessage').html('<span style="color: green;">✓ ' + response.message + '</span>');
+					} else {
+						resetPromotion();
+						$('#proCodeMessage').html('<span style="color: red;">✗ ' + response.message + '</span>');
+					}
+				},
+				error: function() {
+					resetPromotion();
+					$('#proCodeMessage').html('<span style="color: red;">✗ Lỗi khi kiểm tra mã khuyến mãi</span>');
+				}
+			});
+		}
+
+		function resetPromotion() {
+			$('#discountRow').hide();
+			$('#discountAmount').text('0');
+			$('#totalPrice').text(number_format(baseTotal));
+			$('#proCodeMessage').text('');
+		}
+
+		function number_format(number) {
+			return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
 	});
 
 </script>

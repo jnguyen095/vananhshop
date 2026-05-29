@@ -228,3 +228,4 @@ $route['check-out'] = "ShoppingCart_controller/checkOut";
 $route['check-out/address'] = "ShoppingCart_controller/shippingAddress";
 $route['check-out/review'] = "ShoppingCart_controller/review";
 $route['check-out/success'] = "ShoppingCart_controller/success";
+$route['check-out/validate-promo-code'] = "ShoppingCart_controller/validatePromoCode";

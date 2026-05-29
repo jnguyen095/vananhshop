@@ -120,4 +120,117 @@ class Promotion_Model extends CI_Model
 			'promotion_code' => 'Nhập mã khuyến mãi'
         );
     }
+
+    public function findByPromotionCode($proCode)
+    {
+        $this->db->where('Name', $proCode);
+        $this->db->where('Active', 1);
+        $this->db->where('(StartDate IS NULL OR StartDate <= NOW())', null, false);
+        $this->db->where('(EndDate IS NULL OR EndDate >= NOW())', null, false);
+        $query = $this->db->get('promotion');
+        return $query->row();
+    }
+
+    public function findPromotionConditionByCode($proCode){
+    	$sql = "select pc.* from PromotionCondition pc inner join promotion p on pc.PromotionID = p.PromotionsID";
+		$sql .= " where pc.ConditionValue = '" . $proCode . "' and pc.ConditionType = 'promotion_code'";
+		$sql .= " and p.Active = 1 and (p.StartDate is null or p.StartDate <= NOW()) and (p.EndDate is null or p.EndDate >= NOW())";
+    	$query = $this->db->query($sql);
+    	return $query->row();
+	}
+
+    public function validatePromotion($proCode, $cartTotal = 0, $userId = null)
+    {
+        //$promotion = $this->findByPromotionCode($proCode);
+		$condition = $this->findPromotionConditionByCode($proCode);
+		if(!$condition){
+			return array(
+				'valid' => false,
+				'message' => 'Mã khuyến mãi không tồn tại hoặc đã hết hạn.'
+			);
+		}
+		$promotion = $this->findById($condition->PromotionID);
+		/*
+        $conditions = $this->findConditionsByPromotionId($promotion->PromotionsID);
+        
+        foreach ($conditions as $condition) {
+            if ($condition->ConditionType == 'min_order_value') {
+                $minValue = (float)$condition->ConditionValue;
+                if ($cartTotal < $minValue) {
+                    return array(
+                        'valid' => false,
+                        'message' => 'Đơn hàng tối thiểu phải từ ' . number_format($minValue) . ' đ'
+                    );
+                }
+            } elseif ($condition->ConditionType == 'first_order') {
+                if ($userId) {
+                    $this->db->where('CreatedBy', $userId);
+                    $orderCount = $this->db->count_all_results('myorder');
+                    if ($orderCount > 0) {
+                        return array(
+                            'valid' => false,
+                            'message' => 'Mã khuyến mãi chỉ áp dụng cho đơn hàng đầu tiên.'
+                        );
+                    }
+                }
+            }
+        }*/
+
+        return array(
+            'valid' => true,
+            'promotion' => $promotion
+        );
+    }
+
+    public function calculateDiscount($promotion, $cartTotal = 0, $shippingFee = 0)
+    {
+        if (!$promotion) {
+            return 0;
+        }
+
+        $discountAmount = 0;
+        $totalWithShipping = $cartTotal + $shippingFee;
+
+        if ($promotion->Type == 'order_discount') {
+            if ($promotion->DiscountType == 'percentage') {
+                $discountAmount = ($cartTotal * $promotion->DiscountValue) / 100;
+            } else {
+                $discountAmount = $promotion->DiscountValue;
+            }
+            $discountAmount = min($discountAmount, $cartTotal);
+        } elseif ($promotion->Type == 'shipping_discount') {
+            if ($promotion->DiscountType == 'percentage') {
+                $discountAmount = ($shippingFee * $promotion->DiscountValue) / 100;
+            } else {
+                $discountAmount = $promotion->DiscountValue;
+            }
+            $discountAmount = min($discountAmount, $shippingFee);
+        } elseif ($promotion->Type == 'first_order_discount') {
+            if ($promotion->DiscountType == 'percentage') {
+                $discountAmount = ($totalWithShipping * $promotion->DiscountValue) / 100;
+            } else {
+                $discountAmount = $promotion->DiscountValue;
+            }
+            $discountAmount = min($discountAmount, $totalWithShipping);
+        }
+
+        return max(0, $discountAmount);
+    }
+
+    public function recordPromotionApplication($promotionId, $orderId, $discountAmount)
+    {
+        if (!$promotionId || !$orderId || $discountAmount <= 0) {
+            return false;
+        }
+
+        $data = array(
+            'PromotionID' => $promotionId,
+            'OrderID' => $orderId,
+            'DiscountAmount' => $discountAmount,
+            'AppliedAt' => date('Y-m-d H:i:s')
+        );
+
+        $this->db->insert('PromotionApplication', $data);
+        return $this->db->insert_id();
+    }
 }
