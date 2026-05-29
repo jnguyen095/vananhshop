@@ -51,6 +51,11 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
+					<?php
+					$attributes = array("id" => "frmProperty", "class" => "form-horizontal");
+					echo form_open("admin/property/list", $attributes);
+					?>
+
 					<div class="text-left categories">
 						<div class="row no-margin">
 							<a class="btn btn-primary" href="<?=base_url('/admin/property/add.html');?>">Thêm thuộc tính</a>
@@ -59,11 +64,16 @@
 						foreach ($properties as $property) {
 						?>
 						<div class="category-level0" catid="<?=$property->PropertyID?>">
-							<span class="category-status-<?=$property->Status?>"> <?=$property->PropertyName;?></span> <a data-toggle="tooltip" title="Chỉnh sửa" href="<?=base_url("/admin/property/add-".$property->PropertyID).".html"?>"><i class="glyphicon glyphicon-edit"></i> </a>
+							<span class="category-status-<?=$property->Status?>"> <?=$property->PropertyName;?></span>
+							<a data-toggle="tooltip" title="Chỉnh sửa" href="<?=base_url("/admin/property/add-".$property->PropertyID).".html"?>"><i class="glyphicon glyphicon-edit"></i> </a>
+							&nbsp;|&nbsp;<a class="remove-property" data-toggle="tooltip" data-property="<?=$property->PropertyID?>" title="Xóa thuộc tính sp" href="#"><i class="glyphicon glyphicon-trash"></i> </a>
 							<?php
 							if(count($child[$property->PropertyID]) > 0){
 								foreach ($child[$property->PropertyID] as $k){?>
-									<div class="category-level1" catid="<?=$k->PropertyID?>"><span class="category-status-<?=$k->Status?>"><?=$k->PropertyName?></span> <a data-toggle="tooltip" title="Chỉnh sửa" href="<?=base_url("/admin/property/add-".$k->PropertyID).".html"?>"><i class="glyphicon glyphicon-edit"></i> </a></div>
+									<div class="category-level1" catid="<?=$k->PropertyID?>"><span class="category-status-<?=$k->Status?>"><?=$k->PropertyName?></span>
+										<a data-toggle="tooltip" title="Chỉnh sửa" href="<?=base_url("/admin/property/add-".$k->PropertyID).".html"?>"><i class="glyphicon glyphicon-edit"></i> </a>
+										&nbsp;|&nbsp;<a class="remove-property" data-toggle="tooltip" data-property="<?=$k->PropertyID?>" title="Xóa thuộc tính sp" href="#"><i class="glyphicon glyphicon-trash"></i> </a>
+									</div>
 									<?php
 								}
 							}
@@ -80,6 +90,7 @@
 		</section>
 		<!-- /.content -->
 		<input type="hidden" id="crudaction" name="crudaction">
+		<input type="hidden" id="propertyId" name="propertyId">
 		<?php echo form_close(); ?>
 
 	</div>
@@ -104,7 +115,21 @@
 <script src="<?=base_url('/theme/admin/js/tindatdai_admin.js')?>"></script>
 
 <script type="text/javascript">
-
+	function deletePropertyHandler(){
+		$('.remove-property').click(function(){
+			var propertyId = $(this).data('property');
+			bootbox.confirm("Bạn đã chắc chắn xóa danh mục này và thư mục con liên quan chưa?", function(result){
+				if(result){
+					$("#propertyId").val(propertyId);
+					$("#crudaction").val("delete");
+					$("#frmProperty").submit();
+				}
+			});
+		});
+	}
+	$(document).ready(function(){
+		deletePropertyHandler();
+	});
 </script>
 </body>
 </html>

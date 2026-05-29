@@ -23,7 +23,17 @@ class Property_controller extends MY_Controller
 
 	public function index()
 	{
+		$msg = "";
+		if ($this->input->post('crudaction') == "delete") {
+			$propertyID = $this->input->post("propertyId");
+			if($propertyID != null){
+				$this->db->delete('property', array('ParentID' => $propertyID));
+				$this->db->delete('property', array('PropertyID' => $propertyID));
+				$msg = "Xóa danh mục thành công.";
+			}
+		}
 		$data = $this->Property_Model->getProperties();
+		$data['message_response'] = $msg;
 		$this->load->view("admin/property/list", $data);
 	}
 
