@@ -107,7 +107,7 @@ class ShoppingCart_controller extends CI_Controller
 
 			// tracking
 			$user = $this->User_Model->getUserById($loginID);
-			$trackingMessage = $user->FullName. ' tạo đơn hàng';
+			$trackingMessage = '<b>'.$user->FullName. '</b> tạo đơn hàng';
 			if (isset($note) && strlen($note) > 0) {
 				$trackingMessage .= ' với ghi chú: <i>'. $note .'</i>';
 			}

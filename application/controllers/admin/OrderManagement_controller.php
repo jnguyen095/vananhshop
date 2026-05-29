@@ -66,7 +66,7 @@ class OrderManagement_controller extends MY_Controller
 			$orderTracking = array(
 				'OrderID' => $orderId,
 				'CreatedDate' => date('Y-m-d H:i:s'),
-				'Message' => $user->FullName. ' đã tiếp nhận đơn hàng'
+				'Message' => '<b>'. $user->FullName. '</b> đã tiếp nhận đơn hàng'
 			);
 			$this->OrderTracking_Model->insert($orderTracking);
 
@@ -85,7 +85,7 @@ class OrderManagement_controller extends MY_Controller
 			$orderTracking = array(
 				'OrderID' => $orderId,
 				'CreatedDate' => date('Y-m-d H:i:s'),
-				'Message' => $user->FullName. ' đã cập nhật đơn hàng, đơn hàng đang trên dường giao'
+				'Message' => '<b>'. $user->FullName. '</b> đã cập nhật đơn hàng, đơn hàng đang trên dường giao'
 			);
 			$this->OrderTracking_Model->insert($orderTracking);
 
@@ -104,7 +104,7 @@ class OrderManagement_controller extends MY_Controller
 			$orderTracking = array(
 				'OrderID' => $orderId,
 				'CreatedDate' => date('Y-m-d H:i:s'),
-				'Message' => $user->FullName. ' đã cập nhật đơn hàng, đơn hàng đã giao xong'
+				'Message' => '<b>'. $user->FullName. '</b> đã cập nhật đơn hàng, đơn hàng đã giao xong'
 			);
 			$this->OrderTracking_Model->insert($orderTracking);
 
@@ -312,7 +312,7 @@ class OrderManagement_controller extends MY_Controller
 			$orderTracking = array(
 				'OrderID' => $orderId,
 				'CreatedDate' => date('Y-m-d H:i:s'),
-				'Message' => $user->FullName. ' cập nhật thông tin giao hàng'
+				'Message' => '<b>'. $user->FullName. '</b> cập nhật thông tin giao hàng'
 			);
 			$this->OrderTracking_Model->insert($orderTracking);
 
