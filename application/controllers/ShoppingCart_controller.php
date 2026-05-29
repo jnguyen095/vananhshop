@@ -24,17 +24,21 @@ class ShoppingCart_controller extends CI_Controller
 		$this->load->model('District_Model');
 		$this->load->model('MyOrder_Model');
 		$this->load->model('OrderShipping_Model');
+		$this->load->model('ShippingFee_Model');
 		$this->load->helper('my_email');
 	}
 
 	public function checkOut(){
 		$data['categories'] = $this->Category_Model->getActiveCategories();
+		$fee = $this->ShippingFee_Model->findInRange($this->cart->total());
+		$data['ShippingFee'] = $fee;
 		$this->load->view('cart/Cart_detail', $data);
 	}
 
 	public function review(){
 		$shippingAddr = $this->session->userdata("shippingAddr");
 		$crudaction = $this->input->post('crudaction');
+		$shippingFee = $this->ShippingFee_Model->findInRange($this->cart->total());
 		if($crudaction == 'insert'){
 			$note = $this->input->post("note");
 			$payment = $this->input->post("payment");
@@ -43,8 +47,8 @@ class ShoppingCart_controller extends CI_Controller
 			$newOrder = [];
 			$newOrder['UserID'] = $loginID;
 			$newOrder['Status'] = ORDER_STATUS_NEW;
-			// $newOrder['ShippingFee'] = 12000;
-			$newOrder['TotalPrice'] = $this->cart->total();
+			$newOrder['ShippingFee'] = $shippingFee;
+			$newOrder['TotalPrice'] = $this->cart->total() + $shippingFee;
 			$newOrder['TotalItems'] = $this->cart->total_items();
 			$newOrder['Note'] = $note;
 			$newOrder['Payment'] = $payment;
@@ -110,6 +114,7 @@ class ShoppingCart_controller extends CI_Controller
 		$data['city'] = $this->City_Model->findById($shippingAddr['txt_city']);
 		$data['district'] = $this->District_Model->findById($shippingAddr['txt_district']);
 		$data['street'] = $shippingAddr['street'];
+		$data['ShippingFee'] = $shippingFee;
 		$this->load->view('cart/Cart_review', $data);
 	}
 
@@ -125,6 +130,8 @@ class ShoppingCart_controller extends CI_Controller
 			redirect('dang-nhap');
 		}
 		$data['categories'] = $this->Category_Model->getActiveCategories();
+		$fee = $this->ShippingFee_Model->findInRange($this->cart->total());
+		$data['ShippingFee'] = $fee;
 		$crudaction = $this->input->post('crudaction');
 		if($crudaction == 'insert'){
 			$data['txt_receiver'] = $this->input->post("txt_receiver");

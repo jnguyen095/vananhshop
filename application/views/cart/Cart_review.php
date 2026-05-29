@@ -97,11 +97,11 @@
 					<?php } ?>
 					<tr>
 						<td colspan="2">Phí giao hàng</td>
-						<td class="text-right">-</td>
+						<td class="text-right"><?=number_format($ShippingFee)?></td>
 					</tr>
 					<tr>
 						<td colspan="2">Tổng cộng</td>
-						<td class="text-right"><?=number_format($this->cart->total())?>(VNĐ)</td>
+						<td class="text-right"><?=number_format($this->cart->total() + $ShippingFee)?>(VNĐ)</td>
 					</tr>
 
 					</tbody>

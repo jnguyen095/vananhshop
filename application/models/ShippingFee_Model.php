@@ -31,4 +31,16 @@ class ShippingFee_Model extends CI_Model
 		$query = $this->db->get('shippingfee');
 		return $query->result();
 	}
+
+	function findInRange($orderValue){
+
+		$sql = "select min(sp.ShippingFee) as Fee from shippingfee sp WHERE sp.OrderValueFrom <= $orderValue AND $orderValue <= sp.OrderValueTo and sp.Status = 1";
+		$query = $this->db->query($sql);
+		$obj = $query->row();
+		if($obj != null && isset($obj)){
+			return $obj->Fee;
+		}
+		return 0;
+
+	}
 }
