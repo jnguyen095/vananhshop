@@ -91,7 +91,9 @@ class MyOrder_Model extends CI_Model
 	public function findByOrderIdAndFetchAll($orderId)
 	{
 		$data = [];
-		$sql = 'select m.*,u.FullName, u.Phone from myorder m inner join us3r u on m.CreatedBy = u.Us3rID';
+		$sql = 'select m.*, u.FullName, u.Phone, p.Name as PromotionName from myorder m inner join us3r u on m.CreatedBy = u.Us3rID';
+		$sql .= ' left join PromotionApplication pa on pa.OrderID = m.OrderID';
+		$sql .= ' left join promotion p on pa.PromotionID = p.PromotionsID';
 		$sql .= ' where m.OrderID = '. $orderId;
 		$query = $this->db->query($sql);
 		$order = $query->row();

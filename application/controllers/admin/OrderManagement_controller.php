@@ -77,7 +77,7 @@ class OrderManagement_controller extends MY_Controller
 			$orderCode = $emailNCode->Code;
 
 			if($customerEmail != null && strlen($customerEmail) > 0){
-				my_send_email($customerEmail,APP_DOMAIN . " - Tiếp nhận đơn hàng ".$orderCode, "<p>Đơn hàng: ".$orderCode." đã tiếp nhận từ: " . APP_DOMAIN . "</p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
+				my_send_email($customerEmail, "Vân Anh Shop - Tiếp nhận đơn hàng ".$orderCode, "<p>Đơn hàng: ".$orderCode." đã tiếp nhận từ: " . APP_DOMAIN . "</p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
 			}
 		} else if($crudaction == ORDER_STATUS_SHIPPING){
 			$this->MyOrder_Model->updateOrderStatus($orderId, ORDER_STATUS_SHIPPING, $loginID);
@@ -96,7 +96,7 @@ class OrderManagement_controller extends MY_Controller
 			$orderCode = $emailNCode->Code;
 
 			if($customerEmail != null && strlen($customerEmail) > 0){
-				my_send_email($customerEmail,APP_DOMAIN . " - Đơn hàng ".$orderCode. " đang được giao", "<p>Đơn hàng: ".$orderCode." đang được giao đến khách hàng</p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
+				my_send_email($customerEmail,"Vân Anh Shop - Đơn hàng ".$orderCode. " đang được giao", "<p>Đơn hàng: ".$orderCode." đang được giao đến khách hàng</p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
 			}
 		} else if($crudaction == ORDER_STATUS_COMPLETED){
 			$this->MyOrder_Model->updateOrderStatus($orderId, ORDER_STATUS_COMPLETED, $loginID);
@@ -115,7 +115,7 @@ class OrderManagement_controller extends MY_Controller
 			$orderCode = $emailNCode->Code;
 
 			if($customerEmail != null && strlen($customerEmail) > 0){
-				my_send_email($customerEmail,APP_DOMAIN . " - Đơn hàng ".$orderCode. " được giao thành công", "<p>Đơn hàng: ".$orderCode." đã giao đến khách hàng thành công</p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
+				my_send_email($customerEmail, "Vân Anh Shop - Đơn hàng ".$orderCode. " được giao thành công", "<p>Đơn hàng: ".$orderCode." đã giao đến khách hàng thành công</p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
 			}
 		}
 
@@ -268,7 +268,7 @@ class OrderManagement_controller extends MY_Controller
 			$orderTracking = array(
 				'OrderID' => $orderId,
 				'CreatedDate' => date('Y-m-d H:i:s'),
-				'Message' => $user->FullName. ' cập nhật thông tin của đơn hàng'
+				'Message' => '<b>'.$user->FullName. '</b> cập nhật thông tin của đơn hàng'
 			);
 			$this->OrderTracking_Model->insert($orderTracking);
 
@@ -278,7 +278,7 @@ class OrderManagement_controller extends MY_Controller
 			$orderCode = $emailNCode->Code;
 
 			if($customerEmail != null && strlen($customerEmail) > 0){
-				my_send_email($customerEmail,APP_DOMAIN . " - Đơn hàng ".$orderCode. " đã bị được thay đổi", "<p>Đơn hàng: ".$orderCode." đã được thay đổi bởi nhân viên <b>".$user->FullName."</b></p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
+				my_send_email($customerEmail,"Vân Anh Shop - Đơn hàng ".$orderCode. " đã bị được thay đổi", "<p>Đơn hàng: ".$orderCode." đã được thay đổi bởi nhân viên <b>".$user->FullName."</b></p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
 			}
 			echo 'success';
 		} else {

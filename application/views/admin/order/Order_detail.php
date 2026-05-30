@@ -206,7 +206,7 @@
 										<tr>
 											<td colspan="3" class="text-right">Giảm giá</td>
 											<td class="text-right"><?=number_format($order->Discount)?></td>
-											<td></td>
+											<td><i class="label label-info"><?=$order->PromotionName?></i></td>
 										</tr>
 										<tr>
 											<td colspan="3" class="text-right">Tổng cộng</td>

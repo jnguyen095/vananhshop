@@ -129,7 +129,7 @@ class ShoppingCart_controller extends CI_Controller
 			// send email to inform customer
 			$customerEmail = $user->Email;
 			if($customerEmail != null && strlen($customerEmail) > 0){
-				my_send_email($customerEmail,APP_DOMAIN . " - Đặt hàng thành công", "<p>Bạn vừa đặt hàng thành công tại: " . APP_DOMAIN . ", mã đơn hàng: <b>" . $newOrder['Code'] . "</b></p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
+				my_send_email($customerEmail, "Vân Anh Shop - Đặt hàng thành công", "<p>Bạn vừa đặt hàng thành công tại: " . APP_DOMAIN . ", mã đơn hàng: <b>" . $newOrder['Code'] . "</b></p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
 			}
 
 			//return;
