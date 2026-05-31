@@ -53,81 +53,88 @@
 			<div class="col-lg-12">
 				<?php
 				foreach ($categoryTree as $catImg){
-					// print_r($catImg);
-					?>
-					<div class="section-title-container">
-						<h4 class="section-title section-title-center">
-							<b></b>
+					if(count($catImg['nodes']) > 0){
+						?>
+						<div class="section-title-container">
+							<h4 class="section-title section-title-center">
+								<b></b>
 								<span class="section-category-main">
-									<a href="<?=base_url(seo_url($catImg['CatName'].'-c'.$catImg['CategoryID']).'.html')?>"><?=$catImg['CatName']?></a>
+									<a href="<?= base_url(seo_url($catImg['CatName'] . '-c' . $catImg['CategoryID']) . '.html') ?>"><?= $catImg['CatName'] ?></a>
 								</span>
-							<b></b>
-						</h4>
-					</div>
+								<b></b>
+							</h4>
+						</div>
 
-					<div id='carousel-category-<?=$catImg['CategoryID']?>' class='carousel slide carousel-category' data-interval="false" data-ride='carousel'>
-						<div class='carousel-outer'>
-							<!-- Wrapper for slides -->
-							<div class="carousel-inner">
-								<?php
-								$index = 0;
-								foreach ($catImg['nodes'] as $item){
-									if($index % 4 == 0){
-										?>
-											<div class="item <?=$index == 0 ? 'active' : ''?>">
-												<div class="row">
+						<div id='carousel-category-<?= $catImg['CategoryID'] ?>' class='carousel slide carousel-category'
+							 data-interval="false" data-ride='carousel'>
+							<div class='carousel-outer'>
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner">
 									<?php
-									}
-									?>
+									$index = 0;
+									foreach ($catImg['nodes'] as $item) {
+										if ($index % 4 == 0) {
+											?>
+											<div class="item <?= $index == 0 ? 'active' : '' ?>">
+											<div class="row">
+											<?php
+										}
+										?>
 
-									<div class="col-lg-3">
-										<div class="cat-wrap text-center">
-											<div class="cat-img"><a href="<?=base_url(seo_url($item['CatName'].'-c'.$item['CategoryID']).'.html')?>"><img src="<?=base_url('/img/category/'.$item['Image'])?>"></a></div>
-											<div class="cat-header-title text-center">
-												<a href="<?=base_url(seo_url($item['CatName'].'-c'.$item['CategoryID']).'.html')?>"><?=$item['CatName']?></a>
-											</div>
+										<div class="col-lg-3">
+											<a href="<?= base_url(seo_url($item['CatName'] . '-c' . $item['CategoryID']) . '.html') ?>">
+												<div class="cat-wrap text-center" style="background-image: url('<?=base_url('/img/category/' . $item['Image'])?>');">
+													<div class="cat-header-title">
+														<?= $item['CatName'] ?>
+													</div>
+													<div class="cat-img" ></div>
+													<div class="clear-both"></div>
+												</div>
+											</a>
 										</div>
-									</div>
 
-									<?php
-
-									if(($index + 1) % 4 == 0){
-										?>
-												</div>
-											</div>
 										<?php
+
+										if (($index + 1) % 4 == 0) {
+											?>
+											</div>
+											</div>
+											<?php
+										}
+
+										$index++;
 									}
 
-									$index++;
-								}
-
-								if($index % 4 != 0){
-								?>
-												</div>
-											</div>
-									<?php
-								}
-								?>
-
+									if ($index % 4 != 0){
+									?>
+								</div>
 							</div>
-
 							<?php
-							if(count($catImg['nodes']) > 4) {
-								?>
-								<a class="carousel-control-prev" href="#carousel-category-<?= $catImg['CategoryID'] ?>" role="button" data-slide="prev">
-									<span class="carousel-control-prev-icon glyphicon glyphicon-chevron-left" ></span>
-									<span class="sr-only">Previous</span>
-								</a>
-								<a class="carousel-control-next" href="#carousel-category-<?= $catImg['CategoryID'] ?>" role="button" data-slide="next">
-									<span class="carousel-control-next-icon glyphicon glyphicon-chevron-right" ></span>
-									<span class="sr-only">Next</span>
-								</a>
-								<?php
 							}
 							?>
+
 						</div>
+
+						<?php
+						if (count($catImg['nodes']) > 4) {
+							?>
+							<a class="carousel-control-prev" href="#carousel-category-<?= $catImg['CategoryID'] ?>"
+							   role="button" data-slide="prev">
+								<span class="carousel-control-prev-icon glyphicon glyphicon-chevron-left"></span>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="carousel-control-next" href="#carousel-category-<?= $catImg['CategoryID'] ?>"
+							   role="button" data-slide="next">
+								<span class="carousel-control-next-icon glyphicon glyphicon-chevron-right"></span>
+								<span class="sr-only">Next</span>
+							</a>
+							<?php
+						}
+						?>
 					</div>
+				</div>
 				<?php
+				}
 				}
 				?>
 

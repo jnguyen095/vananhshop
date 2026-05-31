@@ -1931,7 +1931,8 @@ input[type=number]{
 }
 
 .carousel-category .item{
-	height: 200px;
+	height: 122px;
+	margin-bottom: 1px;
 }
 
 .carousel-category .carousel-inner .item .rơw .col-lg-3{
@@ -1941,7 +1942,7 @@ input[type=number]{
 
 .carousel-category .item img{
 	max-width: 250px;
-	height: 178px;
+	height: 120px;
 	padding: 5px 0px;
 	overflow: hidden;
 }
@@ -1990,16 +1991,38 @@ input[type=number]{
 
 .cat-wrap{
 	border: solid 1px #ddd;
+	border-radius: 20px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.cat-wrap:hover{
+	border: solid 1px #0190db;
+}
+
+.carousel-inner a:hover{
+	text-decoration: none !important;
 }
 
 .cat-wrap .cat-img{
 	padding: 0 5px;
+	max-width: 250px;
+	height: 120px;
+	padding: 5px 0px;
+	overflow: hidden;
 }
 
 
 .cat-header-title{
-	color: #068643;
-	font-size: 1em;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: white;
+	font-size: 20px;
+	text-shadow: 2px 1px 1px #0190db;
 }
 
 .ul-cate-collections{
