@@ -4,7 +4,7 @@
 <head>
 	<title>Thời Trang, Đồ Lót, Nội Y, Đồ Bộ Mặc Nhà | Vân Anh Shop</title>
 	<link rel="icon" sizes="48x48" href="<?=base_url('/img/favicon_va.ico')?>">
-
+	<link rel="stylesheet" href="<?=base_url('/css/jquery.mCustomScrollbar.min.css')?>" />
 	<?php $this->load->view('common_header')?>
 </head>
 
@@ -15,7 +15,7 @@
 <div class="container-fluid no-padding-left no-padding-right">
 	<?php $this->load->view('/theme/header')?>
 
-	<div class="container-fluid no-padding-left no-padding-right">
+	<div class="container-fluid no-padding-left no-padding-right mobile-hide">
 		<div class="row no-margin">
 			<div id='carousel-custom' class='carousel slide hot-product' data-interval="5000" data-ride='carousel'>
 				<div class='carousel-outer'>
@@ -51,9 +51,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<?php
-				foreach ($categoryTree as $catImg){
-					if(count($catImg['nodes']) > 0){
+				<?php foreach ($categoryTree as $catImg) {
+					if (count($catImg['nodes']) > 0) {
 						?>
 						<div class="section-title-container">
 							<h4 class="section-title section-title-center">
@@ -65,84 +64,36 @@
 							</h4>
 						</div>
 
-						<div id='carousel-category-<?= $catImg['CategoryID'] ?>' class='carousel slide carousel-category'
-							 data-interval="false" data-ride='carousel'>
-							<div class='carousel-outer'>
-								<!-- Wrapper for slides -->
-								<div class="carousel-inner">
-									<?php
-									$index = 0;
-									foreach ($catImg['nodes'] as $item) {
-										if ($index % 4 == 0) {
-											?>
-											<div class="item <?= $index == 0 ? 'active' : '' ?>">
-											<div class="row">
-											<?php
-										}
-										?>
-
-										<div class="col-lg-3">
-											<a href="<?= base_url(seo_url($item['CatName'] . '-c' . $item['CategoryID']) . '.html') ?>">
-												<div class="cat-wrap text-center" style="background-image: url('<?=base_url('/img/category/' . $item['Image'])?>');">
-													<div class="cat-header-title">
-														<?= $item['CatName'] ?>
-													</div>
-													<div class="cat-img" ></div>
-													<div class="clear-both"></div>
+						<div class='category-head'>
+							<ul style="width: <?=count($catImg['nodes'])*225 + 20?>px">
+								<?php foreach ($catImg['nodes'] as $item) { ?>
+									<li class="category-child">
+										<a href="<?= base_url(seo_url($item['CatName'] . '-c' . $item['CategoryID']) . '.html') ?>">
+											<div class="cat-wrap text-center"
+												 style="background-image: url('<?= base_url('/img/category/' . $item['Image']) ?>');">
+												<div class="cat-header-title">
+													<?= $item['CatName'] ?>
 												</div>
-											</a>
-										</div>
-
-										<?php
-
-										if (($index + 1) % 4 == 0) {
-											?>
+												<div class="cat-img"></div>
+												<div class="clear-both"></div>
 											</div>
-											</div>
-											<?php
-										}
-
-										$index++;
-									}
-
-									if ($index % 4 != 0){
-									?>
-								</div>
-							</div>
-							<?php
-							}
-							?>
-
+										</a>
+									</li>
+								<?php
+								} ?>
+							</ul>
 						</div>
-
 						<?php
-						if (count($catImg['nodes']) > 4) {
-							?>
-							<a class="carousel-control-prev" href="#carousel-category-<?= $catImg['CategoryID'] ?>"
-							   role="button" data-slide="prev">
-								<span class="carousel-control-prev-icon glyphicon glyphicon-chevron-left"></span>
-								<span class="sr-only">Previous</span>
-							</a>
-							<a class="carousel-control-next" href="#carousel-category-<?= $catImg['CategoryID'] ?>"
-							   role="button" data-slide="next">
-								<span class="carousel-control-next-icon glyphicon glyphicon-chevron-right"></span>
-								<span class="sr-only">Next</span>
-							</a>
-							<?php
-						}
-						?>
-					</div>
-				</div>
-				<?php
-				}
+					}
 				}
 				?>
 
-
 			</div>
+
+
 		</div>
 		
-		<div class="row margin-top-20">
+		<div class="row margin-top-20 mobile-hide">
 			<?php
 			if(isset($middleBanner)){
 				?>
@@ -165,7 +116,7 @@
 
 			<?php
 			foreach ($products as $product){?>
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 					<div class="product-thumb transition">
 						<div class="image">
 							<a href="<?=base_url().seo_url($product->Title).'-p'.$product->ProductID?>.html"><img src="<?=base_url($product->Thumb)?>" class="img-responsive" ></a>
@@ -176,7 +127,7 @@
 						</div>
 						<div class="button-group">
 							<div class="button"><p class="price"><?=number_format($product->Price)?>đ</p></div>
-							<a href="<?=base_url().seo_url($product->Title).'-p'.$product->ProductID?>.html"><i class="glyphicon glyphicon-shopping-cart"></i> Mua Hàng</a>
+							<a href="<?=base_url().seo_url($product->Title).'-p'.$product->ProductID?>.html"><i class="glyphicon glyphicon-shopping-cart"></i> Mua<b class="mobile-hide"> Hàng</b> </a>
 						</div>
 					</div>
 				</div>
@@ -192,11 +143,13 @@
 
 <!-- SWIPER -->
 <script src="<?php echo base_url()?>theme/site/js/swiper-bundle.min.js"></script>
+<script src="<?=base_url('/js/jquery.mCustomScrollbar.min.js')?>"></script>
 <!-- Custom JS File Link  -->
 <!--<script src="--><?php //echo base_url()?><!--theme/site/js/script.js"></script>-->
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.carousel').carousel();
+		$('.category-head').mCustomScrollbar({axis: 'x'});
 	});
 </script>
 </body>
