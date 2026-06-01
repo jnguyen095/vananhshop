@@ -223,7 +223,7 @@
 						$('#discountRow').show();
 						$('#discountAmount').text(response.discountFormatted);
 						$('#totalPrice').text(number_format(newTotal));
-						$('#proCodeMessage').html('<span style="color: green;">✓ ' + response.message + '</span>');
+						$('#proCodeMessage').html('<span style="color: green;">✓ ' + response.promotionName + '</span>');
 					} else {
 						resetPromotion();
 						$('#proCodeMessage').html('<span style="color: red;">✗ ' + response.message + '</span>');
