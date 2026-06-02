@@ -54,7 +54,10 @@ class Product_controller extends CI_Controller
 		// $categories = $this->Category_Model->getCategories();
 		$data['categories'] = $this->Category_Model->getActiveCategories();
 		$product = $this->Product_Model->findByDetailId($productId);
+
 		$data['product'] = $product;
+		// Update View
+		$this->Product_Model->updateViewForProductId($productId);
 
 		if(!isset($product) || $product->ProductID == null){
 			// redirect("/khong-tim-thay");

@@ -113,7 +113,6 @@ class Product_Model extends CI_Model
 	public function updateViewForProductId($productId){
 		$this->db->set('View', 'View + 1', false);
 		$this->db->where('ProductID', $productId);
-		$this->db->where('Status', ACTIVE);
 		$this->db->update('product');
 	}
 

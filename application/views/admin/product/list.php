@@ -114,10 +114,11 @@
 									<th data-action="sort" data-title="Title" data-direction="ASC"><span>Tiêu đề</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 									<th data-action="sort" data-title="c.CatName" data-direction="ASC"><span>Danh mục</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 									<th data-action="sort" data-title="Price" data-direction="ASC"><span>Giá bán</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+									<th data-action="sort" data-title="View" data-direction="ASC"><span>Lượt xem</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 									<th data-action="sort" data-title="Status" data-direction="ASC"><span>Status</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 									<th data-action="sort" data-title="ModifiedDate" data-direction="ASC"><span>Ngày cập nhật</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 									<th data-action="sort" data-title="CreatedByID" data-direction="ASC"><span>Người đăng</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-									<th></th>
+									<th>#</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -130,7 +131,8 @@
 									<td><input name="checkList[]" type="checkbox" value="<?=$product->ProductID?>"></td>
 									<td><?=$product->Title?></td>
 									<td><?=$product->CatName?></td>
-									<td><?=number_format($product->Price)?></td>
+									<td class="text-right"><?=number_format($product->Price)?></td>
+									<td class="text-right"><?=number_format($product->View)?></td>
 									<td>
 										<?php
 											if($product->Status == ACTIVE){
