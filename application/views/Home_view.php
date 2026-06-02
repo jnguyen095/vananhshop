@@ -37,7 +37,7 @@
 						foreach ($topBanners as $banner) {
 							?>
 							<div class="item <?=$counter++ == 0 ? 'active' : ''?>">
-								<img style="height: 400px; width: 100%" src="<?=base_url('/img/banner/'.$banner->Image)?>" />
+								<img style="width: 100%" src="<?=base_url('/img/banner/'.$banner->Image)?>" />
 							</div>
 							<?php
 						}

@@ -51,9 +51,9 @@
 			<div class="col-lg-7">
 				<div class="copyright text-center">
 					<div><strong>© 2026</strong></div>
-					<div>Hotline: <b>0865.053.860</b> | Email: contact@vananhshop.com</div>
+					<div>Hotline: <b>0865.053.849</b> | Email: contact@vananhshop.com</div>
 					<div>
-						<a href="http://zalo.me/0778763790"><img src="<?=base_url('/img/zalo-icon.png')?>"/></a>
+						<a href="http://zalo.me/0865053849"><img src="<?=base_url('/img/zalo-icon.png')?>"/></a>
 						<a href="https://www.facebook.com/vanhanhshopbmt" target="_blank"><img src="<?=base_url('/img/face-icon.png')?>"/></a>
 					</div>
 					<div>Mua sỉ liên hệ zalo hoặc vào<a class="text-primary" href="<?=base_url('/bao-gia-si.html')?>">BÁO GIÁ</a> để chọn sản phẩm gửi báo giá</div>
