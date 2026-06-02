@@ -64,7 +64,7 @@
 									<th data-action="sort" data-title="Email" data-direction="ASC"><span>Email</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 									<th data-action="sort" data-title="CreatedDate" data-direction="ASC"><span>Ngày Tạo</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 									<th data-action="sort" data-title="LastLogin" data-direction="ASC"><span>Đăng Nhập Gần Nhất</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-									<th></th>
+									<th>Xử lý</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -81,10 +81,7 @@
 									<td><?=date('d/m/Y H:i', strtotime($user->CreatedDate))?></td>
 									<td><?=date('d/m/Y H:i', strtotime($user->LastLogin))?></td>
 									<td>
-										<a href="<?=base_url('/admin/product/list.html?createdById='.$user->Us3rID)?>" data-toggle="tooltip" title="Xem tin rao"><i class="glyphicon glyphicon-folder-open"></i></a>&nbsp;|&nbsp;
-										<a href="<?=base_url('/admin/transfer-user-'.$user->Us3rID.'.html')?>" data-toggle="tooltip" title="Xử lý giao dịch"><i class="glyphicon glyphicon-random"></i></a>&nbsp;|&nbsp;
-										<a data-toggle="tooltip" title="Chỉnh sửa" href="<?=base_url('/admin/user/add-'.$user->Us3rID.'.html')?>"><i class="glyphicon glyphicon-edit"></i></a>&nbsp;|&nbsp;
-										<a data-toggle="tooltip" title="Xóa Người dùng"><i class="glyphicon glyphicon-remove"></i></a>
+										<a data-toggle="tooltip" title="Chỉnh sửa" href="<?=base_url('/admin/user/add-'.$user->Us3rID.'.html')?>"><i class="glyphicon glyphicon-edit"></i></a>
 									</td>
 								</tr>
 								<?php
