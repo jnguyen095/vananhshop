@@ -58,7 +58,7 @@
 				echo '</div>';
 			}?>
 			<div class="box">
-				<div class="box-header card-header">
+				<div class="box-header card-header mobile-hide">
 					<div class="row no-margin">
 						<div class="container-fluid text-center border-bottom ">
 							<div class="progresses">
@@ -82,32 +82,29 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-
-
-
 					<!-- Right column -->
 					<div class="col-lg-9 col-sm-12">
-						<div class="col-xs-6">
+						<div class="col-lg-6 col-sm-12">
 							<div class="card m-b-30 card-body bg-success">
 								<h4 class="card-title font-20 mt-0">Thông tin người mua hàng</h4>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Tên người mua</div>
+									<div class="col-sm-4 card-text">Tên người mua:</div>
 									<div class="col-sm-8"><a href="<?=base_url('admin/user/add-'.$order->UserID.'.html')?>" target="_blank"><?=$order->FullName?></a> </div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Số điện thoại </div>
+									<div class="col-sm-4 card-text">Số điện thoại:</div>
 									<div class="col-sm-8"><i class="fa fa-phone"></i>&nbsp;<?=$order->Phone?></div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Mã đơn hàng</div>
+									<div class="col-sm-4 card-text">Mã đơn hàng:</div>
 									<div class="col-sm-8"><?=$order->Code?></div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Ngày mua</div>
+									<div class="col-sm-4 card-text">Ngày mua:</div>
 									<div class="col-sm-8"><?=date('d/m/Y H:i', strtotime($order->CreatedDate))?></div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Tình trạng</div>
+									<div class="col-sm-4 card-text">Tình trạng:</div>
 									<div class="col-sm-8">
 										<?php
 										if($order->Status == ORDER_STATUS_NEW){
@@ -127,34 +124,34 @@
 							</div>
 						</div>
 
-						<div class="col-xs-6">
+						<div class="col-lg-6 col-sm-12">
 							<div class="card m-b-30 card-body bg-success">
 								<h4 class="card-title font-20 mt-0">Thông tin người nhận hàng</h4>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Tên người nhận</div>
+									<div class="col-sm-4 card-text">Tên người nhận:</div>
 									<div class="col-sm-8"><?=$shippingAddr->Receiver?></div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Số điện thoại </div>
+									<div class="col-sm-4 card-text">Số điện thoại:</div>
 									<div class="col-sm-8"><i class="fa fa-phone"></i>&nbsp;<?=$shippingAddr->Phone?></div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Địa chỉ nhận hạng</div>
+									<div class="col-sm-4 card-text">Địa chỉ nhận hạng:</div>
 									<div class="col-sm-8"><?=$shippingAddr->Street?>, <?=$shippingAddr->DistrictName?>, <?=$shippingAddr->CityName?></div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Phương thức TT</div>
+									<div class="col-sm-4 card-text">Phương thức TT:</div>
 									<div class="col-sm-8"><?=$order->Payment?></div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Ghi chú</div>
+									<div class="col-sm-4 card-text">Ghi chú:</div>
 									<div class="col-sm-8"><?=empty($order->Note) ? 'Không' : $order->Note?></div>
 								</div>
 								<a id="updateReceiver" href="#" class="btn btn-primary waves-effect waves-light"><i class="fa fa-edit"></i> Cập nhật địa chỉ nhận hàng</a>
 							</div>
 						</div>
 
-						<div class="col-lg-12">
+						<div class="col-lg-12 col-sm-12">
 							<div class="row">
 								<div class="col-xs-12">
 									<h4 class="card-title"><b>Mặt hàng:</b></h4>
@@ -227,8 +224,8 @@
 								<?php
 								if($order->Status == ORDER_STATUS_NEW){
 									?>
-									<a class="btn btn-info" id="changeOrderItems">Thay đổi đơn hàng</a>
-									<a class="btn btn-primary" data-new_action="<?=ORDER_STATUS_CONFIRM?>" id="changeStatus">Tiếp nhận đơn hàng</a>
+									<a class="btn btn-info" id="changeOrderItems">Thay đổi ĐH</a>
+									<a class="btn btn-primary" data-new_action="<?=ORDER_STATUS_CONFIRM?>" id="changeStatus">Tiếp nhận ĐH</a>
 									<?php
 								} else if($order->Status == ORDER_STATUS_CONFIRM){
 									?>

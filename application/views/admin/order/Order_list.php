@@ -89,8 +89,7 @@
 					</div>
 
 					<div class="row no-margin top-buttons">
-						<a class="btn btn-primary" id="addNew" href="<?=base_url("/admin/order/edit.html")?>">Thêm sản phẩm</a>
-						<a class="btn btn-danger" id="deleteMulti">Xóa Nhiều</a>
+<!--						<a class="btn btn-danger" id="deleteMulti">Xóa Nhiều</a>-->
 					</div>
 
 					<div class="table-responsive">
@@ -101,14 +100,14 @@
 								<th data-action="sort" data-title="m.Code" data-direction="ASC"><span>Mã ĐH</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="u.FullName" data-direction="ASC"><span>Khách hàng</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="u.Phone" data-direction="ASC"><span>SĐT</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="m.CreatedDate" data-direction="ASC"><span>Tạo lúc</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+								<th data-action="sort" data-title="m.CreatedDate" data-direction="ASC" class="mobile-hide"><span>Tạo lúc</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="m.TotalItems" data-direction="ASC"><span>SL</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="m.ShippingFee" data-direction="ASC"><span>Phí GH</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="m.Discount" data-direction="ASC"><span>Giảm giá</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+								<th data-action="sort" data-title="m.ShippingFee" data-direction="ASC" class="mobile-hide"><span>Phí GH</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+								<th data-action="sort" data-title="m.Discount" data-direction="ASC" class="mobile-hide"><span>Giảm giá</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="m.TotalPrice" data-direction="ASC"><span>Giá trị</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="m.Payment" data-direction="ASC"><span>Thanh toán</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+								<th data-action="sort" data-title="m.Payment" data-direction="ASC" class="mobile-hide"><span>Thanh toán</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="m.Status" data-direction="ASC"><span>Status</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="m.UpdatedDate" data-direction="ASC"><span>Cập nhật</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+								<th data-action="sort" data-title="m.UpdatedDate" data-direction="ASC" class="mobile-hide"><span>Cập nhật</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th></th>
 							</tr>
 							</thead>
@@ -123,12 +122,12 @@
 									<td><?=$order->Code?></td>
 									<td><?=$order->FullName?></td>
 									<td><?=$order->Phone?></td>
-									<td><?=date('d/m/Y H:i', strtotime($order->CreatedDate))?></td>
+									<td class="mobile-hide"><?=date('d/m/Y H:i', strtotime($order->CreatedDate))?></td>
 									<td class="text-right"><?=number_format($order->TotalItems)?></td>
-									<td class="text-right"><?=number_format($order->ShippingFee)?></td>
-									<td class="text-right"><?=number_format($order->Discount)?></td>
+									<td class="text-right mobile-hide"><?=number_format($order->ShippingFee)?></td>
+									<td class="text-right mobile-hide"><?=number_format($order->Discount)?></td>
 									<td class="text-right"><?=number_format($order->TotalPrice)?></td>
-									<td class="text-center"><?=$order->Payment?></td>
+									<td class="text-center mobile-hide"><?=$order->Payment?></td>
 									<td class="text-center"><?php
 										if($order->Status == ORDER_STATUS_NEW){
 											echo '<lable class="label label-success">Đơn mới</lable>';
@@ -143,7 +142,7 @@
 										}
 										?>
 									</td>
-									<td><?=date('d/m/Y H:i', strtotime($order->UpdatedDate))?></td>
+									<td class="mobile-hide"><?=date('d/m/Y H:i', strtotime($order->UpdatedDate))?></td>
 
 									<td class="text-center">
 										<a href="<?=base_url('/admin/order/process-'.$order->OrderID.'.html')?>" data-toggle="tooltip" title="Xử lý đơn hàng"><i class="glyphicon glyphicon-shopping-cart"></i></a>

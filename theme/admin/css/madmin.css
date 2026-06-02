@@ -373,3 +373,7 @@
 .logo-lg img{
 	height: 45px;
 }
+
+@media (max-width: 768px) {
+	.mobile-hide{ display: none !important; }
+}
