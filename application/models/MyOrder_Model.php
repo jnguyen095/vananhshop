@@ -50,7 +50,7 @@ class MyOrder_Model extends CI_Model
 
 	public function searchByItems($code, $phone, $status, $offset, $limit, $orderField, $orderDirection)
 	{
-		$sql = 'select m.*,u.FullName, u.Phone from myorder m inner join us3r u on m.CreatedBy = u.Us3rID where 1=1';
+		$sql = 'select m.*,u.FullName, u.Phone from myorder m inner join us3r u on m.CreatedBy = u.Us3rID where m.Status <> \''.ORDER_STATUS_DELETED.'\'';
 		if($code != null && strlen($code) > 0){
 			$sql .= ' and m.Code like \'%'.$code.'%\'';
 		}

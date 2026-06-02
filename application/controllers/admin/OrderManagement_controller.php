@@ -34,6 +34,16 @@ class OrderManagement_controller extends MY_Controller
 
 	public function index()
 	{
+		$data = [];
+		$crudaction = $this->input->post("crudaction");
+		if(isset($crudaction) && $crudaction == 'delete'){
+			$orderId = $this->input->post("orderId");
+			if($orderId != null){
+				$loginID = $this->session->userdata('loginid');
+				$this->MyOrder_Model->updateOrderStatus($orderId, ORDER_STATUS_DELETED, $loginID);
+				$data['message_response'] = "Xóa đơn hàng thành công";
+			}
+		}
 		$config = pagination($this);
 		$config['base_url'] = base_url('admin/order/list.html');
 		if(!$config['orderField']){

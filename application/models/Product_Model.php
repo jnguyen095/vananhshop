@@ -860,4 +860,14 @@ class Product_Model extends CI_Model
 		return $result;
 	}
 
+	public function findProductSameCategory($catID, $productID, $top){
+		$query = $this->db->select('p.*')
+			->from('product p')
+			->where('p.CategoryID', $catID)
+			->where('p.ProductID <>', $productID)
+			->limit($top, 0)
+			->get();
+		return $query->result();
+	}
+
 }

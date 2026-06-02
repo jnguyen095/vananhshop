@@ -139,13 +139,16 @@
 											echo '<lable class="label label-warning">Đang giao hàng</lable>';
 										} else if($order->Status == ORDER_STATUS_COMPLETED){
 											echo '<lable class="label label-default">Đã giao</lable>';
+										} else if($order->Status == ORDER_STATUS_DELETED){
+											echo '<lable class="label label-danger">Đã xóa</lable>';
 										}
 										?>
 									</td>
 									<td class="mobile-hide"><?=date('d/m/Y H:i', strtotime($order->UpdatedDate))?></td>
 
 									<td class="text-center">
-										<a href="<?=base_url('/admin/order/process-'.$order->OrderID.'.html')?>" data-toggle="tooltip" title="Xử lý đơn hàng"><i class="glyphicon glyphicon-shopping-cart"></i></a>
+										<a href="<?=base_url('/admin/order/process-'.$order->OrderID.'.html')?>" data-toggle="tooltip" title="Xử lý đơn hàng"><i class="glyphicon glyphicon-shopping-cart"></i></a>&nbsp;|&nbsp;
+										<a class="remove-order" data-order="<?=$order->OrderID?>" data-toggle="tooltip" title="Xóa đơn hàng"><i class="glyphicon glyphicon-remove"></i></a>
 									</td>
 								</tr>
 								<?php
@@ -163,7 +166,7 @@
 		</section>
 		<!-- /.content -->
 		<input type="hidden" id="crudaction" name="crudaction">
-		<input type="hidden" id="productId" name="productId">
+		<input type="hidden" id="orderId" name="orderId">
 		<?php echo form_close(); ?>
 
 	</div>
@@ -280,20 +283,20 @@
 		});
 	}
 
-	function deletePostHandler(){
-		$('.remove-post').click(function(){
-			var prId = $(this).data('post');
-			bootbox.confirm("Bạn đã chắc chắn xóa tin rao này chưa?", function(result){
+	function deleteOrderHandler(){
+		$('.remove-order').click(function(){
+			var orderId = $(this).data('order');
+			bootbox.confirm("Bạn đã chắc chắn xóa đơn hàng này chưa?", function(result){
 				if(result){
-					$("#productId").val(prId);
+					$("#orderId").val(orderId);
 					$("#crudaction").val("delete");
-					$("#frmPost").submit();
+					$("#frmOrder").submit();
 				}
 			});
 		});
 	}
 	$(document).ready(function(){
-		deletePostHandler();
+		deleteOrderHandler();
 		deleteMultiplePostHandler();
 	});
 </script>
