@@ -11,7 +11,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Quản Lý Thuộc Tính Sản Phẩm</title>
+	<title>Vân Anh Shop | Quản Lý Thuộc Tính Sản Phẩm</title>
 	<?php $this->load->view('/admin/common/header-js') ?>
 	<link rel="stylesheet" href="<?=base_url('/theme/admin/css/bootstrap-datepicker.min.css')?>">
 </head>
