@@ -73,8 +73,9 @@ class MyOrder_Model extends CI_Model
 
 	public function findByUserId($userId, $offset=null, $limit=null)
 	{
-		$sql = 'select m.*,u.FullName from myorder m inner join us3r u on m.CreatedBy = u.Us3rID';
+		$sql = 'select m.*,u.FullName from myorder m inner join us3r u on m.CreatedBy = u.Us3rID ';
 		$sql .= ' where m.CreatedBy = '.$userId;
+		$sql .= ' and m.Status <> \''.ORDER_STATUS_DELETED.'\'';
 		$sql .= ' order by m.CreatedDate desc';
 		$sql .= ' limit '.$offset.','.$limit;
 
