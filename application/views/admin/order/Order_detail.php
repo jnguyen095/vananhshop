@@ -86,22 +86,10 @@
 					<div class="col-lg-9 col-sm-12">
 						<div class="col-lg-6 col-sm-12">
 							<div class="card m-b-30 card-body bg-success">
-								<h4 class="card-title font-20 mt-0">Thông tin người mua hàng</h4>
-								<div class="form-group row">
-									<div class="col-sm-4 card-text">Tên người mua:</div>
-									<div class="col-sm-8"><a href="<?=base_url('admin/user/add-'.$order->UserID.'.html')?>" target="_blank"><?=$order->FullName?></a> </div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-4 card-text">Số điện thoại:</div>
-									<div class="col-sm-8"><i class="fa fa-phone"></i>&nbsp;<?=$order->Phone?></div>
-								</div>
+								<h4 class="card-title font-20 mt-0">Thông tin đơn hàng</h4>
 								<div class="form-group row">
 									<div class="col-sm-4 card-text">Mã đơn hàng:</div>
 									<div class="col-sm-8"><?=$order->Code?></div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-4 card-text">Ngày mua:</div>
-									<div class="col-sm-8"><?=date('d/m/Y H:i', strtotime($order->CreatedDate))?></div>
 								</div>
 								<div class="form-group row">
 									<div class="col-sm-4 card-text">Tình trạng:</div>
@@ -120,6 +108,15 @@
 										}
 										?>
 									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-sm-4 card-text">Ngày mua:</div>
+									<div class="col-sm-8"><?=date('d/m/Y H:i', strtotime($order->CreatedDate))?></div>
+								</div>
+
+								<div class="form-group row">
+									<div class="col-sm-4 card-text">Ghi chú:</div>
+									<div class="col-sm-8"><?=empty($order->Note) ? 'Không' : $order->Note?></div>
 								</div>
 							</div>
 						</div>
@@ -143,10 +140,7 @@
 									<div class="col-sm-4 card-text">Phương thức TT:</div>
 									<div class="col-sm-8"><?=$order->Payment?></div>
 								</div>
-								<div class="form-group row">
-									<div class="col-sm-4 card-text">Ghi chú:</div>
-									<div class="col-sm-8"><?=empty($order->Note) ? 'Không' : $order->Note?></div>
-								</div>
+
 								<a id="updateReceiver" href="#" class="btn btn-primary waves-effect waves-light"><i class="fa fa-edit"></i> Cập nhật địa chỉ nhận hàng</a>
 							</div>
 						</div>

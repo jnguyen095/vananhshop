@@ -98,8 +98,8 @@
 							<tr>
 								<th><input name="checkAll" value="1" type="checkbox" ></th>
 								<th data-action="sort" data-title="m.Code" data-direction="ASC"><span>Mã ĐH</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="u.FullName" data-direction="ASC"><span>Khách hàng</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="u.Phone" data-direction="ASC"><span>SĐT</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+								<th data-action="sort" data-title="os.Receiver" data-direction="ASC"><span>Người nhận</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+								<th data-action="sort" data-title="os.Phone" data-direction="ASC"><span>SĐT</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="m.CreatedDate" data-direction="ASC" class="mobile-hide"><span>Tạo lúc</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="m.TotalItems" data-direction="ASC"><span>SL</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="m.ShippingFee" data-direction="ASC" class="mobile-hide"><span>Phí GH</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
@@ -120,7 +120,7 @@
 								<tr>
 									<td><input name="checkList[]" type="checkbox" value="<?=$order->OrderID?>"></td>
 									<td><?=$order->Code?></td>
-									<td><?=$order->FullName?></td>
+									<td><?=$order->Receiver?></td>
 									<td><?=$order->Phone?></td>
 									<td class="mobile-hide"><?=date('d/m/Y H:i', strtotime($order->CreatedDate))?></td>
 									<td class="text-right"><?=number_format($order->TotalItems)?></td>
