@@ -121,7 +121,7 @@
 								<?php
 								if(isset($promotion)){
 									if($promotion['valid'] == true){
-										echo '<span style="color: white;">✓ '.$promotion['promotion']->Name . '</span>';
+										echo '<span style="color: yellow;">✓ '.$promotion['promotion']->Name . '</span>';
 									}else{
 										echo '<span style="color: red;">✗ '.$promotion['message']. '</span>';
 									}
@@ -205,7 +205,7 @@
 						$('#discountRow').show();
 						$('#discountAmount').text(response.discountFormatted);
 						$('#totalPrice').text(number_format(newTotal));
-						$('#proCodeMessage').html('<span style="color: white;">✓ ' + response.promotionName + '</span>');
+						$('#proCodeMessage').html('<span style="color: yellow;">✓ ' + response.promotionName + '</span>');
 					} else {
 						resetPromotion();
 						$('#proCodeMessage').html('<span style="color: red;">✗ ' + response.message + '</span>');
