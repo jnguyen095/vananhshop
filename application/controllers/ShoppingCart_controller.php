@@ -142,24 +142,6 @@ class ShoppingCart_controller extends CI_Controller
 				$data['txt_city'] = $shippingAddr['txt_city'];
 				$data['txt_district'] = $shippingAddr['txt_district'];
 				$data['street'] = $shippingAddr['street'];
-			} else {
-				//get latest shipping address from last order
-				$loginID = $this->session->userdata('loginid');
-				if($loginID != null){
-					$shippingAddr = $this->OrderShipping_Model->getLatestShippingAddr($loginID);
-					if($shippingAddr != null){
-						$data['txt_receiver'] = $shippingAddr->Receiver;
-						$data['txt_phone'] = $shippingAddr->Phone;
-						$data['txt_city'] = $shippingAddr->CityID;
-						$data['txt_district'] = $shippingAddr->DistrictID;
-						$data['street'] = $shippingAddr->Street;
-					} else {
-						//get part of info from current user
-						$user = $this->User_Model->getUserById($loginID);
-						$data['txt_receiver'] = $user->FullName;
-						$data['txt_phone'] = $user->Phone;
-					}
-				}
 			}
 
 		}
@@ -208,7 +190,7 @@ class ShoppingCart_controller extends CI_Controller
 	public function reloadMiniCart()
 	{
 		$html = '<li>
-					<a>
+					<a class="mini-cart">
 						<table class="table table-bordered table-responsive">
 							<tr class="bg-info">
 								<td>Sản phẩm</td>
@@ -247,6 +229,7 @@ class ShoppingCart_controller extends CI_Controller
 							}
 							$html .= '</tr>';
 					$html .= '</table>';
+					$html .= '<div class="text-center"><a href="'.base_url('/theo-doi-don-hang.html').'"><i class="glyphicon glyphicon-hand-right"></i> Theo dõi đơn hàng đã đặt </a></div>';
 					$html .= '</a>';
 					$html .= '</li>';
 

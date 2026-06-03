@@ -82,13 +82,13 @@ class OrderManagement_controller extends MY_Controller
 			$this->OrderTracking_Model->insert($orderTracking);
 
 			// send email to inform customer
-			$emailNCode = $this->MyOrder_Model->getCustomerEmailFromOrderId($orderId);
+			/*$emailNCode = $this->MyOrder_Model->getCustomerEmailFromOrderId($orderId);
 			$customerEmail = $emailNCode->Email;
 			$orderCode = $emailNCode->Code;
 
 			if($customerEmail != null && strlen($customerEmail) > 0){
 				my_send_email($customerEmail, "Vân Anh Shop - Tiếp nhận đơn hàng ".$orderCode, "<p>Đơn hàng: ".$orderCode." đã tiếp nhận từ: " . APP_DOMAIN . "</p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
-			}
+			}*/
 		} else if($crudaction == ORDER_STATUS_SHIPPING){
 			$this->MyOrder_Model->updateOrderStatus($orderId, ORDER_STATUS_SHIPPING, $loginID);
 			$data['message_response'] = 'Cập nhật tình trạng đơn hàng thành công.';
@@ -101,13 +101,13 @@ class OrderManagement_controller extends MY_Controller
 			$this->OrderTracking_Model->insert($orderTracking);
 
 			// send email to inform customer
-			$emailNCode = $this->MyOrder_Model->getCustomerEmailFromOrderId($orderId);
+			/*$emailNCode = $this->MyOrder_Model->getCustomerEmailFromOrderId($orderId);
 			$customerEmail = $emailNCode->Email;
 			$orderCode = $emailNCode->Code;
 
 			if($customerEmail != null && strlen($customerEmail) > 0){
 				my_send_email($customerEmail,"Vân Anh Shop - Đơn hàng ".$orderCode. " đang được giao", "<p>Đơn hàng: ".$orderCode." đang được giao đến khách hàng</p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
-			}
+			}*/
 		} else if($crudaction == ORDER_STATUS_COMPLETED){
 			$this->MyOrder_Model->updateOrderStatus($orderId, ORDER_STATUS_COMPLETED, $loginID);
 			$data['message_response'] = 'Cập nhật tình trạng đơn hàng thành công.';
@@ -120,13 +120,13 @@ class OrderManagement_controller extends MY_Controller
 			$this->OrderTracking_Model->insert($orderTracking);
 
 			// send email to inform customer
-			$emailNCode = $this->MyOrder_Model->getCustomerEmailFromOrderId($orderId);
+			/*$emailNCode = $this->MyOrder_Model->getCustomerEmailFromOrderId($orderId);
 			$customerEmail = $emailNCode->Email;
 			$orderCode = $emailNCode->Code;
 
 			if($customerEmail != null && strlen($customerEmail) > 0){
 				my_send_email($customerEmail, "Vân Anh Shop - Đơn hàng ".$orderCode. " được giao thành công", "<p>Đơn hàng: ".$orderCode." đã giao đến khách hàng thành công</p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
-			}
+			}*/
 		}
 
 		$order = $this->MyOrder_Model->findByOrderIdAndFetchAll($orderId);

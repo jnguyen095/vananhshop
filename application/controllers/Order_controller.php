@@ -24,9 +24,10 @@ class Order_controller extends CI_Controller
 		$this->load->model('MyOrder_Model');
 		$this->load->model('OrderTracking_Model');
 		$this->load->library('cart');
+		$this->load->library('form_validation');
 	}
 
-	public function index($page = 0)
+	public function index()
 	{
 		// begin file cached
 		$this->load->driver('cache');
@@ -37,38 +38,12 @@ class Order_controller extends CI_Controller
 			$this->cache->file->save('categories', $categories, 1440);
 		}
 		$data['categories'] = $categories;
-
-		// end file cached
-
-		$userId = $this->session->userdata('loginid');
-
-		$crudaction = $this->input->post("crudaction");
-		if($crudaction == DELETE){
-			$orderId = $this->input->post("orderId");
-			if($orderId != null && $orderId > 0) {
-				$this->MyOrder_Model->updateOrderStatus($orderId, ORDER_STATUS_CANCEL, $userId);
-				$data['message_response'] = 'Hủy đơn hàng thành công.';
-				$user = $this->User_Model->getUserById($userId);
-				$orderTracking = array(
-					'OrderID' => $orderId,
-					'CreatedDate' => date('Y-m-d H:i:s'),
-					'Message' => $user->FullName. ' đã hủy hàng'
-				);
-				$this->OrderTracking_Model->insert($orderTracking);
-			}
-		}
-
-		$orders = $this->MyOrder_Model->findByUserId($userId, $page, 10);
-
+		$txtText = $this->input->post("txtText");
+		$this->form_validation->set_rules("txtText", "Mã đơn hàng/Số ĐT", "trim|required");
+		$this->form_validation->run();
+		$orders = $this->MyOrder_Model->findByOrderCodeOrPhoneOrEmail($txtText);
 		$data['orders'] = $orders['items'];
-
-		$config = pagination();
-		$config['base_url'] = base_url('quan-ly-don-hang.html');
-		$config['total_rows'] = $orders['total'];
-		$config['per_page'] = 10;
-
-		$this->pagination->initialize($config);
-		$data['pagination'] = $this->pagination->create_links();
+		$data['txtText'] = $txtText;
 
 		$this->load->view('order/list', $data);
 	}
