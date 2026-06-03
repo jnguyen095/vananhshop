@@ -2124,11 +2124,28 @@ input[type=number]{
 .category-head{
 	overflow-x: auto;
 }
+
+.category-head .mCSB_horizontal.mCSB_inside>.mCSB_container{
+	margin-bottom: 15px;
+}
 .category-head ul{
 	padding-left: 0px !important;
 }
 .category-child{
 	width: 215px;
+	height: 165px;
 	display: inline-block;
 	margin-right: 10px;
+	vertical-align: top;
+}
+
+.category-child .cat-text{
+	text-align: center;
+	font-size: 16px;
+	height: 45px;
+	overflow-y: hidden;
+
+}
+.category-child a:hover{
+	text-decoration: none;
 }

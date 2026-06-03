@@ -71,12 +71,10 @@
 										<a href="<?= base_url(seo_url($item['CatName'] . '-c' . $item['CategoryID']) . '.html') ?>">
 											<div class="cat-wrap text-center"
 												 style="background-image: url('<?= base_url('/img/category/' . $item['Image']) ?>');">
-												<div class="cat-header-title">
-													<?= $item['CatName'] ?>
-												</div>
 												<div class="cat-img"></div>
 												<div class="clear-both"></div>
 											</div>
+											<div class="cat-text"><?= $item['CatName'] ?></div>
 										</a>
 									</li>
 								<?php
@@ -108,7 +106,7 @@
 				<h4 class="section-title section-title-center">
 					<b></b>
 					<span class="section-category-main">
-						Top sản phẩm bán chạy
+						Sản phẩm mới
 					</span>
 					<b></b>
 				</h4>
