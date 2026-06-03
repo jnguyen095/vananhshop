@@ -154,6 +154,7 @@
 									<table class="table table-bordered">
 										<thead>
 										<tr class="bg-primary">
+											<td class="text-left">#</td>
 											<td class="text-left">Mặt hàng</td>
 											<td class="text-left">Số lượng</td>
 											<td class="text-left">Đơn giá</td>
@@ -162,9 +163,10 @@
 										</tr>
 										</thead>
 										<tbody>
-										<?php foreach ($products as $item){
+										<?php $index=0; foreach ($products as $item){
 											?>
 											<tr>
+												<td class="text-right"><?=++$index?></td>
 												<td class="text-left"><a href="<?=base_url().seo_url($item->ProductName).'-p'.$item->ProductID?>.html" target="_blank"><?=$item->ProductName?></a></td>
 												<td class="text-center"><?=$item->Quantity?></td>
 												<td class="text-right"><?=number_format($item->Price)?></td>
@@ -190,17 +192,17 @@
 											<?php
 										} ?>
 										<tr>
-											<td colspan="3" class="text-right">Phí giao hàng</td>
+											<td colspan="4" class="text-right">Phí giao hàng</td>
 											<td class="text-right"><?=number_format($order->ShippingFee)?></td>
 											<td></td>
 										</tr>
 										<tr>
-											<td colspan="3" class="text-right">Giảm giá</td>
+											<td colspan="4" class="text-right">Giảm giá</td>
 											<td class="text-right"><?=number_format($order->Discount)?></td>
 											<td><i class="label label-info"><?=$order->PromotionName?></i></td>
 										</tr>
 										<tr>
-											<td colspan="3" class="text-right">Tổng cộng</td>
+											<td colspan="4" class="text-right">Tổng cộng</td>
 											<td class="text-right"><b><?=number_format($order->TotalPrice)?> VNĐ</b></td>
 											<td></td>
 										</tr>

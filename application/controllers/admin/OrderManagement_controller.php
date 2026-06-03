@@ -283,13 +283,13 @@ class OrderManagement_controller extends MY_Controller
 			$this->OrderTracking_Model->insert($orderTracking);
 
 			// send email to inform customer
-			$emailNCode = $this->MyOrder_Model->getCustomerEmailFromOrderId($orderId);
+			/*$emailNCode = $this->MyOrder_Model->getCustomerEmailFromOrderId($orderId);
 			$customerEmail = $emailNCode->Email;
 			$orderCode = $emailNCode->Code;
 
 			if($customerEmail != null && strlen($customerEmail) > 0){
 				my_send_email($customerEmail,"Vân Anh Shop - Đơn hàng ".$orderCode. " đã bị được thay đổi", "<p>Đơn hàng: ".$orderCode." đã được thay đổi bởi nhân viên <b>".$user->FullName."</b></p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
-			}
+			}*/
 			echo 'success';
 		} else {
 			echo 'fail';
