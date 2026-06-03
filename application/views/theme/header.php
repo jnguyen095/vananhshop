@@ -30,7 +30,7 @@
 					<img class="top-header-truck-icon" src="<?=base_url('/img/truck-icon.png')?>" alt="Hotline"/>
 				</div>
 				<div class="top-header-hotline text-left">
-					<div>Giao hàng toàn quốc</div>
+					<div>Miễn phí giao hàng</div>
 				</div>
 
 				<ul class="nav navbar-nav navbar-right">

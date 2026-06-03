@@ -41,7 +41,7 @@ img.img-sm {
 
 .top-header-hotline{
 	float: left;
-	width: 90px;
+	width: 80px;
 	font-size: 14px;
 	color: #365899;
 	font-weight: bold;
@@ -2099,7 +2099,7 @@ input[type=number]{
 }
 
 .ul-cate-collections li .sub-cat-name {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 22px;
     margin: 0;
     word-break: break-word;
@@ -2112,6 +2112,8 @@ input[type=number]{
     height: 44px;
     margin-top: 5px;
     margin-bottom: 10px;
+	color: #365899;
+
 }
 
 .productDetails{
@@ -2144,6 +2146,7 @@ input[type=number]{
 	font-size: 16px;
 	height: 45px;
 	overflow-y: hidden;
+	color: #365899;
 
 }
 .category-child a:hover{
