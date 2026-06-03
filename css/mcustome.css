@@ -2157,7 +2157,8 @@ input[type=number]{
 }
 
 .checkout-imgs{
-	max-width: 100px;
+	max-width: 60px;
+	padding: 1px;
 }
 
 .row.row-promotion {
@@ -2172,4 +2173,21 @@ input[type=number]{
 	margin-top: 10px;
 	margin-bottom: 8px;
 	color: #365899;
+}
+
+.col-lg-12.text-right.check-order {
+	margin-bottom: 10px;
+}
+.col-lg-12.text-right.check-order .form-control{
+	width: 200px;
+	float: right;
+	margin-right: 5px;
+}
+.col-lg-12.text-right.check-order span.text-danger{
+	margin-top: -20px;
+	position: absolute;
+}
+.dropdown-menu>li>a.mini-cart:hover
+{
+	background-color: #ffffff;
 }
