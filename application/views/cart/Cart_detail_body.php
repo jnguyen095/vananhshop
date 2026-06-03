@@ -2,7 +2,7 @@
 	<tr>
 		<td class="text-center">
 			<a href="<?=base_url().seo_url($item['name']).'-p'.$item['id']?>.html">
-				<img src="<?=base_url($item['image'])?>" alt="<?=$item['name']?>" title="<?=$item['name']?>" class="img-thumbnail">
+				<img src="<?=base_url($item['image'])?>" alt="<?=$item['name']?>" title="<?=$item['name']?>" class="img-thumbnail checkout-imgs">
 			</a>
 		</td>
 		<td class="text-left">
@@ -32,6 +32,10 @@
 	<td class="text-right"><?=number_format($ShippingFee)?></td>
 </tr>
 <tr>
+	<td class="text-right" colspan="4" >Giảm giá</td>
+	<td class="text-right" id="discountAmount"><?=number_format(isset($discount)? $discount : 0)?></td>
+</tr>
+<tr>
 	<td class="text-right" colspan="4">Tổng cộng</td>
-	<td class="text-right"><?=number_format($this->cart->total() + $ShippingFee)?>(VNĐ)</td>
+	<td class="text-right"><strong id="totalPrice"><?=number_format($this->cart->total() + $ShippingFee - (isset($discount)? $discount : 0))?></strong>(VNĐ)</td>
 </tr>

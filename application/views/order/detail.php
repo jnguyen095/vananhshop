@@ -22,12 +22,11 @@
 <?php $this->load->view('/common/analyticstracking')?>
 <div class="container-fluid no-padding-left no-padding-right">
 	<?php $this->load->view('/theme/header')?>
-	<?php $this->load->view('/common/user-menu')?>
 
 	<div class="col-lg-12 col-sm-12 no-padding-left no-padding-right">
 		<ul itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb always">
 			<div class="container">
-				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="<?php echo base_url('/quan-ly-don-hang.html')?>"><span itemprop="name">Đơn hàng</span></a></li>
+				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="<?php echo base_url('/')?>"><span itemprop="name">Trang chủ</span></a></li>
 				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="active mobile-hide"><span itemprop="item"><span itemprop="name">Chi tiết đơn hàng <?=$order->Code?></span></span></li>
 			</div>
 		</ul>
@@ -51,7 +50,7 @@
 
 				<div class="card">
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item text-center mobile-hide">
+						<li class="list-group-item text-center mobile-hide margin-top-20">
 							<div class="progresses">
 								<?php
 								if($order->Status == ORDER_STATUS_CANCEL) {
@@ -188,14 +187,7 @@
 				</div>
 
 				<div class="row col-lg-12 margin-bottom-20 text-right">
-					<a class="btn btn-primary" href="<?=base_url('quan-ly-don-hang.html')?>"><i class="glyphicon glyphicon glyphicon-chevron-left"></i> Trở lại</a>
-					<?php
-					if($order->Status == ORDER_STATUS_NEW){
-						?>
-						<a class="btn btn-danger" href="#" onclick="cancelOrder(<?=$order->OrderID?>)">Hủy đơn hàng</a>
-						<?php
-					}
-					?>
+					<a class="btn btn-primary" href="<?=base_url('/')?>"><i class="glyphicon glyphicon glyphicon-chevron-left"></i> Trở lại</a>
 				</div>
 
 				<!-- end content -->

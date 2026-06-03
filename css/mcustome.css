@@ -1742,6 +1742,9 @@ div.main-image{
 	position: absolute;
 }
 
+label.label3.success-info {
+	margin: 22px 0px 0px -85px;
+}
 .steps.in-progress{
 	background-color: #FFA500;
 }
@@ -2151,4 +2154,22 @@ input[type=number]{
 }
 .category-child a:hover{
 	text-decoration: none;
+}
+
+.checkout-imgs{
+	max-width: 100px;
+}
+
+.row.row-promotion {
+	background: #0190db;
+	color: #fff;
+	padding: 2px;
+	margin-bottom: 5px;
+}
+
+.place-order-header {
+	font-size: 24px;
+	margin-top: 10px;
+	margin-bottom: 8px;
+	color: #365899;
 }

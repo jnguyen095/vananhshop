@@ -43,7 +43,7 @@
 						</ul>
 					</li>
 
-					<?php
+					<?php /*
 					if($this->session->userdata('phone') != null){
 						?>
 						<li role="presentation" class="dropdown">
@@ -71,7 +71,7 @@
 						<li class="dropdown"><a href="<?=base_url('/dang-nhap.html')?>"><i class="glyphicon glyphicon-user"></i>&nbsp;Đăng nhập</a></li>
 						<?php
 					}
-					?>
+					*/?>
 				</ul>
 			</div>
 		</div>

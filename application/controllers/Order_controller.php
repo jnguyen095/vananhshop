@@ -11,13 +11,9 @@ class Order_controller extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('loginid')){
-			redirect('dang-nhap');
-		}
 		$this->load->model('Product_Model');
 		$this->load->model('Category_Model');
 		$this->load->model('City_Model');
-
 		$this->load->model('CallMeBack_Model');
 		$this->load->helper("seo_url");
 		$this->load->helper('date');
@@ -86,30 +82,15 @@ class Order_controller extends CI_Controller
 		}
 		$data['categories'] = $categories;
 
-		$userId = $this->session->userdata('loginid');
-		$crudaction = $this->input->post("crudaction");
-		if($crudaction == DELETE){
-			if($orderId != null && $orderId > 0) {
-				$this->MyOrder_Model->updateOrderStatus($orderId, ORDER_STATUS_CANCEL, $userId);
-				$data['message_response'] = 'Hủy đơn hàng thành công.';
-				$user = $this->User_Model->getUserById($userId);
-				$orderTracking = array(
-					'OrderID' => $orderId,
-					'CreatedDate' => date('Y-m-d H:i:s'),
-					'Message' => $user->FullName. ' đã hủy hàng'
-				);
-				$this->OrderTracking_Model->insert($orderTracking);
-			}
-		}
-
-
-
 		$order = $this->MyOrder_Model->findByOrderIdAndFetchAll($orderId);
-		$data['order'] = $order['order'];
-		$data['products'] = $order['products'];
-		$data['shippingAddr'] = $order['shippingAddr'];
-
-		$this->load->view('order/detail', $data);
+		if(!isset($order) || $order['order'] == null){
+			$this->load->view('Notfound_view', $data);
+		} else {
+			$data['order'] = $order['order'];
+			$data['products'] = $order['products'];
+			$data['shippingAddr'] = $order['shippingAddr'];
+			$this->load->view('order/detail', $data);
+		}
 	}
 
 	public function callMeBack($page = 0){

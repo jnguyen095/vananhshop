@@ -92,12 +92,17 @@ class MyOrder_Model extends CI_Model
 	public function findByOrderIdAndFetchAll($orderId)
 	{
 		$data = [];
-		$sql = 'select m.*, u.FullName, u.Phone, p.Name as PromotionName from myorder m inner join us3r u on m.CreatedBy = u.Us3rID';
+		$sql = 'select m.*, os.Receiver, os.Phone, p.Name as PromotionName from myorder m inner join ordershipping os on m.OrderID = os.OrderID';
 		$sql .= ' left join PromotionApplication pa on pa.OrderID = m.OrderID';
 		$sql .= ' left join promotion p on pa.PromotionID = p.PromotionsID';
 		$sql .= ' where m.OrderID = '. $orderId;
 		$query = $this->db->query($sql);
 		$order = $query->row();
+
+		if(empty($order) || empty($order->OrderID)){
+			return null;
+		}
+
 
 		// order detail
 		$query = $this->db->select('od.*, p.Title as ProductName, p.Thumb, p.Code as ProductCode, concat(\'[\', group_concat(JSON_OBJECT(IFNULL(po.Pro, \'\'), IFNULL(po.Val, \'\'))), \']\') as  Options')

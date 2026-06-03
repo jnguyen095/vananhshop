@@ -29,122 +29,6 @@ class ShoppingCart_controller extends CI_Controller
 		$this->load->helper('my_email');
 	}
 
-	public function checkOut(){
-		$data['categories'] = $this->Category_Model->getActiveCategories();
-		$fee = $this->ShippingFee_Model->findInRange($this->cart->total());
-		$data['ShippingFee'] = $fee;
-		$this->load->view('cart/Cart_detail', $data);
-	}
-
-	public function review(){
-		$shippingAddr = $this->session->userdata("shippingAddr");
-		$crudaction = $this->input->post('crudaction');
-		$shippingFee = $this->ShippingFee_Model->findInRange($this->cart->total());
-		if($crudaction == 'insert'){
-			$note = $this->input->post("note");
-			$payment = $this->input->post("payment");
-			$proCode = trim($this->input->post("proCode"));
-			
-			// order
-			$loginID = $this->session->userdata('loginid');
-			$newOrder = [];
-			$newOrder['UserID'] = $loginID;
-			$newOrder['Status'] = ORDER_STATUS_NEW;
-			$newOrder['ShippingFee'] = $shippingFee;
-			$newOrder['TotalItems'] = $this->cart->total_items();
-			$newOrder['Note'] = $note;
-			$newOrder['Payment'] = $payment;
-			$newOrder['CreatedDate'] = date('Y-m-d H:i:s');
-			$newOrder['UpdatedDate'] = date('Y-m-d H:i:s');
-			$newOrder['CreatedBy'] = $loginID;
-			$newOrder['UpdatedBy'] = $loginID;
-			$newOrder['Code'] = $this->MyOrder_Model->getNewOrderCode();
-
-			// Apply promotion if provided
-			$discount = 0;
-			$appliedPromotion = null;
-			if (!empty($proCode)) {
-				$validationResult = $this->Promotion_Model->validatePromotion($proCode, $this->cart->total(), $loginID);
-				if ($validationResult['valid']) {
-					$appliedPromotion = $validationResult['promotion'];
-					$discount = $this->Promotion_Model->calculateDiscount($appliedPromotion, $this->cart->total(), $shippingFee);
-				}
-			}
-
-			$newOrder['Discount'] = $discount;
-			$newOrder['TotalPrice'] = $this->cart->total() + $shippingFee - $discount;
-
-			// order items
-			$orderItems = [];
-			foreach ($this->cart->contents() as $item){
-				$options = [];
-				// property
-				if($this->cart->has_options($item['rowid']) == TRUE) {
-					foreach ($this->cart->product_options($item['rowid']) as $option_attr => $option_val) {
-						$option = [];
-						$option[$option_val['key']] = $option_val['attr'];
-						array_push($options, $option);
-					}
-				}
-
-				$orderItem = array(
-					'ProductID' => $item['id'],
-					'Price' => $item['price'],
-					'Quantity' => $item['qty'],
-					'Options' => $options
-				);
-				array_push($orderItems, $orderItem);
-			}
-
-			// shipping
-			$shippingInfo = array(
-				'Receiver' => $shippingAddr['txt_receiver'],
-				'Phone' => $shippingAddr['txt_phone'],
-				'CityID' => $shippingAddr['txt_city'],
-				'DistrictID' => $shippingAddr['txt_district'],
-				'Street' => $shippingAddr['street']
-			);
-
-			// tracking
-			$user = $this->User_Model->getUserById($loginID);
-			$trackingMessage = '<b>'.$user->FullName. '</b> tạo đơn hàng';
-			if (isset($note) && strlen($note) > 0) {
-				$trackingMessage .= ' với ghi chú: <i>'. $note .'</i>';
-			}
-			if ($appliedPromotion) {
-				$trackingMessage .= ' (Mua khuyến mãi: ' . $appliedPromotion->Name . ', giảm giá: ' . number_format($discount) . 'đ)';
-			}
-			$orderTracking = array(
-				'CreatedDate' => date('Y-m-d H:i:s'),
-				'Message' => $trackingMessage
-			);
-
-			$orderId = $this->MyOrder_Model->createOrder($newOrder, $orderItems, $shippingInfo, $orderTracking);
-
-			// Record promotion application if applied
-			if ($appliedPromotion && $discount > 0) {
-				$this->Promotion_Model->recordPromotionApplication($appliedPromotion->PromotionsID, $orderId, $discount);
-			}
-
-			// send email to inform customer
-			$customerEmail = $user->Email;
-			if($customerEmail != null && strlen($customerEmail) > 0){
-				my_send_email($customerEmail, "Vân Anh Shop - Đặt hàng thành công", "<p>Bạn vừa đặt hàng thành công tại: " . APP_DOMAIN . ", mã đơn hàng: <b>" . $newOrder['Code'] . "</b></p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
-			}
-
-			//return;
-			redirect('/check-out/success?orderId=' . $orderId);
-		}
-		$data['categories'] = $this->Category_Model->getActiveCategories();
-		$data['txt_receiver'] = $shippingAddr['txt_receiver'];
-		$data['txt_phone'] = $shippingAddr['txt_phone'];
-		$data['city'] = $this->City_Model->findById($shippingAddr['txt_city']);
-		$data['district'] = $this->District_Model->findById($shippingAddr['txt_district']);
-		$data['street'] = $shippingAddr['street'];
-		$data['ShippingFee'] = $shippingFee;
-		$this->load->view('cart/Cart_review', $data);
-	}
-
 	public function success(){
 		$this->cart->destroy();
 		$this->session->set_userdata("shippingAddr", []);
@@ -152,10 +36,7 @@ class ShoppingCart_controller extends CI_Controller
 		$this->load->view('cart/Cart_success', $data);
 	}
 
-	public function shippingAddress(){
-		if (!$this->session->userdata('loginid')){
-			redirect('dang-nhap');
-		}
+	public function checkOut(){
 		$data['categories'] = $this->Category_Model->getActiveCategories();
 		$fee = $this->ShippingFee_Model->findInRange($this->cart->total());
 		$data['ShippingFee'] = $fee;
@@ -166,22 +47,92 @@ class ShoppingCart_controller extends CI_Controller
 			$data['txt_city'] = $this->input->post("txt_city");
 			$data['txt_district'] = $this->input->post("txt_district");
 			$data['street'] = $this->input->post("txt_street");
+			$data['note'] = $this->input->post("note");
+			$proCode = trim($this->input->post("proCode"));
+			$data['proCode'] = $proCode;
+			$discount = 0;
+			if (!empty($proCode)) {
+				$validationResult = $this->Promotion_Model->validatePromotion($proCode, $this->cart->total());
+				$data['promotion'] = $validationResult;
+				if ($validationResult['valid']) {
+					$appliedPromotion = $validationResult['promotion'];
+					$discount = $this->Promotion_Model->calculateDiscount($appliedPromotion, $this->cart->total(), $fee);
+				}
+			}
+			$data['discount'] = $discount;
+
 			$this->form_validation->set_rules("txt_receiver", "Người nhận hàng", "trim|required");
 			$this->form_validation->set_rules("txt_phone", "Số điện thoại", "trim|required");
 			$this->form_validation->set_rules("txt_city", "Thành phố", "numeric|required");
 			$this->form_validation->set_rules("txt_district", "Quận", "numeric|required");
-			$this->form_validation->set_rules("txt_street", "Đường", "required");
+			$this->form_validation->set_rules("txt_street", "Số nhà/căn hộ/đường", "required");
 			$validateResult = $this->form_validation->run();
 			if($validateResult == TRUE){
-				$shippingAddr = array(
-					'txt_receiver' => $data['txt_receiver'],
-					'txt_phone' => $data['txt_phone'],
-					'txt_city' => $data['txt_city'],
-					'txt_district' => $data['txt_district'],
-					'street' => $data['street'],
+				// shipping
+				$shippingInfo = array(
+					'Receiver' => $data['txt_receiver'],
+					'Phone' => $data['txt_phone'],
+					'CityID' => $data['txt_city'],
+					'DistrictID' => $data['txt_district'],
+					'Street' => $data['street']
 				);
-				$this->session->set_userdata("shippingAddr", $shippingAddr);
-				redirect('check-out/review');
+				// $this->session->set_userdata("shippingAddr", $shippingAddr);
+				$newOrder = [];
+				$newOrder['Status'] = ORDER_STATUS_NEW;
+				$newOrder['ShippingFee'] = $fee;
+				$newOrder['TotalItems'] = $this->cart->total_items();
+				$newOrder['Note'] = $data['note'];
+				$newOrder['Payment'] = 'COD';
+				$newOrder['CreatedDate'] = date('Y-m-d H:i:s');
+				$newOrder['UpdatedDate'] = date('Y-m-d H:i:s');
+				$newOrder['Code'] = $this->MyOrder_Model->getNewOrderCode();
+				$newOrder['Discount'] = $discount;
+				$newOrder['TotalPrice'] = $this->cart->total() + $fee - $discount;
+
+				// order items
+				$orderItems = [];
+				foreach ($this->cart->contents() as $item){
+					$options = [];
+					// property
+					if($this->cart->has_options($item['rowid']) == TRUE) {
+						foreach ($this->cart->product_options($item['rowid']) as $option_attr => $option_val) {
+							$option = [];
+							$option[$option_val['key']] = $option_val['attr'];
+							array_push($options, $option);
+						}
+					}
+
+					$orderItem = array(
+						'ProductID' => $item['id'],
+						'Price' => $item['price'],
+						'Quantity' => $item['qty'],
+						'Options' => $options
+					);
+					array_push($orderItems, $orderItem);
+				}
+
+				// tracking
+				$trackingMessage = '<b>'.$data['txt_receiver']. '</b> tạo đơn hàng';
+				if (isset($note) && strlen($note) > 0) {
+					$trackingMessage .= ' với ghi chú: <i>'. $note .'</i>';
+				}
+				if ($appliedPromotion) {
+					$trackingMessage .= ' (Mua khuyến mãi: ' . $appliedPromotion->Name . ', giảm giá: ' . number_format($discount) . 'đ)';
+				}
+				$orderTracking = array(
+					'CreatedDate' => date('Y-m-d H:i:s'),
+					'Message' => $trackingMessage
+				);
+
+				$orderId = $this->MyOrder_Model->createOrder($newOrder, $orderItems, $shippingInfo, $orderTracking);
+
+				// Record promotion application if applied
+				if ($appliedPromotion && $discount > 0) {
+					$this->Promotion_Model->recordPromotionApplication($appliedPromotion->PromotionsID, $orderId, $discount);
+				}
+
+				//return;
+				redirect('/check-out/success?orderId=' . $orderId);
 			}
 		} else{
 			$shippingAddr = $this->session->userdata("shippingAddr");
@@ -219,7 +170,7 @@ class ShoppingCart_controller extends CI_Controller
 			$districts = $this->District_Model->findByCityId($data['txt_city']);
 			$data['districts'] = $districts;
 		}
-		$this->load->view('cart/Cart_address', $data);
+		$this->load->view('cart/Cart_checkout', $data);
 	}
 
 	public function addItemToCart(){

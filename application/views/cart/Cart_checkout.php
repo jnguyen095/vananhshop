@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>Giỏ Hàng | Vân Anh Shop</title>
+	<title>Tạo Đơn Hàng | Vân Anh Shop</title>
 	<?php $this->load->view('common_header')?>
 	<link rel="stylesheet" href="<?=base_url('/css/jquery.mCustomScrollbar.min.css')?>" />
 	<link rel="stylesheet" href="<?=base_url('/css/iCheck/all.css')?>">
@@ -20,8 +20,7 @@
 <ul itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb always">
 	<div class="container">
 		<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="<?php echo base_url('/')?>"><span itemprop="name">Trang chủ</span></a></li>
-		<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="mobile-hide"><span itemprop="item"><span itemprop="name"><a itemprop="item" href="<?=base_url('/check-out.html')?>">Giỏ hàng</a></span></span></li>
-		<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="active mobile-hide"><span itemprop="item"><span itemprop="name">Địa chỉ giao hàng</span></span></li>
+		<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="active mobile-hide"><span itemprop="item"><span itemprop="name">Tạo đơn hàng</span></span></li>
 	</div>
 </ul>
 
@@ -29,35 +28,16 @@
 	<div class="row">
 		<div class="col-lg-12 mobile-hide ">
 			<div class="container-fluid text-center border-bottom">
-				<div class="progresses">
-					<div class="steps active">
-						<span><i class="glyphicon glyphicon-ok"></i></span>
-					</div>
-
-					<span class="line active"><label class="label1">Xem đơn hàng</label></span>
-
-					<div class="steps in-progress">
-						<span class="font-weight-bold">2</span>
-					</div>
-
-					<span class="line"><label class="label2">Địa chỉ giao hàng</label></span>
-
-					<div class="steps">
-						<span >3</span>
-					</div>
-					<span class="last-line"><label class="label3">Hoàn thành</label></span>
-
-				</div>
-
+				<div class="place-order-header">Tạo Đơn Hàng</div>
 			</div>
 		</div>
 
 		<?php
 		$attributes = array("id" => "frmShippingAddress", "class" => "form-horizontal");
-		echo form_open("check-out/address", $attributes);
+		echo form_open("check-out", $attributes);
 		?>
 		<div class="col-lg-12">
-			<div class="col-lg-7">
+			<div class="col-lg-5 col-sm-12">
 				<div class="form-group">
 					<div class="no-padding-mobile col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<label>Người nhận hàng <span class="required">*</span></label>
@@ -112,68 +92,70 @@
 
 				<div class="form-group">
 					<div class="no-padding-mobile col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<label>Đường/Số nhà/Căn hộ <span class="required">*</span></label>
+						<label>Số nhà/Căn hộ/Đường <span class="required">*</span></label>
 						<input type="text" id="txt_street" name="txt_street" class="form-control typeahead" value="<?=isset($street) ? $street : ''?>">
 						<span class="text-danger"><?php echo form_error('txt_street'); ?></span>
 					</div>
 					<div class="clear-both"></div>
 				</div>
 
+				<div class="form-group">
+					<div class="no-padding-mobile col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<label>Ghi chú cho đơn hàng:</label>
+						<textarea name="note" value="COD" class="form-control" placeholder="ví dụ: giao hàng giờ hành chính" style="width: 100%;height: 45px;resize: none;"></textarea>
+					</div>
+					<div class="clear-both"></div>
+				</div>
+
 			</div>
 
-			<div class="col-lg-5">
-				<table class="table table-bordered">
-					<thead>
-					<tr class="bg-success">
-						<td class="text-left">Sản phẩm</td>
-						<td class="text-left">SL</td>
-						<td class="text-right">Tổng cộng</td>
-					</tr>
-					</thead>
-					<tbody>
-					<?php foreach ($this->cart->contents() as $item){?>
-						<tr>
-							<td class="text-left">
-								<a href="<?=base_url().seo_url($item['name']).'-p'.$item['id']?>.html"><?=$item['name']?></a>
-								<?php if($this->cart->has_options($item['rowid']) == TRUE){
-									echo "<br>";
-									foreach ($this->cart->product_options($item['rowid']) as $option_name => $option_value){
-										$i = 1;
-										foreach ($option_value as $k => $v){ ?>
-											<i><small><?=$v?></small></i>
-											<?=$i == 1 ? ':' : ''?>
-											<?php
-											$i++;
-										}
-										echo "</br>";
+			<div class="col-lg-7 col-sm-12">
+				<div class="row row-promotion">
+					<div class="col-xs-5">
+						<h3>Mã khuyến mãi:</h3>
+					</div>
+					<div class="col-xs-7">
+						<div class="form-group no-margin">
+							<input type="text" name="proCode" class="form-control" placeholder="Nhập mã khuyến mãi" id="proCode" value="<?=isset($proCode) ? $proCode : ''?>">
+							<small id="proCodeMessage" style="color: #999;">
+								<?php
+								if(isset($promotion)){
+									if($promotion['valid'] == true){
+										echo '<span style="color: white;">✓ '.$promotion['promotion']->Name . '</span>';
+									}else{
+										echo '<span style="color: red;">✗ '.$promotion['message']. '</span>';
 									}
-								}?>
+								}
+								?>
+							</small>
+						</div>
+					</div>
+					<div class="clear-both"></div>
+				</div>
 
-							</td>
-							<td class="text-center">
-								<?=$item['qty']?>
-							</td>
-							<td class="text-right" colspan="2"><?=number_format($item['price'] * $item['qty'])?></td>
-
+				<div class="row">
+					<table class="table table-bordered">
+						<thead>
+						<tr class="bg-info">
+							<td class="text-center">Hình ảnh</td>
+							<td class="text-left">Sản phẩm</td>
+							<td class="text-left">SL</td>
+							<td class="text-right">Đơn Giá</td>
+							<td class="text-right">Tổng cộng</td>
 						</tr>
-					<?php } ?>
-					<tr>
-						<td colspan="2">Phí giao hàng</td>
-						<td class="text-right"><?=number_format($ShippingFee)?></td>
-					</tr>
-					<tr>
-						<td colspan="2">Tổng cộng</td>
-						<td class="text-right"><?=number_format($this->cart->total() + $ShippingFee)?>(VNĐ)</td>
-					</tr>
+						</thead>
+						<tbody>
+							<?php $this->load->view('/cart/Cart_detail_body')?>
+						</tbody>
+					</table>
+				</div>
 
-					</tbody>
-				</table>
 			</div>
 		</div>
 
-		<div class="col-lg-12 text-right margin-bottom-20">
-			<a class="btn btn-info" href="<?=base_url('/check-out.html')?>"><i class="glyphicon glyphicon-menu-left"></i> Trở Lại  </a>
-			<button class="btn btn-primary" type="submit">Tiếp Theo <i class="glyphicon glyphicon-menu-right"></i> </button>
+		<div class="col-lg-12 text-center margin-bottom-20 margin-top-20">
+			<a class="btn btn-default" href="<?=base_url('/check-out.html')?>"><i class="glyphicon glyphicon-menu-left"></i> Tiếp tục mua hàng </a>
+			<button class="btn btn-primary" type="submit"> <i class="glyphicon glyphicon-shopping-cart"></i> Tạo Đơn</button>
 		</div>
 
 		<input type="hidden" name="crudaction" value="insert" >
@@ -191,6 +173,60 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		loadDistrictByCityId();
+
+		var cartTotal = <?=$this->cart->total()?>;
+		var shippingFee = <?=$ShippingFee?>;
+		var baseTotal = cartTotal + shippingFee;
+
+		$('#proCode').on('blur', function() {
+			var proCode = $.trim($(this).val());
+			if (proCode.length > 0) {
+				validatePromoCode(proCode, cartTotal, shippingFee);
+			} else {
+				resetPromotion();
+			}
+		});
+
+		function validatePromoCode(proCode, cartTotal, shippingFee) {
+			$.ajax({
+				url: '<?=base_url("check-out/validate-promo-code")?>',
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					proCode: proCode,
+					cartTotal: cartTotal,
+					shippingFee: shippingFee
+				},
+				success: function(response) {
+					if (response.valid) {
+						var discountAmount = response.discountAmount;
+						var newTotal = baseTotal - discountAmount;
+
+						$('#discountRow').show();
+						$('#discountAmount').text(response.discountFormatted);
+						$('#totalPrice').text(number_format(newTotal));
+						$('#proCodeMessage').html('<span style="color: white;">✓ ' + response.promotionName + '</span>');
+					} else {
+						resetPromotion();
+						$('#proCodeMessage').html('<span style="color: red;">✗ ' + response.message + '</span>');
+					}
+				},
+				error: function() {
+					resetPromotion();
+					$('#proCodeMessage').html('<span style="color: red;">✗ Lỗi khi kiểm tra mã khuyến mãi</span>');
+				}
+			});
+		}
+
+		function resetPromotion() {
+			$('#discountAmount').text('0');
+			$('#totalPrice').text(number_format(baseTotal));
+			$('#proCodeMessage').text('');
+		}
+
+		function number_format(number) {
+			return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
 	});
 
 	function loadDistrictByCityId(){
