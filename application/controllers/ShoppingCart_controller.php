@@ -62,10 +62,10 @@ class ShoppingCart_controller extends CI_Controller
 			$data['discount'] = $discount;
 
 			$this->form_validation->set_rules("txt_receiver", "Người nhận hàng", "trim|required");
-			$this->form_validation->set_rules("txt_phone", "Số điện thoại", "trim|required");
+			$this->form_validation->set_rules("txt_phone", "Số điện thoại", "required|regex_match[/^[0-9]{10}$/]");
 			$this->form_validation->set_rules("txt_city", "Thành phố", "numeric|required");
 			$this->form_validation->set_rules("txt_district", "Quận", "numeric|required");
-			$this->form_validation->set_rules("txt_street", "Số nhà/căn hộ/đường", "required");
+			$this->form_validation->set_rules("txt_street", "Số nhà/căn hộ/đường", "required|min_length[10]");
 			$validateResult = $this->form_validation->run();
 			if($validateResult == TRUE){
 				// shipping
