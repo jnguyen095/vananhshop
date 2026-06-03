@@ -108,7 +108,7 @@
 											<td class="text-center"><?=$counter++?>.</td>
 											<td class="text-left">
 												<a href="<?=base_url().seo_url($item->ProductName).'-p'.$item->ProductID?>.html" target="_blank">
-													<img src="<?=base_url($item->Thumb)?>" class="img-fluid width100px" alt="Phone">
+													<img src="<?=base_url($item->Thumb)?>" class="img-thumbnail checkout-imgs" alt="<?=$item->ProductName?>">
 												</a>
 											</td>
 											<td class="text-left">
@@ -145,11 +145,7 @@
 									</tr>
 									<tr>
 										<td class="text-right" colspan="5">Tổng cộng:</td>
-										<td class="text-right"><?=number_format($order->TotalPrice)?> (VNĐ)</td>
-									</tr>
-									<tr>
-										<td class="text-right" colspan="5">Hình thức thanh toán:</td>
-										<td class="text-right"><?=$order->Payment?></td>
+										<td class="text-right"><strong><?=number_format($order->TotalPrice)?></strong> (VNĐ)</td>
 									</tr>
 									</tbody>
 								</table>
@@ -175,7 +171,7 @@
 								</div>
 								<div class="form-group row">
 									<label for="inputPassword" class="col-sm-2 col-form-label">Địa chỉ:</label>
-									<div class="col-sm-10"><?=substr($shippingAddr->Street,0, 5).str_repeat('*',  strlen($shippingAddr->Street) - 5)?>, <?=$shippingAddr->DistrictName?>, <?=$shippingAddr->CityName?></div>
+									<div class="col-sm-10"><?=substr($shippingAddr->Street,0, 6).str_repeat('*',  strlen($shippingAddr->Street) - 6)?>, <?=$shippingAddr->DistrictName?>, <?=$shippingAddr->CityName?></div>
 								</div>
 								<div class="form-group row">
 									<label for="inputPassword" class="col-sm-2 col-form-label">Ghi chú:</label>
