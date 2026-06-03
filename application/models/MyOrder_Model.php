@@ -50,7 +50,7 @@ class MyOrder_Model extends CI_Model
 
 	public function searchByItems($code, $phone, $status, $offset, $limit, $orderField, $orderDirection)
 	{
-		$sql = 'select m.*,u.FullName, u.Phone from myorder m inner join us3r u on m.CreatedBy = u.Us3rID where m.Status <> \''.ORDER_STATUS_DELETED.'\'';
+		$sql = 'select m.*,os.Receiver, os.Phone from myorder m inner join ordershipping os on m.OrderID = os.OrderID where m.Status <> \''.ORDER_STATUS_DELETED.'\'';
 		if($code != null && strlen($code) > 0){
 			$sql .= ' and m.Code like \'%'.$code.'%\'';
 		}
@@ -86,6 +86,18 @@ class MyOrder_Model extends CI_Model
 
 		$data['items'] = $orders->result();
 		$data['total'] = $total;
+		return $data;
+	}
+
+	public function findByOrderCodeOrPhoneOrEmail($strText)
+	{
+		$sql = 'select m.*,os.Receiver from myorder m inner join ordershipping os on m.OrderID = os.OrderID';
+		$sql .= ' where m.Status <> \''.ORDER_STATUS_DELETED.'\'';
+		$sql .= ' and (os.Phone = \''.$strText. '\' or m.Code = \''.$strText.'\')';
+		$sql .= ' order by m.CreatedDate desc';
+		$orders = $this->db->query($sql);
+		$data['items'] = $orders->result();
+
 		return $data;
 	}
 
@@ -149,20 +161,21 @@ class MyOrder_Model extends CI_Model
 		$sql .= ' order by o.CreatedDate desc';
 		$sql .= ' limit 1';
 		$orderCodes = $this->db->query($sql);
-		$code = $orderCodes->row();
-		if($code != null){
-			$newCode = (int)str_replace('O-', '', $code->Code) + 1;
+		$latestOrderCode = $orderCodes->row();
+		if($latestOrderCode != null && $latestOrderCode->Code != null){
+			$increasingParts = explode("-", $latestOrderCode->Code);
+			$newCode = (int)$increasingParts[1] + 1;
 			if($newCode < 10){
-				return "O-0000".$newCode;
+				return "VA-0000".$newCode;
 			} else if($newCode < 100){
-				return "O-000".$newCode;
+				return "VA-000".$newCode;
 			} else if($newCode < 1000){
-				return "O-0".$newCode;
+				return "VA-0".$newCode;
 			} else if($newCode < 10000){
-				return "O-".$newCode;
+				return "VA-".$newCode;
 			}
 		}else {
-			return "O-00001";
+			return "VA-00001";
 		}
 	}
 
@@ -173,10 +186,9 @@ class MyOrder_Model extends CI_Model
 		return $row;
 	}
 
-	public function updateOrderStatus($orderId, $status, $updatedBy){
+	public function updateOrderStatus($orderId, $status){
 		$this->db->set('Status', $status);
 		$this->db->set('UpdatedDate', 'NOW()', false);
-		$this->db->set('UpdatedBy', $updatedBy);
 		$this->db->where('OrderID', $orderId);
 		$this->db->update('myorder');
 	}
