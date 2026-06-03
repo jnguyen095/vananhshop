@@ -11,7 +11,7 @@
 <head>
 	<head>
 		<meta charset = "utf-8">
-		<title>Vân Anh Shop | Quản Lý Đơn Hàng</title>
+		<title>Theo Dõi Đơn Hàng | Vân Anh Shop</title>
 		<?php $this->load->view('common_header')?>
 		<script src="<?= base_url('/js/homeland.js') ?>"></script>
 		<script src="<?=base_url('/js/bootbox.min.js')?>"></script>
@@ -22,14 +22,21 @@
 <?php $this->load->view('/common/analyticstracking')?>
 <div class="container-fluid no-padding-left no-padding-right">
 	<?php $this->load->view('/theme/header')?>
-	<?php $this->load->view('/common/user-menu')?>
+	<div class="col-lg-12 col-sm-12 no-padding-left no-padding-right">
+		<ul itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb always">
+			<div class="container">
+				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="<?php echo base_url('/')?>"><span itemprop="name">Trang chủ</span></a></li>
+				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="active mobile-hide"><span itemprop="item"><span itemprop="name">Theo dõi đơn hàng</span></span></li>
+			</div>
+		</ul>
+	</div>
 
 
 	<div class="container">
 		<div class="row no-margin">
 			<div class="col-lg-12 col-sm-12">
-				<div>
-					<div class="float-left h2title">Quản lý đơn hàng</div>
+				<div class="row">
+					<div class="h2title col-lg-6 col-sm-12">Theo dõi đơn hàng</div>
 					<div class="clear-both"></div>
 				</div>
 				<hr/>
@@ -42,10 +49,19 @@
 				}?>
 
 				<?php
-				$attributes = array("id" => "frmOrder");
-				echo form_open("quan-ly-don-hang", $attributes);
+				$attributes = array("id" => "frmCheckingOrder");
+				echo form_open("theo-doi-don-hang", $attributes);
 				?>
 				<!-- content -->
+				<div class="row">
+					<div class="col-lg-12 text-right check-order">
+						<a id="btnChecking" class="btn btn-primary float-right"><i class="glyphicon glyphicon-search"></i> Tìm Kiếm</a>
+						<input class="form-control" name="txtText" placeholder="Mã đơn hàng/Số ĐT" value="<?=isset($txtText) ? $txtText : ''?>">
+						<span class="text-danger"><?php echo form_error('txtText'); ?></span>
+						<div class="clear-both"></div>
+					</div>
+					<div class="clear-both"></div>
+				</div>
 				<div class="col-md-12 no-margin no-padding text-center table-responsive">
 					<table class="table table-bordered table-hover table-striped">
 						<thead class="thead-table">
@@ -56,7 +72,6 @@
 								<th class="text-center">Số lượng</th>
 								<th class="text-center">Tổng cộng</th>
 								<th class="text-center">Tình trạng</th>
-								<th class="text-center">Chỉnh sửa</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -64,7 +79,7 @@
 						if(count($orders) < 1) {
 							?>
 						<tr>
-							<td colspan="10">Chưa có đơn hàng nào, <a href="<?=base_url('/')?>" class="btn btn-info">Mua Hàng</a>. </td>
+							<td colspan="10">Không tìm thấy đơn hàng nào</td>
 						</tr>
 							<?php
 						}
@@ -74,7 +89,7 @@
 							foreach ($orders as $order) {
 								?>
 								<tr>
-									<th scope="row"><?=$counter++?>.</th>
+									<td scope="row"><?=$counter++?>.</td>
 									<td><a href="<?=base_url('/don-hang-' . $order->OrderID . '.html')?>"><?=$order->Code?></a></td>
 									<td>
 										<?php
@@ -99,34 +114,12 @@
 										}
 										?>
 									</td>
-									<td class="mobile-hide">
-										<a data-toggle="tooltip" title="Xem chi tiết đơn hàng" href="<?=base_url('/don-hang-' . $order->OrderID . '.html')?>"><i class="glyphicon glyphicon-info-sign"></i></a>
-										<?php
-										if($order->Status == ORDER_STATUS_NEW) {
-											?>
-											&nbsp;|&nbsp;<a data-toggle="tooltip" title="Hủy đơn hàng" href="javascript:void(0);" style="text-decoration: none" onclick="cancelOrder('<?= $order->OrderID ?>')">
-												<i class="glyphicon glyphicon-remove-circle text-danger"></i>
-											</a>
-											<?php
-										}else{
-											?>
-											&nbsp;|&nbsp;<a data-toggle="tooltip" title="Không được hủy đơn hàng" style="cursor: not-allowed;text-decoration: none" disabled href="javascript:void(0);" >
-												<i disabled="true" class="glyphicon glyphicon-remove-circle text-warning "></i>
-											</a>
-											<?php
-										}
-										?>
-									</td>
 								</tr>
 								<?php
 							}
 						?>
 						</tbody>
 					</table>
-					<div class="row text-center no-margin">
-						<?php if (isset($pagination)) echo $pagination; ?>
-					</div>
-
 
 				</div>
 				<!-- end content -->
@@ -140,6 +133,13 @@
 	</div>
 
 	<?php $this->load->view('/theme/footer')?>
+	<script>
+		$(document).ready(function(){
+			$("#btnChecking").click(function(){
+				$("#frmCheckingOrder").submit();
+			})
+		});
+	</script>
 </div>
 
 </body>

@@ -171,11 +171,11 @@
 								</div>
 								<div class="form-group row">
 									<label for="inputPassword" class="col-sm-2 col-form-label">Số ĐT:</label>
-									<div class="col-sm-10"><?=$shippingAddr->Phone?></div>
+									<div class="col-sm-10"><?=str_repeat('*', strlen($shippingAddr->Phone) - 4) . substr($shippingAddr->Phone, -4);?></div>
 								</div>
 								<div class="form-group row">
 									<label for="inputPassword" class="col-sm-2 col-form-label">Địa chỉ:</label>
-									<div class="col-sm-10"><?=$shippingAddr->Street?>, <?=$shippingAddr->DistrictName?>, <?=$shippingAddr->CityName?></div>
+									<div class="col-sm-10"><?=substr($shippingAddr->Street,0, 5).str_repeat('*',  strlen($shippingAddr->Street) - 5)?>, <?=$shippingAddr->DistrictName?>, <?=$shippingAddr->CityName?></div>
 								</div>
 								<div class="form-group row">
 									<label for="inputPassword" class="col-sm-2 col-form-label">Ghi chú:</label>
