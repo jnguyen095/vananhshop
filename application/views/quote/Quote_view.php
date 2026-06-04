@@ -46,8 +46,9 @@
 				echo '</div>';
 			}?>
 
+			<div class="search-result-panel col-md-12">Báo Giá Sản Phẩm</div>
 			<div class="col-md-8 no-margin no-padding">
-				<div class="search-result-panel col-md-12">Báo Giá</div>
+
 				<div class="product-panel col-md-5 no-padding-left margin-bottom-20">
 					<select id="cmCatId" class="form-control" name="CatId">
 						<option value="-1">Tất cả danh mục</option>
@@ -90,7 +91,7 @@
 								?>
 								<tr id="tr-<?=$product['ProductID']?>" class="prodItem">
 									<td><?=$counter++?></td>
-									<td class="text-center"><img class="img-sm" src="<?=base_url($product['Thumb'])?>"></td>
+									<td class="text-center"><img class="img-thumbnail checkout-imgs" src="<?=base_url($product['Thumb'])?>"></td>
 									<td><?=$product['Title']?></td>
 									<td><input id="qty-<?=$product['ProductID']?>" name="products[<?=$product['ProductID']?>]qty" type="number" value="<?=$product['Quantity']?>" class="form-control"/></td>
 								</tr>
@@ -203,7 +204,7 @@
 				var index = $("#tbProducts tr").length;
 				var html = '<tr id="tr-' + productId + '" class="prodItem">';
 				html += '<td>' + index + '</td>';
-				html += '<td class="text-center"><img class="img-sm" src="<?=base_url()?>' + item['Thumb'] + '"/></td>';
+				html += '<td class="text-center"><img class="img-thumbnail checkout-imgs" src="<?=base_url()?>' + item['Thumb'] + '"/></td>';
 				html += '<td>'+item['Title']+'</td>';
 				html += '<td><input id="qty-'+productId+'" name="products['+productId+']qty" type="number" value="10" class="form-control"/></td>';
 				html += '</tr>';
