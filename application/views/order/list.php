@@ -79,7 +79,7 @@
 						if(count($orders) < 1) {
 							?>
 						<tr>
-							<td colspan="10">Không tìm thấy đơn hàng nào</td>
+							<td colspan="10"><?=(!isset($txtText) || empty($txtText))? '<i>Hãy nhập mã đơn hàng hoặc số điện thoại để tìm đơn hàng!</i>' : '<span class="text-danger">Không tìm thấy đơn hàng nào.</span>' ?></td>
 						</tr>
 							<?php
 						}
