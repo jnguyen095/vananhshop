@@ -113,7 +113,6 @@
 					}
 					?>
 					<li role="presentation"><a href="<?=base_url('bao-gia-si.html')?>">Báo giá</a> </li>
-					<li role="presentation"><a href="<?=base_url('ve-chung-toi.html')?>">Về chúng tôi</a> </li>
 				</ul>
 
 				

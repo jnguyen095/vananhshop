@@ -20,13 +20,12 @@
 				-->
 				<div class="menu_bottom">
 					<ul>
-						<li><a href="<?=base_url('/bao-gia-si.html')?>">Báo giá</a></li>
-						<li><a href="<?=base_url('/doi-tra-hang.html')?>">Đổi trả hàng</a></li>
-						<li><a href="<?=base_url('/dieu-khoan-su-dung.html')?>">Điều khoản thỏa thuận</a></li>
-						<li><a href="<?=base_url('/quy-che-hoat-dong.html')?>">Quy chế hoạt động</a></li>
-						<li><a href="<?=base_url('/cau-hoi-thuong-gap.html')?>">Câu hỏi thường gặp</a></li>
+						<li><a href="<?=base_url('ve-chung-toi.html')?>">Về chúng tôi</a> </li>
 						<li><a href="javascript:void(0);" id="contactModalForm">Liên hệ - góp ý</a></li>
-						<li><a href="<?=base_url('/tuyen-dung.html')?>">Tuyển dụng</a></li>
+						<li class="hidden-sm hidden-xs"><a href="<?=base_url('/doi-tra-hang.html')?>">Đổi trả hàng</a></li>
+						<li class="hidden-sm hidden-xs"><a href="<?=base_url('/dieu-khoan-su-dung.html')?>">Điều khoản thỏa thuận</a></li>
+						<li class="hidden-sm hidden-xs"><a href="<?=base_url('/quy-che-hoat-dong.html')?>">Quy chế hoạt động</a></li>
+						<li class="hidden-xs hidden-md"><a href="<?=base_url('/cau-hoi-thuong-gap.html')?>">Câu hỏi thường gặp</a></li>
 
 					</ul>
 				</div>
