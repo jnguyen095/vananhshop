@@ -43,11 +43,13 @@
 		<div class="col-lg-12">
 			<div class="alert alert-success" role="alert">
 				<strong>Cảm ơn, bạn đã đặt hàng thành công!</strong> Chúng tôi sẻ tiến hành xử lý đơn hàng của bạn.
-				<p>Bạn có thể theo dõi đơn hàng vừa mua tại đây: <a href="<?=base_url('don-hang-'. $_GET['orderId'].'.html')?>">Xem đơn hàng</a> </p>
+				<p><i class="glyphicon glyphicon-chevron-right"></i> Bạn có thể theo dõi đơn hàng vừa mua tại đây: <a href="<?=base_url('don-hang-'. $_GET['orderId'].'.html')?>">Xem đơn hàng</a> </p>
+
 			</div>
 		</div>
 
 		<div class="col-lg-12 text-right margin-bottom-20">
+			<a href="<?=base_url('/theo-doi-don-hang.html')?>"><i class="glyphicon glyphicon-menu-right"></i> Tra cứu đơn hàng</a>
 			<a href="<?=base_url('/')?>"><i class="glyphicon glyphicon-menu-right"></i> Tiếp tục mua hàng</a>
 		</div>
 
