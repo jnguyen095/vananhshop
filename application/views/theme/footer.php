@@ -25,7 +25,7 @@
 						<li class="hidden-sm hidden-xs"><a href="<?=base_url('/doi-tra-hang.html')?>">Đổi trả hàng</a></li>
 						<li class="hidden-sm hidden-xs"><a href="<?=base_url('/dieu-khoan-su-dung.html')?>">Điều khoản thỏa thuận</a></li>
 						<li class="hidden-sm hidden-xs"><a href="<?=base_url('/quy-che-hoat-dong.html')?>">Quy chế hoạt động</a></li>
-						<li class="hidden-xs hidden-md"><a href="<?=base_url('/cau-hoi-thuong-gap.html')?>">Câu hỏi thường gặp</a></li>
+						<li class="hidden-xs"><a href="<?=base_url('/cau-hoi-thuong-gap.html')?>">Câu hỏi thường gặp</a></li>
 
 					</ul>
 				</div>
