@@ -1704,12 +1704,6 @@ input[type=checkbox], input[type=radio] {
 	height: 400px;
 	margin-bottom: 15px;
 }
-li.thumbnail {
-	/*display: inline-block;*/
-}
-li.thumbnail img, .img-thumbnail {
-	/*max-width: 120px;*/
-}
 
 div.thumbnails{
 	width: 135px;
@@ -2231,3 +2225,6 @@ input[type=number]{
 }
 
 .text-vsm{font-size:11px}
+.thumbnails.thumbnail-scroll .thumbnail img {
+	max-width: 90px;
+}

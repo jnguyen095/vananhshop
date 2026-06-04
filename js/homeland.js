@@ -41,6 +41,7 @@ function bindingRemoveItemCart(){
 	$(".remove-cart-item").click(function(){
 		var rowid = $(this).attr('rowid');
 		if(rowid != undefined){
+			$(".overlay").show();
 			$.ajax({
 				type: "POST",
 				url: urls.base_url + '/ShoppingCart_controller/removeItemToCart',
@@ -49,6 +50,7 @@ function bindingRemoveItemCart(){
 				// $('#image-container-' + container).remove();
 				$("#myHeaderCart").html(data);
 				loadCart();
+				$(".overlay").hide();
 			});
 		}
 	});
