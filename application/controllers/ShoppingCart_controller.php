@@ -182,7 +182,7 @@ class ShoppingCart_controller extends CI_Controller
 
 	public function reloadHeadCart()
 	{
-		$html = '<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;'.$this->cart->total_items().' sản phẩm '.number_format($this->cart->total()).'đ';
+		$html = '<img src="'.base_url('/img/icons/mini-cart-theme.png').'"/>&nbsp;'.$this->cart->total_items().' sản phẩm '.number_format($this->cart->total()).'đ';
 		$html .= ' <span class="caret"></span>';
 		return $html;
 	}

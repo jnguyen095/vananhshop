@@ -10,7 +10,7 @@
 <nav class="navbar navbar-default m-navbar">
 	<div class="container no-background-color">
 		<div class="row no-margin display-flex">
-			<div class="col-md-3 col-sm-12">
+			<div class="col-md-3 col-sm-12 text-center">
 				<a class="navbar-brand brandName" href="<?=base_url('/')?>">
 					<img src="<?=base_url('/img/vananh_logo.png')?>" atl="Vân Anh Shop Logo"/>
 				</a>
@@ -36,7 +36,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li role="presentation" class="dropdown">
 						<a id="myHeaderCart" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
-							<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;<?=$this->cart->total_items();?> sản phẩm <?=number_format($this->cart->total())?>đ
+							<img src="<?=base_url('/img/icons/mini-cart-theme.png')?>">&nbsp;<?=$this->cart->total_items();?> sản phẩm <?=number_format($this->cart->total())?>đ
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu mycart">
