@@ -106,6 +106,9 @@ img.middleHorizontalBanner {
 .navbar-default .navbar-nav.navbar-right>li>a {
 	color: #365899 !important;
 }
+.navbar-default .navbar-nav.navbar-right>li>a.text-green {
+	color: green !important;
+}
 .navbar-default .navbar-nav.navbar-right>li:hover>a {
 	color: #fff !important;
 }
@@ -1636,7 +1639,7 @@ ul.user-menu{
 .img-responsive {
 	display: block;
 	max-width: 100%;
-	padding-top: 2px;
+	padding: 1px;
 }
 .img-responsive-large{
 	display: block;
@@ -2201,3 +2204,30 @@ input[type=number]{
 {
 	background-color: #ffffff;
 }
+
+.mycart .mini-cart {
+	padding: 2px 5px 8px;
+	min-width: 500px;
+	display: block;
+}
+
+.mycart .mini-cart tr,.mycart .mini-cart td{
+	font-size: 12px;
+}
+
+.mycart .mini-cart .remove-cart-item img{
+	width: 20px;
+}
+
+.mycart .mini-cart .cart-image{
+	float: left;
+	margin-right: 5px;
+}
+
+@media (max-width: 767px) {
+	.mycart .mini-cart {
+		min-width: 92vw !important; /* Forces 100% viewport width */
+	}
+}
+
+.text-vsm{font-size:11px}
