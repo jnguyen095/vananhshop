@@ -190,7 +190,7 @@ class ShoppingCart_controller extends CI_Controller
 	public function reloadMiniCart()
 	{
 		$html = '<li>
-					<a class="mini-cart">
+					<div class="mini-cart table-responsive-sm">
 						<table class="table table-bordered table-responsive">
 							<tr class="bg-info">
 								<td>Sản phẩm</td>
@@ -200,14 +200,14 @@ class ShoppingCart_controller extends CI_Controller
 							</tr>';
 							foreach ($this->cart->contents() as $item){
 								$html .= '<tr>';
-								$html .= '<td>' . substr_at_middle($item['name'], 120);
+								$html .= '<td><div class="cart-image"><img class="img-thumbnail checkout-imgs" src="'.base_url($item['image']).'"/></div>' . substr_at_middle($item['name'], 120);
 								// property
 								if($this->cart->has_options($item['rowid']) == TRUE){
 									$html .= '<br/>';
 									foreach ($this->cart->product_options($item['rowid']) as $option_name => $option_value){
 										$i = 1;
 										foreach ($option_value as $k => $v){
-											$html .= '<i>'.$v . '</i>';
+											$html .= '<i class="text-vsm">'.$v . '</i>';
 											$html .= $i == 1 ? ':' : '';
 											$i++;
 										}
@@ -218,7 +218,7 @@ class ShoppingCart_controller extends CI_Controller
 								$html .= '</td>';
 								$html .= '<td class="text-center">' . $item['qty'] .'</td>';
 								$html .= '<td class="text-right">'. number_format($item['price']) .  '</td>';
-								$html .= '<td><a class="remove-cart-item glyphicon glyphicon-remove-circle text-red" rowid="'. $item['rowid'] .'" style="color: #ff0000"></a></td>';
+								$html .= '<td><a class="remove-cart-item" rowid="'. $item['rowid'] .'" onclick="javascript:void(0);" href="#"><img src="'.base_url('/img/icons/delete-icon.png').'"/></a></td>';
 								$html .= '</tr>';
 							}
 							$html .= '<tr>';
@@ -228,9 +228,9 @@ class ShoppingCart_controller extends CI_Controller
 								$html .='<td colspan="4" class="text-center"><i>Chưa có sản phẩm!</i></td>';
 							}
 							$html .= '</tr>';
-					$html .= '</table>';
+						$html .= '</table>';
 					$html .= '<div class="text-center"><a href="'.base_url('/theo-doi-don-hang.html').'"><i class="glyphicon glyphicon-hand-right"></i> Theo dõi đơn hàng đã đặt </a></div>';
-					$html .= '</a>';
+					$html .= '</div>';
 					$html .= '</li>';
 
 		echo $html;
