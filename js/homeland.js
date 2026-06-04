@@ -49,6 +49,7 @@ function bindingRemoveItemCart(){
 			}).done(function (data) {
 				// $('#image-container-' + container).remove();
 				$("#myHeaderCart").html(data);
+				$(".mycart").hide();
 				loadCart();
 				$(".overlay").hide();
 			});
