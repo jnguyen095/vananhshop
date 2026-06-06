@@ -66,14 +66,14 @@ if ( ! function_exists('create_captcha'))
 			'word'		=> '',
 			'img_path'	=> '',
 			'img_url'	=> '',
-			'img_width'	=> '150',
-			'img_height'	=> '30',
+			'img_width'	=> 100,
+			'img_height'	=> 30,
 			'font_path'	=> '',
 			'expiration'	=> 7200,
 			'word_length'	=> 8,
 			'font_size'	=> 16,
 			'img_id'	=> '',
-			'pool'		=> '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+			'pool'		=> '123456789', //'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
 			'colors'	=> array(
 				'background'	=> array(255,255,255),
 				'border'	=> array(153,102,102),
@@ -332,7 +332,7 @@ if ( ! function_exists('create_captcha'))
 			return FALSE;
 		}
 
-		$img = '<img '.($img_id === '' ? '' : 'id="'.$img_id.'"').' src="'.$img_url.$img_filename.'" style="width: '.$img_width.'; height: '.$img_height .'; border: 0;" alt=" " />';
+		$img = '<img '.($img_id === '' ? '' : 'id="'.$img_id.'"').' src="'.base_url($img_url.$img_filename).'" style="width: '.$img_width.'; height: '.$img_height .'; border: 0;" alt=" " />';
 		ImageDestroy($im);
 
 		return array('word' => $word, 'time' => $now, 'image' => $img, 'filename' => $img_filename);
