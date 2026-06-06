@@ -89,16 +89,14 @@ function bindingAdd2Cart() {
 
 function bindingChangeCaptchaEvent(){
 	$("#changeCaptcha").click(function (){
-		$("#captchaImg").html("<img src='/img/load.gif'/>");
+		$(".overlay").show();
 		$.ajax({
 			type: "POST",
 			url: urls.loadCaptchaUrl,
 			dataType: 'json',
 			success: function(res){
 				$("#captchaImg").html(res[0].capchaImg);
-			},
-			error: function(xhr, err){
-				console.log(err);
+				$(".overlay").hide();
 			}
 		});
 	});
@@ -214,7 +212,8 @@ function topFunction() {
 }
 
 function contactFormHandler(){
-	$("#contactModalForm").click(function(){
+	$("#contactModalForm, #contactVAS").click(function(){
+		$(".overlay").show();
 		$.ajax({
 			type:'POST',
 			url: urls.base_url + 'ajax_controller/contactFormHandler',
@@ -224,7 +223,7 @@ function contactFormHandler(){
 				var $modal = $('#modalFormDialog');
 				$modal.modal('show');
 				bindingChangeCaptchaEvent();
-
+				$(".overlay").hide();
 			}
 		});
 	});
@@ -254,12 +253,12 @@ function submitCallMeBackForm(){
 		data: dataString,
 		beforeSend: function () {
 			$('.submitBtn').attr("disabled","disabled");
-			$('.modal-body').css('opacity', '.5');
+			$(".overlay").show();
 		},
 		success:function(msg){
 			$("#modalFormDialog").html(msg);
 			$('.submitBtn').removeAttr("disabled");
-			$('.modal-body').css('opacity', '');
+			$(".overlay").hide();
 		}
 	});
 }
@@ -273,22 +272,13 @@ function submitContactForm(){
 			data: dataString,
 			beforeSend: function () {
 				$('.submitBtn').attr("disabled","disabled");
-				$('.modal-body').css('opacity', '.5');
+				$(".overlay").show();
 			},
 			success:function(msg){
-				if(msg == "success"){
-					$('#fullName').val('');
-					$('#inputEmail').val('');
-					$('#inputPhone').val('');
-					$('#inputMessage').val('');
-					$('#txtCaptcha').val('');
-					$("#btnSendFeedBack").hide();
-					$('.statusMsg').html('<span style="color:green;">Gửi thành công, chúng tôi sẻ phản hồi ngay khi có thể.</p>');
-				}else{
-					$('.statusMsg').html('<span style="color:red;">'+msg+'</span>');
-				}
+				$("#contactBodyId").html(msg);
 				$('.submitBtn').removeAttr("disabled");
-				$('.modal-body').css('opacity', '');
+				bindingChangeCaptchaEvent();
+				$(".overlay").hide();
 			}
 		});
 }
