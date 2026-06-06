@@ -86,25 +86,6 @@ $route['thong-tin-ca-nhan'] = 'UserProfile_controller';
 // Trang doi mat khau
 $route['doi-mat-khau'] = 'UserProfile_controller/changePassword';
 
-// Search by city
-$route['(:any)-ct(:num)'] = "Search_controller/searchByCity/$2";
-$route['(:any)-ct(:num).html/(:num)'] = "Search_controller/searchByCity/$2/$3";
-// Search by district
-$route['(:any)-dt(:num)'] = "Search_controller/searchByDistrict/$2";
-$route['(:any)-dt(:num).html/(:num)'] = "Search_controller/searchByDistrict/$2/$3";
-// Search by branch
-$route['(:any)-b(:num)'] = "Search_controller/searchByBranch/$2";
-$route['(:any)-b(:num).html/(:num)'] = "Search_controller/searchByBranch/$2/$3";
-// Search by category and city
-$route['(:any)-cc(:num)-(:num)'] = "Search_controller/searchByCategoryAndCity/$2/$3";
-$route['(:any)-cc(:num)-(:num).html/(:num)'] = "Search_controller/searchByCategoryAndCity/$2/$3/$4";
-// Search by category and district
-$route['(:any)-c(:num)-d(:num)'] = "Search_controller/searchByCategoryAndDistrict/$2/$3";
-$route['(:any)-c(:num)-d(:num).html/(:num)'] = "Search_controller/searchByCategoryAndDistrict/$2/$3/$4";
-// Search in the same user
-$route['(:any)-u(:num)'] = "Search_controller/searchBySameUser/$2";
-$route['(:any)-u(:num).html/(:num)'] = "Search_controller/searchBySameUser/$2/$3";
-
 // Global search
 $route['tim-kiem'] = "Search_controller";
 $route['tim-kiem.html/(:num)'] = "Search_controller/index/$1";
