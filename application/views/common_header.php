@@ -11,5 +11,5 @@
 <!-- Image gallery -->
 <script src="<?php echo base_url()?>js/jssor.slider-25.2.0.min.js"></script>
 <!-- custom javascript -->
-<script src="<?php echo base_url()?>js/vananhshop.min_v1.0.js"></script>
+<script src="<?php echo base_url()?>js/vananhshop_v1.0.js"></script>
 
