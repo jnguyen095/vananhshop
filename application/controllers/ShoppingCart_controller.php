@@ -27,6 +27,7 @@ class ShoppingCart_controller extends CI_Controller
 		$this->load->model('ShippingFee_Model');
 		$this->load->model('Promotion_Model');
 		$this->load->helper('my_email');
+		$this->load->helper('telegram');
 	}
 
 	public function success(){
@@ -130,6 +131,14 @@ class ShoppingCart_controller extends CI_Controller
 				if ($appliedPromotion && $discount > 0) {
 					$this->Promotion_Model->recordPromotionApplication($appliedPromotion->PromotionsID, $orderId, $discount);
 				}
+
+				//Notify via Telegram
+				notify_new_order([
+					'order_code'    => $newOrder['Code'],
+					'customer_name' => $data['txt_receiver'],
+					'phone'         => $data['txt_phone'],
+					'total'         => $newOrder['TotalPrice']
+				]);
 
 				//return;
 				redirect('/check-out/success?orderId=' . $orderId);

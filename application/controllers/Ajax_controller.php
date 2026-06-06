@@ -22,6 +22,7 @@ class Ajax_controller extends CI_Controller
 		$this->load->helper('date');
 		$this->load->library('form_validation');
 		$this->load->helper('form');
+		$this->load->helper('telegram');
 	}
 
 	public function findStreetByName(){
@@ -199,6 +200,14 @@ class Ajax_controller extends CI_Controller
 					$data['phoneNumber'] = '';
 					$data['email'] = '';
 					$data['content'] = '';
+					// send telegram
+					$message = "💬 <b>LIÊN HỆ MỚI</b>\n\n";
+					$message .= "Khách hàng: {$fullName}\n";
+					$message .= "Số điện thoại: {$phoneNumber}\n";
+					$message .= "Nội dung:\n{$content}\n\n";
+					$message .= "⏰ Thời gian: " . date('d/m/Y H:i');
+
+					send_telegram($message);
 				}else{
 					$data['statusMsg'] = "Opp! Thật tiếc, đã có sự cố khi gửi thông tin.";
 					$data['status'] = 'NOK';
