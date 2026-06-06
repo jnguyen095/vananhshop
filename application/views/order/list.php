@@ -26,7 +26,7 @@
 		<ul itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb always">
 			<div class="container">
 				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="<?php echo base_url('/')?>"><span itemprop="name">Trang chủ</span></a></li>
-				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="active mobile-hide"><span itemprop="item"><span itemprop="name">Theo dõi đơn hàng</span></span></li>
+				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="active"><span itemprop="item"><span itemprop="name">Đơn hàng</span></span></li>
 			</div>
 		</ul>
 	</div>

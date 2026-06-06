@@ -11,7 +11,7 @@
 <head>
 	<head>
 		<meta charset = "utf-8">
-		<title>Vân Anh Shop | Quản Lý Đơn Hàng - <?=$order->Code?></title>
+		<title>Vân Anh Shop | Đơn Hàng - <?=$order->Code?></title>
 		<?php $this->load->view('common_header')?>
 		<script src="<?= base_url('/js/createpost.js') ?>"></script>
 		<script src="<?=base_url('/js/bootbox.min.js')?>"></script>
@@ -27,7 +27,8 @@
 		<ul itemscope itemtype="http://schema.org/BreadcrumbList" class="breadcrumb always">
 			<div class="container">
 				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="<?php echo base_url('/')?>"><span itemprop="name">Trang chủ</span></a></li>
-				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="active mobile-hide"><span itemprop="item"><span itemprop="name">Chi tiết đơn hàng <?=$order->Code?></span></span></li>
+				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><a itemprop="item" href="<?php echo base_url('/theo-doi-don-hang')?>"><span itemprop="name">Đơn hàng</span></a></li>
+				<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="active"><span itemprop="item"><span itemprop="name"><?=$order->Code?></span></span></li>
 			</div>
 		</ul>
 	</div>
@@ -183,7 +184,9 @@
 				</div>
 
 				<div class="row col-lg-12 margin-bottom-20 text-right">
-					<a class="btn btn-primary" href="<?=base_url('/')?>"><i class="glyphicon glyphicon glyphicon-chevron-left"></i> Trở lại</a>
+					<a class="btn btn-default" href="<?=base_url('/theo-doi-don-hang.html')?>"><i class="glyphicon glyphicon glyphicon-chevron-left"></i> Trở lại</a>
+					<a class="btn btn-primary" href="<?=base_url('/')?>"><i class="glyphicon glyphicon-home"></i> Tiếp tục mua hàng</a>
+
 				</div>
 
 				<!-- end content -->
