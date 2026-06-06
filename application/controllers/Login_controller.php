@@ -26,6 +26,7 @@ class Login_controller extends CI_Controller
 		$this->load->helper("seo_url");
 		$this->load->helper('string');
 		$this->load->helper('my_email');
+		$this->load->helper('cookie');
 		$this->load->library('cart');
 	}
 
@@ -66,6 +67,10 @@ class Login_controller extends CI_Controller
 
 	public function index()
 	{
+		if ($this->session->userdata('loginuser') && $this->session->userdata('usergroup') == USER_GROUP_ADMIN_CODE)
+		{
+			redirect('/admin/dashboard');
+		}
 		// begin file cached
 		$this->load->driver('cache');
 		$categories = $this->cache->file->get('categories');
@@ -111,6 +116,7 @@ class Login_controller extends CI_Controller
 					);
 					$this->session->set_userdata($sessiondata);
 					$this->Login_Model->updateLastLogin($usr_result->Us3rID);
+					$this->rememberMe($usr_result->Us3rID);
 					if($usr_result->UserGroup == 'ADMIN'){
 						redirect("admin/dashboard");
 					}else{
@@ -130,7 +136,43 @@ class Login_controller extends CI_Controller
 		}
 	}
 
+	function rememberMe($userId){
+		if($this->input->post('ch_rememberme'))
+		{
+			$token = bin2hex(random_bytes(32));
+
+			$expire = date(
+				'Y-m-d H:i:s',
+				strtotime('+365 days')
+			);
+
+			$this->db->insert(
+				'user_remember_tokens',
+				[
+					'user_id'    => $userId,
+					'token'      => password_hash($token, PASSWORD_DEFAULT),
+					'expired_at' => $expire
+				]
+			);
+
+			set_cookie([
+				'name'     => 'remember_token',
+				'value'    => $userId.':'.$token,
+				'expire'   => 31536000,
+				'secure'   => true,
+				'httponly' => true
+			]);
+		}
+	}
+
 	function unsetSession(){
+		// delete cookie
+		delete_cookie('remember_token');
+
+		$this->db
+			->where('user_id', $this->session->userdata('loginid'))
+			->delete('user_remember_tokens');
+
 		$this->session->unset_userdata('phone');
 		$this->session->unset_userdata('loginuser');
 		$this->session->unset_userdata('loginid');
