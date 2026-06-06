@@ -88,12 +88,12 @@
 							<div class="card m-b-30 card-body bg-success">
 								<h4 class="card-title font-20 mt-0">Thông tin đơn hàng</h4>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Mã đơn hàng:</div>
-									<div class="col-sm-8"><?=$order->Code?></div>
+									<div class="col-sm-4 col-xs-6 card-text">Mã đơn hàng:</div>
+									<div class="col-sm-8 col-xs-6"><?=$order->Code?></div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Tình trạng:</div>
-									<div class="col-sm-8">
+									<div class="col-sm-4 col-xs-6 card-text">Tình trạng:</div>
+									<div class="col-sm-8 col-xs-6">
 										<?php
 										if($order->Status == ORDER_STATUS_NEW){
 											echo '<lable class="label label-success">Đơn mới</lable>';
@@ -110,13 +110,13 @@
 									</div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Ngày mua:</div>
-									<div class="col-sm-8"><?=date('d/m/Y H:i', strtotime($order->CreatedDate))?></div>
+									<div class="col-sm-4 col-xs-6 card-text">Ngày mua:</div>
+									<div class="col-sm-8 col-xs-6"><?=date('d/m/Y H:i', strtotime($order->CreatedDate))?></div>
 								</div>
 
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Ghi chú:</div>
-									<div class="col-sm-8"><?=empty($order->Note) ? 'Không' : $order->Note?></div>
+									<div class="col-sm-4 col-xs-6 card-text">Ghi chú:</div>
+									<div class="col-sm-8 col-xs-6"><?=empty($order->Note) ? 'Không' : $order->Note?></div>
 								</div>
 							</div>
 						</div>
@@ -125,20 +125,20 @@
 							<div class="card m-b-30 card-body bg-success">
 								<h4 class="card-title font-20 mt-0">Thông tin người nhận hàng</h4>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Tên người nhận:</div>
-									<div class="col-sm-8"><?=$shippingAddr->Receiver?></div>
+									<div class="col-sm-4 col-xs-6 card-text">Tên người nhận:</div>
+									<div class="col-sm-8 col-xs-6"><?=$shippingAddr->Receiver?></div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Số điện thoại:</div>
-									<div class="col-sm-8"><i class="fa fa-phone"></i>&nbsp;<?=$shippingAddr->Phone?></div>
+									<div class="col-sm-4 col-xs-6 card-text">Số điện thoại:</div>
+									<div class="col-sm-8 col-xs-6"><i class="fa fa-phone"></i>&nbsp;<?=$shippingAddr->Phone?></div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Địa chỉ nhận hạng:</div>
-									<div class="col-sm-8"><?=$shippingAddr->Street?>, <?=$shippingAddr->DistrictName?>, <?=$shippingAddr->CityName?></div>
+									<div class="col-sm-4 col-xs-6 card-text">Địa chỉ nhận hạng:</div>
+									<div class="col-sm-8 col-xs-6"><?=$shippingAddr->Street?>, <?=$shippingAddr->DistrictName?>, <?=$shippingAddr->CityName?></div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 card-text">Phương thức TT:</div>
-									<div class="col-sm-8"><?=$order->Payment?></div>
+									<div class="col-sm-4 col-xs-6 card-text">Phương thức TT:</div>
+									<div class="col-sm-8 col-xs-6"><?=$order->Payment?></div>
 								</div>
 
 								<a id="updateReceiver" href="#" class="btn btn-primary waves-effect waves-light"><i class="fa fa-edit"></i> Cập nhật địa chỉ nhận hàng</a>
@@ -150,7 +150,7 @@
 								<div class="col-xs-12">
 									<h4 class="card-title"><b>Mặt hàng:</b></h4>
 								</div>
-								<div class="col-xs-12">
+								<div class="col-xs-12 table-responsive">
 									<table class="table table-bordered">
 										<thead>
 										<tr class="bg-primary">
@@ -214,7 +214,7 @@
 
 						</div>
 
-						<div class="col-lg-12">
+						<div class="col-lg-12" style="margin-bottom: 10px">
 							<div class="row no-margin top-buttons">
 								<a class="btn btn-warning" id="addBack" href="<?=base_url("/admin/order/list.html")?>">Trở lại</a>&nbsp;
 								<?php
