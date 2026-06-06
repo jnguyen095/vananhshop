@@ -10,29 +10,35 @@
 <nav class="navbar navbar-default m-navbar">
 	<div class="container no-background-color">
 		<div class="row no-margin display-flex">
-			<div class="col-md-3 col-sm-12 text-center">
+			<div class="col-md-3 col-sm-5 col-xs-12 text-center">
 				<a class="navbar-brand brandName" href="<?=base_url('/')?>">
 					<img src="<?=base_url('/img/vananh_logo.png')?>" atl="Vân Anh Shop Logo"/>
 				</a>
 				<div class="clear-both"></div>
 			</div>
 			
-			<div class="col-md-9 col-sm-12 text-sm-right text-left">
-				<div class="top-header-icon-container">
-					<img class="top-header-hotline-icon" src="<?=base_url('/img/hotline-icon.png')?>" alt="Hotline"/>
-				</div>
-				<div class="top-header-hotline text-left">
-					<div><strong>Hotline:</strong></div>
-					<div>0865.053.849</div>
-				</div>
+			<div class="col-md-6 col-sm-7 col-xs-12 text-left text-sm-center">
+				<div style="display: inline-block">
+					<div class="top-header-icon-container">
+						<img class="top-header-hotline-icon" src="<?=base_url('/img/hotline-icon.png')?>" alt="Hotline"/>
+					</div>
+					<div class="top-header-hotline text-left">
+						<div><strong>Hotline:</strong></div>
+						<div>0865.053.849</div>
+					</div>
 
-				<div class="top-header-icon-container">
-					<img class="top-header-truck-icon" src="<?=base_url('/img/truck-icon.png')?>" alt="Hotline"/>
+					<div class="top-header-icon-container">
+						<img class="top-header-truck-icon" src="<?=base_url('/img/truck-icon.png')?>" alt="Hotline"/>
+					</div>
+					<div class="top-header-hotline text-left">
+						<div>Miễn phí giao hàng</div>
+					</div>
+					<div class="clear-both"></div>
 				</div>
-				<div class="top-header-hotline text-left">
-					<div>Miễn phí giao hàng</div>
-				</div>
+				<div class="clear-both"></div>
+			</div>
 
+			<div class="col-md-3 col-sm-12 col-xs-12 text-right text-sm-left">
 				<ul class="nav navbar-nav navbar-right">
 					<li role="presentation" class="dropdown">
 						<a id="myHeaderCart" href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
@@ -42,38 +48,11 @@
 						<ul class="dropdown-menu mycart">
 						</ul>
 					</li>
-
-					<?php /*
-					if($this->session->userdata('phone') != null){
-						?>
-						<li role="presentation" class="dropdown">
-							<a href="javascript:void(0);" role="button" aria-haspopup="true" aria-expanded="false">
-								<i class="glyphicon glyphicon-user"></i>&nbsp;<?=$this->session->userdata('fullname')?>
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu">
-								<?php
-								if($this->session->userdata('usergroup') != null && $this->session->userdata('usergroup') == 'ADMIN') {
-									?>
-									<li><a href="<?= base_url('/admin/dashboard.html') ?>">Quản Lý</a></li>
-									<?php
-								}
-								?>
-								<li><a href="<?= base_url('/quan-ly-don-hang.html') ?>">Đơn hàng</a></li>
-								<li><a href="<?= base_url('/thong-tin-ca-nhan.html') ?>">Thông tin cá nhân</a></li>
-								<li><a href="<?=base_url('/dang-xuat.html')?>">Đăng xuất</a></li>
-							</ul>
-						</li>
-
-						<?php
-					}else{
-						?>
-						<li class="dropdown"><a href="<?=base_url('/dang-nhap.html')?>"><i class="glyphicon glyphicon-user"></i>&nbsp;Đăng nhập</a></li>
-						<?php
-					}
-					*/?>
+					<div class="clear-both"></div>
 				</ul>
+				<div class="clear-both"></div>
 			</div>
+
 		</div>
 		
 	</div>

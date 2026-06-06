@@ -7,7 +7,8 @@
  */
 
 ?>
-<a id="myBtn" href="javascript:void(0);" class="mobile-hide" title="Go to top"><img src="<?=base_url().'/img/gotop.png'?>" alt="Go Top"/></a>
+<a id="myBtn" href="javascript:void(0);" title="Go to top"><img src="<?=base_url().'/img/gotop.png'?>" alt="Go Top"/></a>
+<div class="overlay" style="display: none"><img src="<?=base_url('/img/spinner.gif')?>"/></div>
 
 <nav class="navbar navbar-default m-navbar">
 	<div class="container-fluid">
