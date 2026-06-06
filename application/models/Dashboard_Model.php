@@ -11,74 +11,6 @@ class Dashboard_Model extends CI_Model
 	function __construct() {
 		parent::__construct();
 	}
-
-	public function countPostVip($vipType){
-		$query = "select count(*) as Total from product where Vip = {$vipType}";
-		$total = $this->db->query($query);
-		$row = $total->row();
-		return $row->Total;
-	}
-	public function countUser(){
-		$query = "select count(*) as Total from us3r where UserGroupID != 1";
-		$total = $this->db->query($query);
-		$row = $total->row();
-		return $row->Total;
-	}
-	public function countPost(){
-		$query = "select count(*) as Total from product where Status = 1 and CreatedByID is not null";
-		$total = $this->db->query($query);
-		$row = $total->row();
-		return $row->Total;
-	}
-	public function countPostDisabled(){
-		$query = "select count(*) as Total from product where Status = 0 and CreatedByID is not null";
-		$total = $this->db->query($query);
-		$row = $total->row();
-		return $row->Total;
-	}
-	public function countCrawler(){
-		$query = "select count(*) as Total from product where CreatedByID is null";
-		$total = $this->db->query($query);
-		$row = $total->row();
-		return $row->Total;
-	}
-	public function countSubscribe(){
-		$query = "select count(*) as Total from subscrible";
-		$total = $this->db->query($query);
-		$row = $total->row();
-		return $row->Total;
-	}
-	public function getLoginToday(){
-		$today = date('Y-m-d');
-		$query = "select * from us3r u where date(u.LastLogin) = '{$today}' and u.Us3rID != 1 order by u.LastLogin desc";
-		$result = $this->db->query($query);
-		return $result->result();
-	}
-	public function getRegisterToday(){
-		$today = date('Y-m-d');
-		$query = "select * from us3r u where date(u.CreatedDate) = '{$today}' order by u.CreatedDate desc";
-		$result = $this->db->query($query);
-		return $result->result();
-	}
-	public function getPostToday(){
-		$today = date('Y-m-d');
-		$query = "select p.*, u.FullName as FullName from product p inner join us3r u on p.CreatedByID = u.Us3rID where p.CreatedByID is not null and date(p.PostDate) = '{$today}' order by p.PostDate desc";
-		$result = $this->db->query($query);
-		return $result->result();
-	}
-	public function getPostPushToday(){
-		$today = date('Y-m-d');
-		$query = "select p.*, u.FullName as FullName from product p inner join us3r u on p.CreatedByID = u.Us3rID where p.CreatedByID is not null and date(p.ModifiedDate) = '{$today}' and date(p.PostDate) != '{$today}' order by p.ModifiedDate desc";
-		$result = $this->db->query($query);
-		return $result->result();
-	}
-	public function countPostPushToday(){
-		$today = date('Y-m-d');
-		$query = "select count(*) as Total from product p where p.CreatedByID is not null and date(p.ModifiedDate) = '{$today}' and date(p.PostDate) != '{$today}'";
-		$result = $this->db->query($query);
-		$row = $result->row();
-		return $row->Total;
-	}
 	public function countFeedback($isToday){
 		$today = date('Y-m-d');
 		$query = "select count(*) as Total from feedback fb";
@@ -89,95 +21,97 @@ class Dashboard_Model extends CI_Model
 		$row = $result->row();
 		return $row->Total;
 	}
-	public function getPostCurrentDate($type){
+
+	public function countActiveProducts(){
+		$query = "select count(*) as Total from product p where p.Status = 1";
+		$result = $this->db->query($query);
+		$row = $result->row();
+		return $row ? (int)$row->Total : 0;
+	}
+
+	public function countOrders($isToday = false){
 		$today = date('Y-m-d');
-		$query = "select count(*) as Total from product p where date(p.ModifiedDate) = '{$today}'";
-		if(isset($type) && $type == 'CRAWLER'){
-			$query .= ' and p.CreatedByID is null';
-		}else if(isset($type) && $type == 'CREATE'){
-			$query .= " and date(p.PostDate) = '{$today}' and p.CreatedByID is not null";
+		$query = "select count(*) as Total from myorder m where m.Status <> '".ORDER_STATUS_DELETED."'";
+		if($isToday){
+			$query .= " and date(m.CreatedDate) = '{$today}'";
 		}
-		$total = $this->db->query($query);
-		$row = $total->row();
-		return $row->Total;
+		$result = $this->db->query($query);
+		$row = $result->row();
+		return $row ? (int)$row->Total : 0;
 	}
-	public function updateStandardForPreviousPost(){
+
+	public function sumRevenue($isToday = false){
 		$today = date('Y-m-d');
-		$query = "update product set Vip = 5 where date(ModifiedDate) != '{$today}' and Vip != 5 and CreatedByID is null";
-		$this->db->query($query);
+		$query = "select sum(m.TotalPrice) as TotalRevenue from myorder m where m.Status <> '".ORDER_STATUS_DELETED."'";
+		if($isToday){
+			$query .= " and date(m.CreatedDate) = '{$today}'";
+		}
+		$result = $this->db->query($query);
+		$row = $result->row();
+		return $row && $row->TotalRevenue ? (float)$row->TotalRevenue : 0;
 	}
-	public function countStandardForPreviousPost(){
-		$today = date('Y-m-d');
-		$query = "select count(*) as Total from product where date(ModifiedDate) != '{$today}' and Status = 1 and Vip != 5 and CreatedByID is null";
-		$total = $this->db->query($query);
-		$row = $total->row();
-		return $row->Total;
-	}
-	public function countPreviousPostVip(){
-		$today = date('Y-m-d');
-		$query = "select count(*) as Total from product where date(ModifiedDate) != '{$today}' and Status = 1 and Vip != 5 and CreatedByID is not null";
-		$total = $this->db->query($query);
-		$row = $total->row();
-		return $row->Total;
-	}
-	public function renewPreviousPostVip(){
-		$today = date('Y-m-d');
-		$query = "update product ModifiedDate now() where Status = 1 and Vip != 5 and CreatedByID is not null and date(ExpireDate) <= '{$today}'";
-		$this->db->query($query);
-	}
-	function countUserByDate($limit){
-		$sql = "SELECT DATE(CreatedDate) AS ForDate,";
-		$sql .= "  COUNT(*) AS Total FROM us3r GROUP BY DATE(CreatedDate) ORDER BY ForDate DESC limit 0, {$limit}";
-		$query = $this->db->query($sql);
-		return $query->result();
-	}
-	function countPostByDate($limit){
-		$sql = "SELECT DATE(PostDate) AS ForDate,";
-		$sql .= "  COUNT(*) AS Total FROM product WHERE CreatedByID IS NOT NULL GROUP BY DATE(PostDate) ORDER BY ForDate DESC limit 0, {$limit}";
-		$query = $this->db->query($sql);
-		return $query->result();
-	}
-	public function countProductHasNoThumb($sources){
-		$this->db->where_in("Thumb", $sources);
-		$num_rows = $this->db->count_all_results('product');
-		return $num_rows;
-	}
-	public function updateProductHasNoThumb($sources, $default){
-		$data = array("Thumb" => $default);
-		$this->db->where_in("Thumb", $sources);
-		$this->db->update("product", $data);
-	}
-	public function addRandomNumber2PostView($max){
-		$this->output->enable_profiler(TRUE);
-		$this->db->set('View', 'View + '.ROUND(1+RAND()* $max), false);
-		$this->db->where("CreatedByID IS NOT NULL", NULL, false);
-		$this->db->update("product");
-	}
-	public function retainPreviousVip($justAuthor){
-		if($justAuthor){
-			$today = date('Y-m-d');
-			$query = "update product set ModifiedDate = now() where Status = 1 and Vip != 5 and CreatedByID is not null and date(ModifiedDate) <= '{$today}'";
-			$this->db->query($query);
-		}else{
-			$yesterday = date('Y-m-d', strtotime("-1 days"));
-			$query = "update product set ModifiedDate = now() where Status = 1 and Vip != 5 and CreatedByID is null and date(PostDate) = '{$yesterday}'";
-			$this->db->query($query);
+
+	/**
+	 * Get orders count grouped by day for the last $days days.
+	 * Returns an array of [ ["YYYY-MM-DD", count], ... ] ordered ascending by date.
+	 */
+	public function getOrdersCountByDay($days = 7){
+		$days = intval($days);
+		if($days < 1) $days = 7;
+		$start = date('Y-m-d', strtotime('-'.($days-1).' days'));
+
+		// initialize date buckets
+		$dates = array();
+		for($i = 0; $i < $days; $i++){
+			$d = date('Y-m-d', strtotime($start . " +{$i} days"));
+			$dates[$d] = 0;
 		}
 
-	}
-	public function countExpiredPost($postType){
-		$today = date('Y-m-d');
-		if($postType == 'Author'){
-			$query = "select count(*) as Total from product where date(ExpireDate) < '{$today}' and Vip > 4 and CreatedByID is not null";
-			$total = $this->db->query($query);
-			$row = $total->row();
-			return $row->Total;
-		}else if($postType == 'Crawler'){
-			$query = "select count(*) as Total from product where date(ExpireDate) < '{$today}' and CreatedByID is null";
-			$total = $this->db->query($query);
-			$row = $total->row();
-			return $row->Total;
+		$query = "select date(m.CreatedDate) as Day, count(*) as Total from myorder m ";
+		$query .= " where m.Status <> '".ORDER_STATUS_DELETED."' and date(m.CreatedDate) >= '".$start."' ";
+		$query .= " group by date(m.CreatedDate) order by date(m.CreatedDate) asc";
+		$result = $this->db->query($query);
+		foreach($result->result() as $row){
+			$day = $row->Day;
+			if(array_key_exists($day, $dates)){
+				$dates[$day] = (int)$row->Total;
+			}
 		}
 
+		// convert to array of [label, value]
+		$output = array();
+		foreach($dates as $d => $c){
+			$output[] = array($d, $c);
+		}
+		return $output;
 	}
+
+	public function topViewedProducts($limit = 5){
+		$query = "select p.ProductID, p.Title, p.Code, p.View from product p where p.Status = 1 order by p.View desc limit " . intval($limit);
+		$result = $this->db->query($query);
+		return $result->result();
+	}
+
+	public function countQuotation($isToday = false){
+		$today = date('Y-m-d');
+		$query = "select count(*) as Total from quotation q";
+		if($isToday){
+			$query .= " where date(q.RequestedDate) = '{$today}'";
+		}
+		$result = $this->db->query($query);
+		$row = $result->row();
+		return $row ? (int)$row->Total : 0;
+	}
+
+	public function topOrderedProducts($limit = 5){
+		$query = "select p.ProductID, p.Title, p.Code, sum(od.Quantity) as OrderedQuantity from orderdetail od";
+		$query .= " inner join myorder m on od.OrderID = m.OrderID";
+		$query .= " inner join product p on od.ProductID = p.ProductID";
+		$query .= " where m.Status <> '".ORDER_STATUS_DELETED."' and p.Status = 1";
+		$query .= " group by p.ProductID, p.Title, p.Code";
+		$query .= " order by OrderedQuantity desc limit " . intval($limit);
+		$result = $this->db->query($query);
+		return $result->result();
+	}
+
 }

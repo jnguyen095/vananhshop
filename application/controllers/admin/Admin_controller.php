@@ -16,28 +16,24 @@ class Admin_controller extends MY_Controller
 	}
 
 	public function index() {
-		$data = [];
+		$data = [
+			'totalActiveProducts' => $this->Dashboard_Model->countActiveProducts(),
+			'totalOrderToday' => $this->Dashboard_Model->countOrders(true),
+			'totalOrderAll' => $this->Dashboard_Model->countOrders(false),
+			'revenueToday' => $this->Dashboard_Model->sumRevenue(true),
+			'revenueAll' => $this->Dashboard_Model->sumRevenue(false),
+			'quotationToday' => $this->Dashboard_Model->countQuotation(true),
+			'quotationAll' => $this->Dashboard_Model->countQuotation(false),
+			'feedbackToday' => $this->Dashboard_Model->countFeedback(true),
+			'feedbackAll' => $this->Dashboard_Model->countFeedback(false),
+			'topProducts' => $this->Dashboard_Model->topViewedProducts(5),
+			'topOrderedProducts' => $this->Dashboard_Model->topOrderedProducts(5),
+			// orders chart data for last 7 days (array of [date, count])
+			'ordersChart' => json_encode($this->Dashboard_Model->getOrdersCountByDay(7))
+		];
 		$this->load->view('admin/dashboard', $data);
 	}
-	public function updateStandardForPreviousPost(){
-		$this->Dashboard_Model->updateStandardForPreviousPost();
-		echo json_encode('success');
-	}
-	public function retainCrawlerVip(){
-		$crawlerPost = !true;
-		$this->Dashboard_Model->retainPreviousVip($crawlerPost);
-		echo json_encode('success');
-	}
-	public function retainOwnerVip(){
-		$owner = true;
-		$this->Dashboard_Model->retainPreviousVip($owner);
-		echo json_encode('success');
-	}
-	public function replaceThumbs(){
-		$thumbs = ["https://file1.batdongsan.com.vn/images/no-photo.jpg", "https://dothi.net/Images/no-photo170.png", "https://nhadat.cafeland.vn/images/ico/cafeland.jpg"];
-		$this->Dashboard_Model->updateProductHasNoThumb($thumbs, "/img/no_image.png");
-		echo json_encode('success');
-	}
+
 	public function deleteAllCaptcha(){
 		$files = glob('img/captcha/*.jpg'); // get all file names
 		foreach($files as $file){ // iterate files
