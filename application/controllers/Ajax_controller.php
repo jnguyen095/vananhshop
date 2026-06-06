@@ -93,12 +93,12 @@ class Ajax_controller extends CI_Controller
 			'img_id'		=> 'captcha',
 			'img_path'      => 'img/captcha/',
 			'img_url'       => 'img/captcha/',
-			'font_path'		=> 'admin/fonts/arial.ttf',
-			'img_width'     => '150',
+			'font_path'		=> FCPATH .'/theme/admin/fonts/arial.ttf',
+			'img_width'     => '100',
 			'expiration'    => 7200,
 			'img_height'    => 30,
-			'word_length'   => 6,
-			'font_size'     => 18,
+			'word_length'   => 4,
+			'font_size'     => 16,
 			'line_count'	=> 10,
 			'colors'        => array(
 				'background' => array(255, 255, 255),
@@ -163,40 +163,52 @@ class Ajax_controller extends CI_Controller
 
 	public function contactFormHandler(){
 		$crudaction = $this->input->post('crudaction');
+		$data = [];
+
+		$data['statusMsg'] = "Vui lòng để lại thông tin bên dưới!";
+		$data['status'] = 'NA';
+		$captcha = $this->generateCaptcha();
+		$data['capchaImg'] = $captcha['image'];
 
 		if($crudaction == 'insert'){
+			$fullName = $this->input->post('fullName');
+			$phoneNumber = $this->input->post('phoneNumber');
+			$email = $this->input->post('email');
+			$content = $this->input->post('content');
+			$ipAddress = $this->input->ip_address();
+			$data['fullName'] = $fullName;
+			$data['phoneNumber'] = $phoneNumber;
+			$data['email'] = $email;
+			$data['content'] = $content;
+			$data['ipAddress'] = $ipAddress;
+
 			$this->form_validation->set_error_delimiters('', '');
 			$this->form_validation->set_rules('fullName','Họ tên', 'required');
-			$this->form_validation->set_rules('phoneNumber','Số điện thoại', 'required');
+			$this->form_validation->set_rules('phoneNumber','Số điện thoại', 'required|regex_match[/^[0-9]{10}$/]');
 			$this->form_validation->set_rules('email','Email','valid_email');
 			$this->form_validation->set_rules('content','Nội dung','required');
 			$this->form_validation->set_rules("txt_captcha", "Mã xác thực", "callback_validateCaptcha");
-			if ($this->form_validation->run() == FALSE) {
-				echo validation_errors();
-			}else{
-				$fullName = $this->input->post('fullName');
-				$phoneNumber = $this->input->post('phoneNumber');
-				$email = $this->input->post('email');
-				$content = $this->input->post('content');
-				$ipAddress = $this->input->ip_address();
-				$data['fullName'] = $fullName;
-				$data['phoneNumber'] = $phoneNumber;
-				$data['email'] = $email;
-				$data['content'] = $content;
-				$data['ipAddress'] = $ipAddress;
+
+
+			if ($this->form_validation->run()) {
 				$insert_id = $this->FeedBack_Model->addNewFeedBack($data);
 				if($insert_id != null && $insert_id > 0){
-					echo 'success';
+					$data['status'] = 'OK';
+					$data['statusMsg'] = "";
+					$data['fullName'] = '';
+					$data['phoneNumber'] = '';
+					$data['email'] = '';
+					$data['content'] = '';
 				}else{
-					echo 'failure';
+					$data['statusMsg'] = "Opp! Thật tiếc, đã có sự cố khi gửi thông tin.";
+					$data['status'] = 'NOK';
+					$this->session->set_userdata('captcha', $captcha['word']);
 				}
+			} else {
+				$this->session->set_userdata('captcha', $captcha['word']);
 			}
+			return $this->load->view('/contact/contact-body', $data);
 		}else{
-			$data = [];
-			$captcha = $this->generateCaptcha();
-			//print_r($captcha);
-			//$data['captcha'] = $captcha;
-			$data['capchaImg'] = $captcha['image'];
 			$this->session->set_userdata('captcha', $captcha['word']);
 			return $this->load->view('/contact/contact', $data);
 		}
@@ -204,12 +216,11 @@ class Ajax_controller extends CI_Controller
 	}
 
 	public function validateCaptcha($str){
-		if($str != $this->session->userdata['captcha'])
-		{
+		if($str === $this->session->userdata['captcha']){
+			return TRUE;
+		}else{
 			$this->form_validation->set_message('validateCaptcha', '{field} không khớp');
 			return FALSE;
-		}else{
-			return TRUE;
 		}
 	}
 
