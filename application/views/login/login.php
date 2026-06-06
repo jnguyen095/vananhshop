@@ -64,7 +64,7 @@
 						<div class="col-lg-4 col-sm-4">
 						</div>
 						<div class="col-lg-8 col-sm-8">
-							<label><input type="checkbox" class="minimal" name="ch_rememberme"/> Nhớ đăng nhập</label>
+							<label><input type="checkbox" class="minimal" name="ch_rememberme" checked="checked"/> Nhớ đăng nhập</label>
 						</div>
 					</div>
 				</div>
