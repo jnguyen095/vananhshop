@@ -636,8 +636,9 @@ class Product_Model extends CI_Model
 			$this->db->where('p.Status', $status);
 		}
 		if($categoryId != null){
-			$this->db->where('c.CategoryID', $categoryId);
-			$this->db->or_where('status', 'active');
+			$this->db->where('p.CategoryID', $categoryId);
+			$this->db->or_where('c.ParentID', $categoryId);
+			//$this->db->or_where('status', 'active');
 		}
 		//$query = $this->db->like('Title', $st)->limit($limit, $offset)->order_by($orderField, $orderDirection)->get('product');
 
@@ -834,10 +835,12 @@ class Product_Model extends CI_Model
 	public function findProductByCodeOrTitle($query, $catId = null){
 		$where = "p.Status = ".ACTIVE;
 		if($catId != null && $catId > 0){
-			$where .= " AND p.CategoryID = ". $catId;
+			$where .= " AND (p.CategoryID = ". $catId;
+			$where .= " OR c.ParentID = ". $catId . ")";
 		}
 		$query = $this->db->select('p.*')
 			->from('product p')
+			->join('category c', 'p.CategoryID = c.CategoryID', 'inner')
 			->where($where)
 			->group_start()
 			->like('p.Code', $query)
