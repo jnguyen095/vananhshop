@@ -44,7 +44,7 @@
 				</div>
 				<div class="top-buttons"><a class="btn btn-primary" href="<?=base_url('/admin/static-page/add.html')?>">Thêm Mới</a> </div>
 				<!-- /.box-header -->
-				<div class="box-body">
+				<div class="box-body table-responsive">
 					<table id="example1" class="table table-bordered table-striped">
 						<thead>
 							<tr>

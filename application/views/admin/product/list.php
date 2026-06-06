@@ -129,7 +129,7 @@
 								?>
 								<tr>
 									<td><input name="checkList[]" type="checkbox" value="<?=$product->ProductID?>"></td>
-									<td><?=$product->Title?></td>
+									<td><a href="<?=base_url('/admin/product/edit-'.$product->ProductID.'.html')?>" data-toggle="tooltip" title="Chỉnh sửa"><?=$product->Title?></a></td>
 									<td><?=$product->CatName?></td>
 									<td class="text-right"><?=number_format($product->Price)?></td>
 									<td class="text-right"><?=number_format($product->View)?></td>
@@ -146,7 +146,7 @@
 									<td><?=$product->FullName?></td>
 									<td>
 										<a href="<?=base_url('/admin/product/edit-'.$product->ProductID.'.html')?>" data-toggle="tooltip" title="Chỉnh sửa"><i class="glyphicon glyphicon-edit"></i></a>&nbsp;|&nbsp;
-										<a class="remove-post" data-post="<?=$product->ProductID?>" data-toggle="tooltip" title="Xóa tin đăng"><i class="glyphicon glyphicon-remove"></i></a>
+										<a class="remove-post" data-post="<?=$product->ProductID?>" data-toggle="tooltip" title="Xóa sản phẩm"><i class="glyphicon glyphicon-remove"></i></a>
 									</td>
 								</tr>
 								<?php
@@ -277,7 +277,7 @@
 		$("#deleteMulti").click(function(){
 			var selectedItems = $("input[name='checkList[]']:checked").length;
 			if(selectedItems > 0) {
-				bootbox.confirm("Bạn đã chắc chắn xóa những tin rao này chưa?", function (result) {
+				bootbox.confirm("Bạn đã chắc chắn xóa những sản phẩm này chưa?", function (result) {
 					if (result) {
 						$("#crudaction").val("delete-multiple");
 						$("#frmPost").submit();
@@ -292,7 +292,7 @@
 	function deletePostHandler(){
 		$('.remove-post').click(function(){
 			var prId = $(this).data('post');
-			bootbox.confirm("Bạn đã chắc chắn xóa tin rao này chưa?", function(result){
+			bootbox.confirm("Bạn đã chắc chắn xóa sản phẩm này chưa?", function(result){
 				if(result){
 					$("#productId").val(prId);
 					$("#crudaction").val("delete");
