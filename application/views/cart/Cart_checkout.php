@@ -133,7 +133,7 @@
 					<div class="clear-both"></div>
 				</div>
 
-				<div class="row">
+				<div class="row table-cart-items table-responsive">
 					<table class="table table-bordered">
 						<thead>
 						<tr class="bg-info">
@@ -154,7 +154,7 @@
 		</div>
 
 		<div class="col-lg-12 text-center margin-bottom-20 margin-top-20">
-			<a class="btn btn-default" href="<?=base_url('/check-out.html')?>"><i class="glyphicon glyphicon-menu-left"></i> Tiếp tục mua hàng </a>
+			<a class="btn btn-default" href="<?=base_url('/')?>"><i class="glyphicon glyphicon-menu-left"></i> Tiếp tục mua hàng </a>
 			<button class="btn btn-primary" type="submit"> <i class="glyphicon glyphicon-shopping-cart"></i> Tạo Đơn</button>
 		</div>
 

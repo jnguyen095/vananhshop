@@ -43,8 +43,8 @@
 		<div class="col-lg-12">
 			<div class="alert alert-success" role="alert">
 				<strong>Cảm ơn, bạn đã đặt hàng thành công!</strong> Chúng tôi sẻ tiến hành xử lý đơn hàng của bạn.
-				<p><i class="glyphicon glyphicon-chevron-right"></i> Bạn có thể theo dõi đơn hàng vừa mua tại đây: <a href="<?=base_url('don-hang-'. $_GET['orderId'].'.html')?>">Xem đơn hàng</a> </p>
-
+				<p class="margin-top-20"><i class="glyphicon glyphicon-chevron-right"></i> Bạn có thể theo dõi đơn hàng vừa mua tại đây: <a href="<?=base_url('don-hang-'. $_GET['orderId'].'.html')?>">Xem đơn hàng</a> </p>
+				<p><i class="glyphicon glyphicon-chevron-right"></i> Liên hệ với chúng tôi tại đây: <a id="contactVAS" href="#">Liên Hệ</a>, hoặc qua SĐT/Zalo: <b><a href="http://zalo.me/0865053849">0865.053.849</a></b> nếu cần.</p>
 			</div>
 		</div>
 
