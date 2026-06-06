@@ -637,6 +637,7 @@ class Product_Model extends CI_Model
 		}
 		if($categoryId != null){
 			$this->db->where('c.CategoryID', $categoryId);
+			$this->db->or_where('status', 'active');
 		}
 		//$query = $this->db->like('Title', $st)->limit($limit, $offset)->order_by($orderField, $orderDirection)->get('product');
 
@@ -653,6 +654,9 @@ class Product_Model extends CI_Model
 
 		if($status != null && $status > -1){
 			$this->db->where('Status', $status);
+		}
+		if($categoryId != null){
+			$this->db->where('CategoryID', $categoryId);
 		}
 		$query = $this->db->like('Title', $st)->get('product');
 		$result['total'] = $query->num_rows();
