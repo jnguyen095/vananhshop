@@ -119,12 +119,8 @@
 		</div>
 	</div>
 
-
-
-	<div class="overlay" style="display: none"><img src="<?=base_url('/img/spinner.gif')?>"/></div>
-
-		<script src="<?=base_url('/css/iCheck/icheck.min.js')?>"></script>
-		<script src="<?=base_url('/js/jquery.magnific-popup.min.js')?>"></script>
+	<script src="<?=base_url('/css/iCheck/icheck.min.js')?>"></script>
+	<script src="<?=base_url('/js/jquery.magnific-popup.min.js')?>"></script>
 	</div>
 </div>
 
