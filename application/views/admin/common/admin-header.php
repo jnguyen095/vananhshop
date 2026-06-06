@@ -49,10 +49,10 @@
 						<!-- Menu Footer-->
 						<li class="user-footer">
 							<div class="pull-left">
-
+								<a href="<?=base_url('/')?>" class="btn btn-default btn-flat">Trang mua hàng</a>
 							</div>
 							<div class="pull-right">
-								<a href="<?=base_url('/dang-xuat.html')?>" class="btn btn-default btn-flat">Đăng xuất</a>
+								<a href="<?=base_url('/dang-xuat.html')?>" class="btn btn-warning btn-flat">Đăng xuất</a>
 							</div>
 						</li>
 					</ul>
