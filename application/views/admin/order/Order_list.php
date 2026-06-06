@@ -119,7 +119,7 @@
 								?>
 								<tr>
 									<td><input name="checkList[]" type="checkbox" value="<?=$order->OrderID?>"></td>
-									<td><?=$order->Code?></td>
+									<td><a href="<?=base_url('/admin/order/process-'.$order->OrderID.'.html')?>" data-toggle="tooltip" title="Xử lý đơn hàng"><?=$order->Code?></a></td>
 									<td><?=$order->Receiver?></td>
 									<td><?=$order->Phone?></td>
 									<td class="mobile-hide"><?=date('d/m/Y H:i', strtotime($order->CreatedDate))?></td>
