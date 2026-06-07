@@ -57,13 +57,20 @@
 	</div>
 </div>
 
-<script src="<?=base_url('/css/iCheck/icheck.min.js')?>"></script>
-<script src="<?=base_url('/js/jquery.magnific-popup.min.js')?>"></script>
-
+	<script src="<?=base_url('/css/iCheck/icheck.min.js')?>"></script>
+	<script src="<?=base_url('/js/jquery.magnific-popup.min.js')?>"></script>
+	<?php $this->load->view('/common/analyticstracking')?>
 </div>
 
 <?php $this->load->view('/theme/footer')?>
-
+<script type="text/javascript">
+	$(document).ready(function() {
+		gtag('event', 'placed_order_success', {
+			'app_name': 'Vân Anh Shop',
+			'screen_name': 'Tạo đơn hàng thành công!'
+		});
+	});
+</script>
 </body>
 
 </html>

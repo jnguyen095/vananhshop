@@ -62,25 +62,11 @@ $route['quen-mat-khau'] = "Login_controller/forgotPassword";
 $route['dang-ky'] = "Register_controller";
 // Dang xuat
 $route['dang-xuat'] = "Login_controller/logout";
-// Dang tin rao
-$route['dang-tin'] = "Post_controller";
-$route['gui-mail'] = "Email_controller/send_email";
-// Xem truoc dang tin rao
-$route['xem-truoc-p(:num)'] = "Post_controller/preview/$1";
-// Chinh sua tin rao
-$route['chinh-sua-p(:num)'] = "Post_controller/edit/$1";
-// Dang bai thanh cong
-$route['dang-bai-thanh-cong-p(:num)'] = "Post_controller/done/$1";
-// Trang quan ly tin rao
-// $route['quan-ly-tin-rao'] = "ManagePost_controller";
-$route['quan-ly-tin-rao.html/(:num)'] = "ManagePost_controller/index/$1";
 // Trang quan ly đơn hàng
 $route['theo-doi-don-hang'] = "Order_controller";
 $route['quan-ly-don-hang.html/(:num)'] = "Order_controller/index/$1";
 $route['don-hang-(:num)'] = "Order_controller/viewDetail/$1";
-// Trang quan ly giao dich
-$route['yeu-cau-goi-lai'] = "ManagePost_controller/callMeBack";
-$route['yeu-cau-goi-lai.html/(:num)'] = "ManagePost_controller/callMeBack/$1";
+
 // Trang thong tin ca nhan
 $route['thong-tin-ca-nhan'] = 'UserProfile_controller';
 // Trang doi mat khau
@@ -93,24 +79,6 @@ $route['tim-kiem.html/(:num)'] = "Search_controller/index/$1";
 // Sitemap
 $route['sitemap\.xml'] = "Sitemap_controller";
 $route['sitemap_(:num)\.xml'] = "Sitemap_controller/viewItems/$1";
-
-
-// tin tuc
-$route['tin-tuc'] = "News_controller";
-$route['tin-tuc.html/(:num)'] = "News_controller/index/$1";
-$route['(:any)-n(:num)'] = "News_controller/detail/$2";
-
-// Hop tac
-$route['hop-tac'] = "Cooperate_controller";
-$route['hop-tac.html/(:num)'] = "Cooperate_controller/index/$1";
-$route['(:any)-co(:num)'] = "Cooperate_controller/detail/$2";
-$route['dang-tin-hop-tac'] = "Cooperate_controller/add";
-$route['dang-bai-thanh-cong-cp(:num)'] = "Cooperate_controller/done/$1";
-
-// nha mau dep
-$route['nha-mau-dep'] = "SampleHouse_controller";
-$route['nha-mau-dep.html/(:num)'] = "SampleHouse_controller/index/$1";
-$route['(:any)-s(:num)'] = "SampleHouse_controller/detail/$2";
 
 
 // View by category

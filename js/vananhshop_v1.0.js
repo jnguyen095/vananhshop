@@ -80,6 +80,10 @@ function bindingAdd2Cart() {
 				$("#myHeaderCart").html(data);
 				//alert('them thanh cong');
 				$(".overlay").hide();
+				gtag('event', 'add_product_2_cart', {
+					'app_name': 'Vân Anh Shop',
+					'screen_name': 'Mini Cart'
+				});
 			});
 		} else {
 			alert('qty > 0');

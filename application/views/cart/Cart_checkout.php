@@ -14,6 +14,7 @@
 </head>
 
 <body>
+
 <div class="container-fluid no-padding-left no-padding-right">
 <?php $this->load->view('/theme/header')?>
 
@@ -167,7 +168,7 @@
 <script src="<?=base_url('/js/jquery.magnific-popup.min.js')?>"></script>
 
 </div>
-
+<?php $this->load->view('/common/analyticstracking')?>
 <?php $this->load->view('/theme/footer')?>
 
 <script type="text/javascript">
@@ -227,6 +228,11 @@
 		function number_format(number) {
 			return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
+
+		gtag('event', 'checkout_view', {
+			'app_name': 'Vân Anh Shop',
+			'screen_name': 'Tạo đơn hàng'
+		});
 	});
 
 	function loadDistrictByCityId(){

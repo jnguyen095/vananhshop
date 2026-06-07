@@ -73,19 +73,9 @@
 
 <script>
 	var urls = {
-		social_login_url: '<?=base_url('/login_controller/socialLogin')?>',
-		uploadOthersImages: '<?= base_url('/post_controller/do_upload_others_images') ?>',
-		loadOthersImages: '<?= base_url('/post_controller/loadOthersImages') ?>',
-		removeSecondaryImage: '<?= base_url('/post_controller/removeSecondaryImage') ?>',
 		loadDistrictByCityId: '<?= base_url('/ajax_controller/findDistrictByCityId') ?>',
-		loadWardByDistrictId: '<?= base_url('/ajax_controller/findWardByDistrictId') ?>',
-		findStreetByNameUrl: '<?= base_url('/ajax_controller/findStreetByName') ?>',
-		updateCoordinatorMapUrl: '<?= base_url('/ajax_controller/updateCoordinator') ?>',
-		loadGeoFromAddrUrl: '<?= base_url('/ajax_controller/getGeoFromAddress') ?>',
 		loadCaptchaUrl: '<?= base_url('/ajax_controller/getCaptchaImg') ?>',
-		base_url: '<?=base_url()?>',
-		loadPrice4Package: '<?=base_url('/ajax_controller/loadPrice4Package')?>'
-
+		base_url: '<?=base_url()?>'
 	};
 </script>
 <script src="<?php echo base_url()?>js/mcustome.js"></script>

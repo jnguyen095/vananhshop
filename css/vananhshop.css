@@ -166,6 +166,10 @@ img.middleHorizontalBanner {
 	padding: 0px;
 }
 
+.product-thumb:hover {
+	border: 1px solid #0190db;
+}
+
 .product-list .product-content{
 	margin-top: 5px;
 	margin-left: 7px;
