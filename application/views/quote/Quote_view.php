@@ -151,7 +151,7 @@
 						<div class="form-group row">
 							<label for="example-text-input" class="col-sm-4 text-left col-form-label"></label>
 							<div class="col-sm-8 text-left">
-								<a id="btnQuote" class="btn btn-tindatdai btn-sm"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Yêu Cầu Báo Giá</a>
+								<a id="btnQuote" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Yêu Cầu Báo Giá</a>
 							</div>
 						</div>
 					</div>

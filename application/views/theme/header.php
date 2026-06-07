@@ -49,7 +49,16 @@
 						</ul>
 					</li>
 					<div class="clear-both"></div>
+					<!-- Fixed container in top-right corner -->
+					<div id="toast-container">
+						<!-- Hidden by default using display:none -->
+						<div id="myToast" class="alert alert-success alert-dismissible" role="alert" style="display: none;">
+							<img src="<?=base_url('/img/icons/checkok.png')?>"> <span id="toast-message">thêm sp thành công.</span>
+						</div>
+					</div>
 				</ul>
+
+
 				<div class="clear-both"></div>
 			</div>
 

@@ -232,7 +232,7 @@ class ShoppingCart_controller extends CI_Controller
 							}
 							$html .= '<tr>';
 							if(count($this->cart->contents()) > 0){
-								$html .='<td colspan="4" class="text-right"><a href="'.base_url('/check-out.html'). '" class="btn-primary btn-sm">Đặt Hàng</a></td>';
+								$html .='<td colspan="4" class="text-right"><a href="'.base_url('/check-out.html'). '" ><span class="btn-primary btn-sm">Đặt Hàng</span></a></td>';
 							} else {
 								$html .='<td colspan="4" class="text-center"><i>Chưa có sản phẩm!</i></td>';
 							}
