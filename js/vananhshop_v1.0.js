@@ -21,6 +21,16 @@ $(document).ready(function(){
 
 });
 
+function showAdd2CartToast(){
+	var $toast = $('#myToast');
+	// Stop any current animations and show the toast
+	$toast.stop(true, true).fadeIn(200);
+	// Auto-hide the toast after 3 seconds (3000ms)
+	setTimeout(function() {
+		$toast.fadeOut(200);
+	}, 1000);
+}
+
 function bindingLoadCart(){
 	$('#myHeaderCart').hover(function(){
 		loadCart();
@@ -78,7 +88,7 @@ function bindingAdd2Cart() {
 				// $('#image-container-' + container).remove();
 				//update cart
 				$("#myHeaderCart").html(data);
-				//alert('them thanh cong');
+				showAdd2CartToast();
 				$(".overlay").hide();
 				gtag('event', 'add_product_2_cart', {
 					'app_name': 'Vân Anh Shop',

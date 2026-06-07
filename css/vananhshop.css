@@ -39,6 +39,11 @@ img.img-sm {
 	margin-top: 8px;
 }
 
+a.remove-cart-item {
+	display: block;
+	padding: 5px;
+}
+
 .top-header-hotline{
 	float: left;
 	width: 80px;
@@ -2249,4 +2254,20 @@ input[type=number]{
 .text-vsm{font-size:11px}
 .thumbnails.thumbnail-scroll .thumbnail img {
 	max-width: 90px;
+}
+
+#toast-container{
+	position: absolute;
+	top: 10px;
+	right: 0px;
+	z-index: 9999;
+}
+
+#myToast{
+	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+	padding: 2px 5px;
+}
+
+#myToast img{
+	width: 30px;
 }
