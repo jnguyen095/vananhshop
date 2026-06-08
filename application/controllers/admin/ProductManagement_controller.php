@@ -85,7 +85,10 @@ class ProductManagement_controller extends MY_Controller
 		$data['properties'] = $property;
 		if($this->input->post('crudaction') == "insert"){
 			$this->form_validation->set_rules("sl_category", "Danh mục", "trim|required");
-			$this->form_validation->set_rules("Title", "Tên sản phẩm", "trim|required");
+			$this->form_validation->set_rules("Title", "Tên sản phẩm",
+				'trim|required|regex_match[/^[\p{L}0-9_\s:\-]+$/u]',
+				array('regex_match' => '{field} không được có kí tự đặc biệt: @, #, !, ", \' ')
+			);
 			$this->form_validation->set_rules("Price", "Gián bán", "trim|required");
 			$this->form_validation->set_rules("Brief", "Mô tả ngắn sản phẩm", "trim|required");
 			$this->form_validation->set_rules("Description", "Mô tả chi tiết sản phẩm", "trim|required");
