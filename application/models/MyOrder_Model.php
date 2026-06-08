@@ -55,7 +55,7 @@ class MyOrder_Model extends CI_Model
 			$sql .= ' and m.Code like \'%'.$code.'%\'';
 		}
 		if($phone != null && strlen($phone) > 0){
-			$sql .= ' and u.Phone like \'%'.$phone.'%\'';
+			$sql .= ' and os.Phone like \'%'.$phone.'%\'';
 		}
 		if($status != null && strlen($status) > 0){
 			$sql .= ' and m.Status = "'.$status.'"';
@@ -64,10 +64,21 @@ class MyOrder_Model extends CI_Model
 		$sql .= ' order by '.$orderField.' '.$orderDirection;
 		$sql .= ' limit '.$offset.','.$limit;
 		$orders = $this->db->query($sql);
-		$total = $this->db->count_all_results('myorder');
-
 		$data['items'] = $orders->result();
-		$data['total'] = $total;
+
+		$wheresql = 'select count(*) as Total from myorder m inner join ordershipping os on m.OrderID = os.OrderID';
+		$wheresql .= ' where m.Status <> \''.ORDER_STATUS_DELETED.'\'';
+		if($code != null && strlen($code) > 0){
+			$wheresql .= ' and m.Code like \'%'.$code.'%\'';
+		}
+		if($phone != null && strlen($phone) > 0){
+			$wheresql .= ' and os.Phone like \'%'.$phone.'%\'';
+		}
+		if($status != null && strlen($status) > 0){
+			$wheresql .= ' and m.Status = "'.$status.'"';
+		}
+		$countresult = $this->db->query($wheresql);
+		$data['total'] = $countresult->row()->Total;
 		return $data;
 	}
 

@@ -107,7 +107,8 @@ class ProductManagement_controller extends MY_Controller
 			$otherImgs = $this->input->post('otherImages');
 
 			if($product['Price'] != null) {
-				$this->form_validation->set_rules('Price', 'Giá bán', 'regex_match[/^\d+(\.\d{2})?$/]'); //{10} for 10 or 11 digits number
+				$this->form_validation->set_rules('Price', 'Giá bán', 'regex_match[/^\d+(\.\d{2})?$/]',
+					array('regex_match' => '{field} phải là số')); //{10} for 10 or 11 digits number
 			}
 
 			if ($this->form_validation->run() == FALSE) {
