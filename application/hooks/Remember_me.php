@@ -10,12 +10,20 @@ class Remember_me
 	public function auto_login()
 	{
 		$CI =& get_instance();
-		$CI->load->helper('cookie');
+		$CI->load->helper('url');
+		// Fetch the current URI string (e.g., 'admin/dashboard' or 'welcome/index')
+		$current_url = $CI->uri->uri_string();
+		// If the page is not admin and login page(that meant doesn't required login --> skip checking)
+		if (strpos($current_url, 'admin') !== 0 && strpos($current_url, 'dang-nhap') !== 0) {
+			return; // Ignore this URL and stop hook execution immediately
+		}
+
 		if($CI->session->userdata('loginuser'))
 		{
 			return;
 		}
 
+		$CI->load->helper('cookie');
 		$cookie = get_cookie('remember_token');
 
 		if(!$cookie)
