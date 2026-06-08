@@ -13,7 +13,6 @@
 		<meta charset = "utf-8">
 		<title>Theo Dõi Đơn Hàng | Vân Anh Shop</title>
 		<?php $this->load->view('common_header')?>
-		<script src="<?= base_url('/js/homeland.js') ?>"></script>
 		<script src="<?=base_url('/js/bootbox.min.js')?>"></script>
 		<?php $this->load->view('/common/googleadsense')?>
 </head>
@@ -62,16 +61,16 @@
 					</div>
 					<div class="clear-both"></div>
 				</div>
-				<div class="col-md-12 no-margin no-padding text-center table-responsive">
+				<div class="col-md-12 no-margin no-padding text-center table-responsive margin-bottom-20">
 					<table class="table table-bordered table-hover table-striped">
 						<thead class="thead-table">
 							<tr class="bg-info">
 								<th class="text-center">#</th>
 								<th class="text-center">Mã Đơn Hàng</th>
+								<th class="text-center">Tình trạng</th>
 								<th class="text-center">Ngày mua</th>
 								<th class="text-center">Số lượng</th>
 								<th class="text-center">Tổng cộng</th>
-								<th class="text-center">Tình trạng</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -93,14 +92,6 @@
 									<td><a href="<?=base_url('/don-hang-' . $order->OrderID . '.html')?>"><?=$order->Code?></a></td>
 									<td>
 										<?php
-										$datestring = '%d/%m/%Y %H:%i';
-										echo mdate($datestring, strtotime($order->CreatedDate));
-										?>
-									</td>
-									<td><?=number_format($order->TotalItems)?></td>
-									<td><?=number_format($order->TotalPrice)?></td>
-									<td>
-										<?php
 										if($order->Status == ORDER_STATUS_NEW){
 											echo '<span class="label label-primary">Chờ xác nhận</span>';
 										} else if($order->Status == ORDER_STATUS_CANCEL){
@@ -110,10 +101,18 @@
 										} else if($order->Status == ORDER_STATUS_SHIPPING){
 											echo '<span class="label label-warning">Đang giao hàng</span>';
 										} else if($order->Status == ORDER_STATUS_COMPLETED){
-											echo '<span class="label label-default">Đã giao</span>';
+											echo '<span class="label label-success">Đã giao</span>';
 										}
 										?>
 									</td>
+									<td>
+										<?php
+										$datestring = '%d/%m/%Y %H:%i';
+										echo mdate($datestring, strtotime($order->CreatedDate));
+										?>
+									</td>
+									<td><?=number_format($order->TotalItems)?></td>
+									<td><?=number_format($order->TotalPrice)?></td>
 								</tr>
 								<?php
 							}
