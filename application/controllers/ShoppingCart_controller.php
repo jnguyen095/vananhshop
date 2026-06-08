@@ -227,12 +227,12 @@ class ShoppingCart_controller extends CI_Controller
 								$html .= '</td>';
 								$html .= '<td class="text-center">' . $item['qty'] .'</td>';
 								$html .= '<td class="text-right">'. number_format($item['price']) .  '</td>';
-								$html .= '<td><a class="remove-cart-item" rowid="'. $item['rowid'] .'" onclick="javascript:void(0);" href="#"><img src="'.base_url('/img/icons/delete-icon.png').'"/></a></td>';
+								$html .= '<td><a class="remove-cart-item btn" rowid="'. $item['rowid'] .'" onclick="javascript:void(0);" href="#"><img src="'.base_url('/img/icons/delete-icon.png').'"/></a></td>';
 								$html .= '</tr>';
 							}
 							$html .= '<tr>';
 							if(count($this->cart->contents()) > 0){
-								$html .='<td colspan="4" class="text-right"><a href="'.base_url('/check-out.html'). '" ><span class="btn-primary btn-sm">Đặt Hàng</span></a></td>';
+								$html .='<td colspan="4" class="text-right"><a href="'.base_url('/check-out.html'). '" ><span class="btn-primary btn">Đặt Hàng</span></a></td>';
 							} else {
 								$html .='<td colspan="4" class="text-center"><i>Chưa có sản phẩm!</i></td>';
 							}
