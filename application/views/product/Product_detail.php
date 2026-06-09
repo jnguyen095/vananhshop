@@ -119,34 +119,39 @@
 		</div>
 	</div>
 
-	<div class="row collections">
-		<div class="section-title-container">
-			<h4 class="section-title section-title-center">
-				<b></b>
-				<span class="section-category-main">
+		<?php
+		if(isset($sameLevels) && count($sameLevels) > 0) {
+			?>
+			<div class="row collections">
+				<div class="section-title-container">
+					<h4 class="section-title section-title-center">
+						<b></b>
+						<span class="section-category-main">
 						Xem Thêm SP Danh Mục Khác
 					</span>
-				<b></b>
-			</h4>
-		</div>
-		<ul class="ul-cate-collections">
-			<?php
-			if(isset($sameLevels) && count($sameLevels) > 0){
-				foreach ($sameLevels as $level){
-					echo '<li><a href="'.base_url().seo_url($level->CatName).'-c'.$level->CategoryID.'.html">';
-					if(empty($level->Image)){
-						echo '<div class="sub-cat-img"><img src="'.base_url('/img/no_image.webp').'" class="img-responsive" alt="'.$level->CatName.'"></div>';
-					}else{
-						echo '<div class="sub-cat-img"><img src="'.base_url('/img/category/'.$level->Image).'" class="img-responsive" alt="'.$level->CatName.'"></div>';
+						<b></b>
+					</h4>
+				</div>
+				<ul class="ul-cate-collections">
+					<?php
+					foreach ($sameLevels as $level) {
+						echo '<li><a href="' . base_url() . seo_url($level->CatName) . '-c' . $level->CategoryID . '.html">';
+						if (empty($level->Image)) {
+							echo '<div class="sub-cat-img"><img src="' . base_url('/img/no_image.webp') . '" class="img-responsive" alt="' . $level->CatName . '"></div>';
+						} else {
+							echo '<div class="sub-cat-img"><img src="' . base_url('/img/category/' . $level->Image) . '" class="img-responsive" alt="' . $level->CatName . '"></div>';
+						}
+						echo '<p class="sub-cat-name">' . $level->CatName . '</p>';
+						echo '</a></li>';
 					}
-					echo '<p class="sub-cat-name">'.$level->CatName.'</p>';
-					echo '</a></li>';
-				}
-			}
-			?>
-			<div class="clear-both"></div>
-		</ul>
-	</div>
+
+					?>
+					<div class="clear-both"></div>
+				</ul>
+			</div>
+			<?php
+		}
+		?>
 
 	<script src="<?=base_url('/css/iCheck/icheck.min.js')?>"></script>
 	<script src="<?=base_url('/js/jquery.magnific-popup.min.js')?>"></script>
