@@ -1,85 +1,137 @@
-<?php
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-/**
- * Created by Khang Nguyen.
- * Email: nguyennhukhangvn@gmail.com
- * Date: 8/28/2017
- * Time: 4:13 PM
- */
 class Sitemap_controller extends CI_Controller
 {
-	function __construct() {
-		parent::__construct();
-		$this->load->library('session');
-		$this->load->model('Category_Model');
-		$this->load->model('Product_Model');
-		$this->load->model('SitemapIndex_Model');
-		$this->load->model('Sitemap_Model');
-		$this->load->helper("seo_url");
-	}
+    const MAX_URLS_PER_FILE = 45000;
 
-	public function index()
-	{
-		header("Content-type: text/xml");
-		$sitemapindex = $this->SitemapIndex_Model->findAll();
-		$data['items'] = $sitemapindex;
-		$this->load->view('/sitemap/sitemap_index', $data);
-	}
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->helper(array('url', 'seo_url'));
+        $this->load->model('Sitemap_Model');
+    }
 
-	function viewItems($sitemapIndexId){
-		header("Content-type: text/xml");
-		$currentDate = date('Y-m-d');
-		$data['items'] = $this->Sitemap_Model->findAllBySitemapIndexId($sitemapIndexId);
-		$data['currentDate'] = $currentDate;
-		$this->load->view('/sitemap/item_view', $data);
-	}
+    public function index()
+    {
+        $urls = $this->Sitemap_Model->getAllUrls();
+        $urlCount = count($urls);
 
-	function publish2SearchEngine(){
+        if ($urlCount === 0) {
+            show_404();
+            return;
+        }
 
-		$isProductionServer = strpos(base_url(), "tindatdai");
-		if($isProductionServer){
-			$sitemapUrl = 'https:'.base_url('sitemap.xml');
+        header('Content-Type: application/xml; charset=utf-8');
 
-			$sitemapUrl = htmlentities($sitemapUrl);
-			//Google
-			$url = "http://www.google.com/webmasters/sitemaps/ping?sitemap=".$sitemapUrl;
-			$this->SubmitSiteMap($url);
+        if ($urlCount > self::MAX_URLS_PER_FILE) {
+            $chunks = array_chunk($urls, self::MAX_URLS_PER_FILE);
+            $sitemaps = array();
+            foreach ($chunks as $index => $chunk) {
+                $sitemaps[] = array(
+                    'loc' => rtrim(base_url('sitemap_' . ($index + 1) . '.xml'), '/'),
+                    'lastmod' => gmdate('Y-m-d\TH:i:s\Z'),
+                );
+            }
+            echo $this->renderSitemapIndex($sitemaps);
+            return;
+        }
 
-			//Bing / MSN
-			$url = "http://www.bing.com/webmaster/ping.aspx?siteMap=".$sitemapUrl;
-			$this->SubmitSiteMap($url);
+        echo $this->renderUrlset($urls);
+    }
 
-			// Ask
-			$url = "http://submissions.ask.com/ping?sitemap=".$sitemapUrl;
-			$this->SubmitSiteMap($url);
+    public function viewItems($page = 1)
+    {
+        $page = max(1, intval($page));
+        $urls = $this->Sitemap_Model->getAllUrls();
+        $chunks = array_chunk($urls, self::MAX_URLS_PER_FILE);
 
-			// Live
-			$url = "http://webmaster.live.com/ping.aspx?siteMap=".$sitemapUrl;
-			$this->SubmitSiteMap($url);
+        if (!isset($chunks[$page - 1])) {
+            show_404();
+            return;
+        }
 
-			// moreover
-			$url = "http://api.moreover.com/ping?sitemap=".$sitemapUrl;
-			$this->SubmitSiteMap($url);
+        header('Content-Type: application/xml; charset=utf-8');
+        echo $this->renderUrlset($chunks[$page - 1]);
+    }
 
-			$this->SitemapIndex_Model->updatePingDate();
-		}
-	}
+    public function publish2SearchEngine()
+    {
+        $isProductionServer = strpos(base_url(), 'vananhshop') !== false;
+        if (!$isProductionServer) {
+            echo 'Publish skipped: not production server.';
+            return;
+        }
 
-	function Submit($url){
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_exec($ch);
-		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		curl_close($ch);
-		return $httpCode;
-	}
+        $sitemapUrl = urlencode(rtrim(base_url('sitemap.xml'), '/'));
+        $endpoints = array(
+            'Google' => "https://www.google.com/ping?sitemap={$sitemapUrl}",
+            'Bing' => "https://www.bing.com/webmasters/ping.aspx?siteMap={$sitemapUrl}",
+        );
 
-	function SubmitSiteMap($url) {
-		$returnCode = $this->Submit($url);
-		if ($returnCode != 200) {
-			echo "Error $returnCode: $url <BR/>";
-		} else {
-			echo "Submitted $returnCode: $url <BR/>";
-		}
-	}
+        foreach ($endpoints as $name => $endpoint) {
+            $code = $this->submit($endpoint);
+            if ($code !== 200) {
+                echo "Error {$code}: {$name} ping failed: {$endpoint} <br/>";
+            } else {
+                echo "Submitted {$code}: {$name} ping succeeded: {$endpoint} <br/>";
+            }
+        }
+    }
+
+    private function renderSitemapIndex(array $sitemaps)
+    {
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+        foreach ($sitemaps as $item) {
+            $xml .= "  <sitemap>\n";
+            $xml .= '    <loc>' . $this->xmlEscape($item['loc']) . '</loc>\n';
+            $xml .= '    <lastmod>' . $this->xmlEscape($item['lastmod']) . '</lastmod>\n';
+            $xml .= "  </sitemap>\n";
+        }
+
+        $xml .= '</sitemapindex>';
+        return $xml;
+    }
+
+    private function renderUrlset(array $urls)
+    {
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+        foreach ($urls as $entry) {
+            $xml .= "  <url>\n";
+            $xml .= '    <loc>' . $this->xmlEscape($entry['loc']) . '</loc>';
+            if (!empty($entry['lastmod'])) {
+                $xml .= '    <lastmod>' . $this->xmlEscape($entry['lastmod']) . '</lastmod>';
+            }
+            if (!empty($entry['changefreq'])) {
+                $xml .= '    <changefreq>' . $this->xmlEscape($entry['changefreq']) . '</changefreq>';
+            }
+            if (!empty($entry['priority'])) {
+                $xml .= '    <priority>' . $this->xmlEscape($entry['priority']) . '</priority>';
+            }
+            $xml .= "  </url>\n";
+        }
+
+        $xml .= '</urlset>';
+        return $xml;
+    }
+
+    private function xmlEscape($value)
+    {
+        return htmlspecialchars($value, ENT_QUOTES | ENT_XML1, 'UTF-8');
+    }
+
+    private function submit($url)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        return $httpCode;
+    }
 }
