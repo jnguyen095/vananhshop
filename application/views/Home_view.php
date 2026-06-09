@@ -1,8 +1,74 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang = "vi">
 
 <head>
+	<meta charset="UTF-8">
 	<title>Thời Trang, Đồ Lót, Nội Y, Đồ Bộ Mặc Nhà | Vân Anh Shop</title>
+	<meta name="description" content="Vân Anh Shop chuyên cung cấp sỉ và lẻ quần lót nữ, áo lót nữ, áo lá học sinh, đồ lót nam chất lượng cao, giá tốt, giao hàng toàn quốc.">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="index, follow, max-image-preview:large">
+	<link rel="canonical" href="https://vananhshop.com">
+
+	<meta property="og:locale" content="vi_VN">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Thời Trang, Đồ Lót, Nội Y, Đồ Bộ Mặc Nhà | Vân Anh Shop">
+	<meta property="og:description" content="Vân Anh Shop chuyên cung cấp sỉ và lẻ quần lót nữ, áo lót nữ, áo lá học sinh, đồ lót nam chất lượng cao, giá tốt, giao hàng toàn quốc.">
+	<meta property="og:url" content="https://vananhshop.com">
+	<meta property="og:site_name" content="Vân Anh Shop">
+	<meta property="og:image" content="https://vananhshop.com/img/vananh-sm-icon.png">
+	<meta property="og:image:width" content="152">
+	<meta property="og:image:height" content="147">
+
+	<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Store",
+          "@id": "https://vananhshop.com",
+          "name": "Vân Anh Shop",
+          "url": "https://vananhshop.com",
+          "logo": "https://vananhshop.com/img/vananh_logo.png",
+          "image": "https://vananhshop.com/img/vananh-sm-icon.png",
+          "telephone": "0865.053.849",
+          "email": "contact@vananhshop.com",
+          "priceRange": "$$",
+          "address": [
+            {
+              "@type": "PostalAddress",
+              "streetAddress": "C/c 4S, Đường 30, Phường Hiệp Bình",
+              "addressLocality": "Thành phố Hồ Chí Minh",
+              "addressCountry": "VN"
+            },
+            {
+              "@type": "PostalAddress",
+              "streetAddress": "101 Phạm Ngũ Lão",
+              "addressLocality": "Buôn Ma Thuột, ĐăkLăk",
+              "addressCountry": "VN"
+            }
+          ],
+          "sameAs": [
+            "https://www.facebook.com/vanhanhshopbmt",
+            "http://zalo.me/0865053849"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://vananhshop.com",
+          "url": "https://vananhshop.com",
+          "name": "Vân Anh Shop",
+          "publisher": {
+            "@id": "https://vananhshop.com"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://vananhshop.com/tim-kiem.html?query={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
 	<link rel="icon" sizes="48x48" href="<?=base_url('/img/favicon_va.ico')?>">
 	<link rel="stylesheet" href="<?=base_url('/css/jquery.mCustomScrollbar.min.css')?>" />
 	<?php $this->load->view('common_header')?>
