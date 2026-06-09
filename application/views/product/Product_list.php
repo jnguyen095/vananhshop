@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang = "vi">
 
 <head>
+	<title><?php echo $category->CatName?> | Vân Anh Shop</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="description" content="<?=$category->CatName?>">
-	<meta name="keywords" content="<?=keyword_maker($category->CatName)?>">
-	<meta name="revisit-after" content="1 days" />
-	<meta name="robots" content="follow" />
-	<title><?php echo $category->CatName?> | Vân Anh Shop</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="index, follow">
+	<link rel="canonical" href="<?=base_url().seo_url($category->CatName).'-c'.($category->CategoryID).'.html'?>" />
+
+	<meta property="og:type" content="object">
+	<meta property="og:title" content="<?php echo $category->CatName?> | Vân Anh Shop">
+	<meta property="og:description" content="<?php echo $category->CatName?> | Vân Anh Shop">
+	<meta property="og:url" content="<?=base_url().seo_url($category->CatName).'-c'.($category->CategoryID).'.html'?>">
+	<meta property="og:image" content="<?=base_url('/img/category/'.$category->Image)?>">
+
 	<?php $this->load->view('common_header')?>
 	<?php $this->load->view('/common/googleadsense')?>
 	<?php $this->load->view('/common/facebook-pixel-tracking')?>
@@ -88,6 +95,8 @@
 
 				<div class="row">
 					<?php
+					$schema_items = array();
+					$position = 1;
 					foreach ($products as $product){?>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<div class="product-thumb transition">
@@ -105,6 +114,13 @@
 							</div>
 						</div>
 						<?php
+						$schema_items[] = array(
+							"@type" => "ListItem",
+							"position" => $position,
+							"url" => base_url().seo_url($product->Title).'-p'.$product->ProductID.'.html',
+							"name" => htmlspecialchars($product->Title, ENT_QUOTES, 'UTF-8')
+						);
+						$position++;
 					}
 					?>
 				</div>
@@ -116,6 +132,18 @@
 		</div>
 	</div>
 </div>
+
+<?php if (!empty($schema_items)): ?>
+	<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "ItemList",
+	  "numberOfItems": <?php echo count($schema_items); ?>,
+	  "itemListElement": <?php echo json_encode($schema_items, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>
+	}
+	</script>
+<?php endif; ?>
+
 </div>
 
 <?php $this->load->view('/theme/footer')?>

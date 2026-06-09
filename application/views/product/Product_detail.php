@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang = "vi">
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="description" content="<?=$product->Title?>">
-	<meta name="keywords" content="<?=keyword_maker($product->Title)?>">
-	<meta name="revisit-after" content="1 days" />
-	<meta name="robots" content="follow" />
 	<title><?php echo $product->Title?> | Vân Anh Shop</title>
+	<meta name="description" content="<?php echo htmlspecialchars(strip_tags($product->Title), ENT_QUOTES, 'UTF-8'); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="index, follow">
+	<link rel="canonical" href="<?php echo base_url().seo_url($product->Title).'-p'.$product->ProductID.'.html';?>">
+
+	<meta property="og:type" content="product">
+	<meta property="og:title" content="<?php echo htmlspecialchars($product->Title, ENT_QUOTES, 'UTF-8'); ?> | Vân Anh Shop">
+	<meta property="og:description" content="<?php echo htmlspecialchars(strip_tags($product->Title), ENT_QUOTES, 'UTF-8'); ?>">
+	<meta property="og:url" content="<?php echo base_url().seo_url($product->Title).'-p'.$product->ProductID.'.html';?>">
+	<meta property="og:image" content="<?php echo base_url($product->Thumb); ?>">
+	<meta property="product:price:amount" content="<?php echo number_format($product->Price);?>">
+	<meta property="product:price:currency" content="VND">
+	<meta property="product:availability" content="instock">
+
 	<?php $this->load->view('common_header')?>
 	<link rel="stylesheet" href="<?=base_url('/css/jquery.mCustomScrollbar.min.css')?>" />
 	<link rel="stylesheet" href="<?=base_url('/css/iCheck/all.css')?>">
@@ -156,6 +166,33 @@
 	<script src="<?=base_url('/css/iCheck/icheck.min.js')?>"></script>
 	<script src="<?=base_url('/js/jquery.magnific-popup.min.js')?>"></script>
 	</div>
+
+	<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "<?php echo htmlspecialchars($product->Title, ENT_QUOTES, 'UTF-8'); ?>",
+      "image": [
+        "<?php echo base_url($product->Thumb); ?>"
+      ],
+      "description": "<?php echo htmlspecialchars(strip_tags($product->Brief), ENT_QUOTES, 'UTF-8'); ?>",
+      "sku": "<?php echo $product->Code; ?>",
+      "brand": {
+        "@type": "Brand",
+        "name": "Vân Anh Shop"
+      },"offers": {
+        "@type": "Offer",
+        "url": "<?php echo base_url().seo_url($product->Title).'-p'.$product->ProductID.'.html';?>",
+        "priceCurrency": "VND",
+        "price": "<?php echo number_format($product->Price); ?>",
+        "availability": "https://schema.orgInStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "Vân Anh Shop"
+        }
+      }
+    }
+    </script>
 </div>
 
 <?php $this->load->view('/theme/footer')?>
