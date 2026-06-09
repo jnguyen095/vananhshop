@@ -209,4 +209,13 @@ class Category_Model extends CI_Model
 		$this->db->delete('category', array('CategoryID' => $categoryId));
 	}
 
+	public function getCatsOfParent($parentCatID){
+		$this->db->where("ParentID = '" . $parentCatID . "' AND Active = 1");
+		$this->db->order_by("DisplayIndex", "ASC");
+		$query = $this->db->get("category");
+
+		$data = $query->result();
+		return $data;
+	}
+
 }

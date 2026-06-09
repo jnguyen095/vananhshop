@@ -65,6 +65,8 @@ class Product_controller extends CI_Controller
 		} else {
 			$category = $this->Category_Model->findById($product->CategoryID);
 			$data['category'] = $category;
+			$catsOfLevel = $this->Category_Model->getCatsOfParent($category->ParentID);
+			$data['sameLevels'] = $catsOfLevel;
 			$this->load->view('product/Product_detail', $data);
 		}
 
