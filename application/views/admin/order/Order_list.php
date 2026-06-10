@@ -100,7 +100,7 @@
 								<th data-action="sort" data-title="m.Code" data-direction="ASC"><span>Mã ĐH</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="os.Receiver" data-direction="ASC"><span>Người nhận</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="os.Phone" data-direction="ASC"><span>SĐT</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="m.CreatedDate" data-direction="ASC" class="mobile-hide"><span>Tạo lúc</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+								<th data-action="sort" data-title="m.CreatedDate" data-direction="ASC"><span>Tạo lúc</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="m.TotalItems" data-direction="ASC"><span>SL</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="m.ShippingFee" data-direction="ASC" class="mobile-hide"><span>Phí GH</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="m.Discount" data-direction="ASC" class="mobile-hide"><span>Giảm giá</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
@@ -108,7 +108,7 @@
 								<th data-action="sort" data-title="m.Payment" data-direction="ASC" class="mobile-hide"><span>Thanh toán</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="m.Status" data-direction="ASC"><span>Status</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
 								<th data-action="sort" data-title="m.UpdatedDate" data-direction="ASC" class="mobile-hide"><span>Cập nhật</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th></th>
+								<th>#</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -122,7 +122,7 @@
 									<td><a href="<?=base_url('/admin/order/process-'.$order->OrderID.'.html')?>" data-toggle="tooltip" title="Xử lý đơn hàng"><?=$order->Code?></a></td>
 									<td><?=$order->Receiver?></td>
 									<td><?=$order->Phone?></td>
-									<td class="mobile-hide"><?=date('d/m/Y H:i', strtotime($order->CreatedDate))?></td>
+									<td><?=date('d/m/Y H:i', strtotime($order->CreatedDate))?></td>
 									<td class="text-right"><?=number_format($order->TotalItems)?></td>
 									<td class="text-right mobile-hide"><?=number_format($order->ShippingFee)?></td>
 									<td class="text-right mobile-hide"><?=number_format($order->Discount)?></td>
