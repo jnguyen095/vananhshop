@@ -153,8 +153,11 @@
 									<div class="col-sm-4 col-xs-6 card-text">Phương thức TT:</div>
 									<div class="col-sm-8 col-xs-6"><?=$order->Payment?></div>
 								</div>
-
+								<?php
+								if($order->Status != ORDER_STATUS_CANCELLED && $order->Status != ORDER_STATUS_COMPLETED){
+								?>
 								<a id="updateReceiver" href="#" class="btn btn-info waves-effect waves-light"><i class="fa fa-edit"></i> Cập nhật địa chỉ nhận hàng</a>
+								<?php } ?>
 							</div>
 						</div>
 
@@ -165,7 +168,7 @@
 								</div>
 								<div class="col-xs-6 text-right">
 									<h4 class="card-title">
-										<?php if($order->Status == ORDER_STATUS_NEW){?>
+										<?php if($order->Status != ORDER_STATUS_CANCELLED && $order->Status != ORDER_STATUS_COMPLETED){?>
 											<a class="btn btn-info" id="changeOrderItems"><i class="fa fa-edit"></i> Thay đổi ĐH</a>
 										<?php } ?>
 									</h4>
@@ -221,7 +224,7 @@
 										<tr>
 											<td colspan="4" class="text-right">Giảm giá</td>
 											<td class="text-right"><?=number_format($order->Discount)?></td>
-											<td><i class="label label-info"><?=$order->PromotionName?></i></td>
+											<td><i class="label label-success"><?=$order->PromotionName?></i></td>
 										</tr>
 										<tr>
 											<td colspan="4" class="text-right">Tổng cộng</td>
@@ -243,7 +246,7 @@
 								if($order->Status == ORDER_STATUS_NEW){
 									?>
 									<a class="btn btn-primary" data-new_action="<?=ORDER_STATUS_CONFIRM?>" id="changeStatus">Tiếp nhận ĐH</a>
-									<a class="btn btn-warning" data-new_action="<?=ORDER_STATUS_CANCELLED?>" id="cancelOrder">Hủy ĐH</a>
+									<a class="btn btn-danger" data-new_action="<?=ORDER_STATUS_CANCELLED?>" id="cancelOrder">Hủy ĐH</a>
 									<?php
 								} else if($order->Status == ORDER_STATUS_CONFIRM){
 									?>
