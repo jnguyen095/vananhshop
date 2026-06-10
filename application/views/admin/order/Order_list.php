@@ -79,7 +79,7 @@
 									<label><input id="st-<?=ORDER_STATUS_CONFIRM?>" type="radio" name="status" value="<?=ORDER_STATUS_CONFIRM?>"> Chờ giao hàng</label>
 									<label><input id="st-<?=ORDER_STATUS_SHIPPING?>" type="radio" name="status" value="<?=ORDER_STATUS_SHIPPING?>"> Đang giao hàng</label>
 									<label><input id="st-<?=ORDER_STATUS_COMPLETED?>" type="radio" name="status" value="<?=ORDER_STATUS_COMPLETED?>"> Đã giao</label>
-									<label><input id="st-<?=ORDER_STATUS_CANCEL?>" type="radio" name="status" value="<?=ORDER_STATUS_CANCEL?>"> Đã hủy</label>
+									<label><input id="st-<?=ORDER_STATUS_CANCELLED?>" type="radio" name="status" value="<?=ORDER_STATUS_CANCELLED?>"> Đã hủy</label>
 								</div>
 							</div>
 						</div>
@@ -131,7 +131,7 @@
 									<td class="text-center"><?php
 										if($order->Status == ORDER_STATUS_NEW){
 											echo '<lable class="label label-success">Đơn mới</lable>';
-										} else if($order->Status == ORDER_STATUS_CANCEL){
+										} else if($order->Status == ORDER_STATUS_CANCELLED){
 											echo '<lable class="label label-danger">Đã hủy</lable>';
 										} else if($order->Status == ORDER_STATUS_CONFIRM){
 											echo '<lable class="label label-info">Chờ giao hàng</lable>';

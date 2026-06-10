@@ -127,6 +127,17 @@ class OrderManagement_controller extends MY_Controller
 			if($customerEmail != null && strlen($customerEmail) > 0){
 				my_send_email($customerEmail, "Vân Anh Shop - Đơn hàng ".$orderCode. " được giao thành công", "<p>Đơn hàng: ".$orderCode." đã giao đến khách hàng thành công</p><p>Theo dõi đơn hàng tại đây: " . APP_DOMAIN . "/don-hang-". $orderId."html</p>" );
 			}*/
+		} else if($crudaction == ORDER_STATUS_CANCELLED){
+			$this->MyOrder_Model->updateOrderStatus($orderId, ORDER_STATUS_CANCELLED, $loginID);
+			$data['message_response'] = 'Hủy đơn hàng thành công.';
+			$user = $this->User_Model->getUserById($loginID);
+			$reason = $this->input->post("reason");
+			$orderTracking = array(
+				'OrderID' => $orderId,
+				'CreatedDate' => date('Y-m-d H:i:s'),
+				'Message' => '<b>'. $user->FullName. '</b> đã hủy đơn hàng'. (!empty($reason) ? ', lý do: <i>'. $reason .'</i>' : '')
+			);
+			$this->OrderTracking_Model->insert($orderTracking);
 		}
 
 		$order = $this->MyOrder_Model->findByOrderIdAndFetchAll($orderId);

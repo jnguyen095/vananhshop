@@ -94,7 +94,7 @@
 										<?php
 										if($order->Status == ORDER_STATUS_NEW){
 											echo '<span class="label label-primary">Chờ xác nhận</span>';
-										} else if($order->Status == ORDER_STATUS_CANCEL){
+										} else if($order->Status == ORDER_STATUS_CANCELLED){
 											echo '<span class="label label-danger">Đã hủy</span>';
 										} else if($order->Status == ORDER_STATUS_CONFIRM){
 											echo '<span class="label label-info">Chờ giao hàng</span>';

@@ -134,6 +134,17 @@
 	background-color: #FFA500;
 }
 
+.steps.cancelled{
+	background-color: #dd4b39;
+}
+
+span.cancel{
+	position: absolute;
+	top: 50px;
+	font-weight: bold;
+	margin-left: -10px;
+}
+
 .steps{
 	display: flex;
 	background-color: #dddddd;

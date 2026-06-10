@@ -62,6 +62,16 @@
 					<div class="row no-margin">
 						<div class="container-fluid text-center border-bottom ">
 							<div class="progresses">
+								<?php
+								if($order->Status == ORDER_STATUS_CANCELLED){
+									?>
+									<div class="steps step cancelled">
+										<span><?=$order->Status == ORDER_STATUS_NEW ? '1' : '<i class="glyphicon glyphicon-remove"></i>'?></span>
+									</div>
+									<span class="cancel">Đơn đã hủy</span></span>
+									<?php
+								} else {
+								?>
 								<div class="steps step <?=$order->Status == ORDER_STATUS_NEW ? 'in-progress' : 'active'?>">
 									<span><?=$order->Status == ORDER_STATUS_NEW ? '1' : '<i class="glyphicon glyphicon-ok"></i>'?></span>
 								</div>
@@ -76,6 +86,9 @@
 									<span><?=$order->Status == ORDER_STATUS_COMPLETED ? '<i class="glyphicon glyphicon-ok"></i>' : '3'?></span>
 								</div>
 								<span class="last-line"><label class="label3">Hoàn thành</label></span>
+								<?php
+								}
+								?>
 							</div>
 						</div>
 					</div>
@@ -97,7 +110,7 @@
 										<?php
 										if($order->Status == ORDER_STATUS_NEW){
 											echo '<lable class="label label-success">Đơn mới</lable>';
-										} else if($order->Status == ORDER_STATUS_CANCEL){
+										} else if($order->Status == ORDER_STATUS_CANCELLED){
 											echo '<lable class="label label-danger">Đã hủy</lable>';
 										} else if($order->Status == ORDER_STATUS_CONFIRM){
 											echo '<lable class="label label-info">Chờ giao hàng</lable>';
@@ -141,15 +154,24 @@
 									<div class="col-sm-8 col-xs-6"><?=$order->Payment?></div>
 								</div>
 
-								<a id="updateReceiver" href="#" class="btn btn-primary waves-effect waves-light"><i class="fa fa-edit"></i> Cập nhật địa chỉ nhận hàng</a>
+								<a id="updateReceiver" href="#" class="btn btn-info waves-effect waves-light"><i class="fa fa-edit"></i> Cập nhật địa chỉ nhận hàng</a>
 							</div>
 						</div>
 
 						<div class="col-lg-12 col-sm-12">
 							<div class="row">
-								<div class="col-xs-12">
+								<div class="col-xs-6">
 									<h4 class="card-title"><b>Mặt hàng:</b></h4>
 								</div>
+								<div class="col-xs-6 text-right">
+									<h4 class="card-title">
+										<?php if($order->Status == ORDER_STATUS_NEW){?>
+											<a class="btn btn-info" id="changeOrderItems"><i class="fa fa-edit"></i> Thay đổi ĐH</a>
+										<?php } ?>
+									</h4>
+								</div>
+							</div>
+							<div class="row">
 								<div class="col-xs-12 table-responsive">
 									<table class="table table-bordered">
 										<thead>
@@ -216,12 +238,12 @@
 
 						<div class="col-lg-12" style="margin-bottom: 10px">
 							<div class="row no-margin top-buttons">
-								<a class="btn btn-warning" id="addBack" href="<?=base_url("/admin/order/list.html")?>">Trở lại</a>&nbsp;
+								<a class="btn btn-default" id="addBack" href="<?=base_url("/admin/order/list.html")?>">Trở lại</a>&nbsp;
 								<?php
 								if($order->Status == ORDER_STATUS_NEW){
 									?>
-									<a class="btn btn-info" id="changeOrderItems">Thay đổi ĐH</a>
 									<a class="btn btn-primary" data-new_action="<?=ORDER_STATUS_CONFIRM?>" id="changeStatus">Tiếp nhận ĐH</a>
+									<a class="btn btn-warning" data-new_action="<?=ORDER_STATUS_CANCELLED?>" id="cancelOrder">Hủy ĐH</a>
 									<?php
 								} else if($order->Status == ORDER_STATUS_CONFIRM){
 									?>
@@ -266,6 +288,7 @@
 		</section>
 		<!-- /.content -->
 		<input type="hidden" id="crudaction" name="crudaction">
+		<input type="hidden" id="reason" name="reason">
 		<?php echo form_close(); ?>
 
 		<!-- popups -->
@@ -340,12 +363,36 @@
 		});
 	}
 
+	function cancelStatusHandler(){
+		$('#cancelOrder').click(function(){
+			var nextAction = $(this).data('new_action');
+			bootbox.prompt({
+				title: "Lý do hủy đơn hàng?",
+				required: true,
+				callback: function(result) {
+					if (result) {
+						$("#reason").val(result);
+						$("#crudaction").val(nextAction);
+						$("#frmOrder").submit();
+						console.log(result);
+					}
+
+					if (result === "") {
+						bootbox.alert("Bạn phải nhập lý do hủy đơn hàng!");
+						return false; // Keeps the prompt open
+					}
+				}
+			});
+		});
+	}
+
 
 
 	$(document).ready(function(){
 		contactFormHandler();
 		updateStatusHandler();
 		updateOrderItemsHandler();
+		cancelStatusHandler();
 	});
 </script>
 </body>

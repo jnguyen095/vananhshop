@@ -54,15 +54,10 @@
 						<li class="list-group-item text-center mobile-hide margin-top-20">
 							<div class="progresses">
 								<?php
-								if($order->Status == ORDER_STATUS_CANCEL) {
+								if($order->Status == ORDER_STATUS_CANCELLED) {
 									?>
-									<div class="steps active">
-										<span><i class="glyphicon glyphicon-ok"></i></span>
-									</div>
-									<span class="line active"><label class="label1">Chờ xác nhận</label></span>
-
-									<div class="steps active">
-										<span class="font-weight-bold"><i class="glyphicon glyphicon-ok"></i></span>
+									<div class="steps cancelled">
+										<span class="font-weight-bold"><i class="glyphicon glyphicon-remove"></i></span>
 									</div>
 									<span class="last-line active"><label class="label3">Đã hủy đơn</label></span>
 									<?php

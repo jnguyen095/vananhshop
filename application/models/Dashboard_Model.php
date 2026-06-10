@@ -32,6 +32,7 @@ class Dashboard_Model extends CI_Model
 	public function countOrders($isToday = false){
 		$today = date('Y-m-d');
 		$query = "select count(*) as Total from myorder m where m.Status <> '".ORDER_STATUS_DELETED."'";
+		$query .= " and m.Status <> '".ORDER_STATUS_CANCELLED."'";
 		if($isToday){
 			$query .= " and date(m.CreatedDate) = '{$today}'";
 		}
@@ -43,6 +44,7 @@ class Dashboard_Model extends CI_Model
 	public function sumRevenue($isToday = false){
 		$today = date('Y-m-d');
 		$query = "select sum(m.TotalPrice) as TotalRevenue from myorder m where m.Status <> '".ORDER_STATUS_DELETED."'";
+		$query .= " and m.Status <> '".ORDER_STATUS_CANCELLED."'";
 		if($isToday){
 			$query .= " and date(m.CreatedDate) = '{$today}'";
 		}
@@ -68,7 +70,9 @@ class Dashboard_Model extends CI_Model
 		}
 
 		$query = "select date(m.CreatedDate) as Day, count(*) as Total from myorder m ";
-		$query .= " where m.Status <> '".ORDER_STATUS_DELETED."' and date(m.CreatedDate) >= '".$start."' ";
+		$query .= " where m.Status <> '".ORDER_STATUS_DELETED."'";
+		$query .= " and m.Status <> '".ORDER_STATUS_CANCELLED."'";
+		$query .= " and date(m.CreatedDate) >= '".$start."'";
 		$query .= " group by date(m.CreatedDate) order by date(m.CreatedDate) asc";
 		$result = $this->db->query($query);
 		foreach($result->result() as $row){
@@ -107,7 +111,9 @@ class Dashboard_Model extends CI_Model
 		$query = "select p.ProductID, p.Title, p.Code, sum(od.Quantity) as OrderedQuantity from orderdetail od";
 		$query .= " inner join myorder m on od.OrderID = m.OrderID";
 		$query .= " inner join product p on od.ProductID = p.ProductID";
-		$query .= " where m.Status <> '".ORDER_STATUS_DELETED."' and p.Status = 1";
+		$query .= " where m.Status <> '".ORDER_STATUS_DELETED."'";
+		$query .= " and m.Status <> '".ORDER_STATUS_CANCELLED."'";
+		$query .= " and p.Status = 1";
 		$query .= " group by p.ProductID, p.Title, p.Code";
 		$query .= " order by OrderedQuantity desc limit " . intval($limit);
 		$result = $this->db->query($query);

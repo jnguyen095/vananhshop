@@ -559,6 +559,10 @@ a#btnSubscrible {
 	color: #ff0000;
 }
 
+.steps.cancelled{
+	background-color: #dd4b39;
+}
+
 .subscribe-panel button.btn {
 	width: 30%;
 	border-top-left-radius: 0;
