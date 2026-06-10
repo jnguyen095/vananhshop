@@ -72,47 +72,49 @@
 					<div class="row no-margin">
 						<a class="btn btn-danger" id="deleteMulti">Xóa Nhiều</a>
 					</div>
+					<div class="table-responsive">
+						<table class="admin-table table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th><input name="checkAll" value="1" type="checkbox" ></th>
+									<th data-action="sort" data-title="FullName" data-direction="ASC"><span>Họ tên</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+									<th data-action="sort" data-title="PhoneNumber" data-direction="ASC"><span>Số điện thoại</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+									<th data-action="sort" data-title="Content" data-direction="ASC"><span>Nội dung</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+									<th data-action="sort" data-title="Email" data-direction="ASC"><span>Email</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+									<th data-action="sort" data-title="CreatedDate" data-direction="ASC"><span>Ngày tạo</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+									<th data-action="sort" data-title="IpAddress" data-direction="ASC"><span>Ip Address</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
 
-					<table class="admin-table table table-bordered table-striped">
-						<thead>
-							<tr>
-								<th><input name="checkAll" value="1" type="checkbox" ></th>
-								<th data-action="sort" data-title="FullName" data-direction="ASC"><span>Họ tên</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="PhoneNumber" data-direction="ASC"><span>Số điện thoại</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="Content" data-direction="ASC"><span>Nội dung</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="Email" data-direction="ASC"><span>Email</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="CreatedDate" data-direction="ASC"><span>Ngày tạo</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th data-action="sort" data-title="IpAddress" data-direction="ASC"><span>Ip Address</span><i class="glyphicon glyphicon-triangle-bottom"></i></th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-
-						<?php
-						$counter = 1;
-						foreach ($products as $product) {
-							?>
-							<tr>
-								<td><input name="checkList[]" type="checkbox" value="<?=$product->FeedBackID?>"></td>
-								<td><a href="<?=base_url('/admin/feedback/view-'.$product->FeedBackID.'.html')?>"><?=$product->FullName?></a></td>
-								<td><?=$product->PhoneNumber?></td>
-								<td><?=substr_at_middle($product->Content, 100)?></td>
-								<td><?=$product->Email?></td>
-								<td><?=date('d/m/Y H:i', strtotime($product->CreatedDate))?></td>
-								<td><?=$product->IpAddress?></td>
-								<td>
-									<a class="view-feedBack" href="<?=base_url('/admin/feedback/view-'.$product->FeedBackID.'.html')?>" data-toggle="tooltip" title="Xem phản hồi"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;|&nbsp;
-									<a class="remove-post" data-post="<?=$product->FeedBackID?>" data-toggle="tooltip" title="Xóa phản hồi"><i class="glyphicon glyphicon-remove"></i></a>
-								</td>
-							</tr>
 							<?php
-						}
-						?>
-						</tbody>
-					</table>
+							$counter = 1;
+							foreach ($products as $product) {
+								?>
+								<tr>
+									<td><input name="checkList[]" type="checkbox" value="<?=$product->FeedBackID?>"></td>
+									<td><a href="<?=base_url('/admin/feedback/view-'.$product->FeedBackID.'.html')?>"><?=$product->FullName?></a></td>
+									<td><?=$product->PhoneNumber?></td>
+									<td><?=substr_at_middle($product->Content, 100)?></td>
+									<td><?=$product->Email?></td>
+									<td><?=date('d/m/Y H:i', strtotime($product->CreatedDate))?></td>
+									<td><?=$product->IpAddress?></td>
+									<td>
+										<a class="view-feedBack" href="<?=base_url('/admin/feedback/view-'.$product->FeedBackID.'.html')?>" data-toggle="tooltip" title="Xem phản hồi"><i class="glyphicon glyphicon-eye-open"></i></a>&nbsp;|&nbsp;
+										<a class="remove-post" data-post="<?=$product->FeedBackID?>" data-toggle="tooltip" title="Xóa phản hồi"><i class="glyphicon glyphicon-remove"></i></a>
+									</td>
+								</tr>
+								<?php
+							}
+							?>
+							</tbody>
+						</table>
+					</div>
 					<div class="text-center">
 						<?php echo $pagination; ?>
 					</div>
+
 				</div>
 			</div>
 
