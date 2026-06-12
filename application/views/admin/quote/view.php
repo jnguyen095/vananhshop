@@ -65,7 +65,7 @@
 							<div class="card">
 								<div class="card-body">
 									<h6 class="card-title">Đơn hàng cần báo giá:</h6>
-									<div id="content">
+									<div id="content" class="table-responsive">
 										<table class="table">
 											<thead>
 											<tr>
@@ -112,8 +112,11 @@
 												<td colspan="2"><b><?=number_format($quote->TotalPrice)?> VNĐ</b></td>
 											</tr>
 											<tr>
-												<td colspan="6" class="text-right">Báo giá hiệu lực đến ngày</td>
-												<td colspan="2"><input type="text" id="txt_validate" name="valid_date" data-fromdate="" value="<?=isset($quote->ValidDate) ? date('d/m/Y',strtotime($quote->ValidDate)) : ''?>" class="form-control valid_date"></td>
+												<td colspan="6" class="text-right">Báo giá hiệu lực đến ngày <span class="required">*</span></td>
+												<td colspan="2">
+													<input type="text" id="txt_validate" name="valid_date" data-fromdate="" value="<?=isset($quote->ValidDate) ? date('d/m/Y',strtotime($quote->ValidDate)) : ''?>" class="form-control valid_date">
+													<span class="text-danger"><?php echo form_error('valid_date'); ?></span>
+												</td>
 											</tr>
 											</tbody>
 										</table>
@@ -140,32 +143,32 @@
 									<h6 class="card-title">Thông tin người yêu cầu</h6>
 									<div id="content">
 										<div class="form-group row">
-											<div class="col-sm-4 card-text">Mã báo giá</div>
-											<div class="col-sm-8"><?=$quote->Code?></div>
+											<div class="col-xs-4 card-text">Mã báo giá</div>
+											<div class="col-xs-8"><?=$quote->Code?></div>
 										</div>
 										<div class="form-group row">
-											<div class="col-sm-4 card-text">Ngày gửi</div>
-											<div class="col-sm-8"><?=date('d/m/Y H:i', strtotime($quote->RequestedDate))?></div>
+											<div class="col-xs-4 card-text">Ngày gửi</div>
+											<div class="col-xs-8"><?=date('d/m/Y H:i', strtotime($quote->RequestedDate))?></div>
 										</div>
 										<div class="form-group row">
-											<div class="col-sm-4 card-text">Tên người gửi</div>
-											<div class="col-sm-8"><?=$quote->Name?></div>
+											<div class="col-xs-4 card-text">Tên người gửi</div>
+											<div class="col-xs-8"><?=$quote->Name?></div>
 										</div>
 										<div class="form-group row">
-											<div class="col-sm-4 card-text">Số điện thoại </div>
-											<div class="col-sm-8"><i class="fa fa-phone"></i>&nbsp;<?=$quote->Phone?></div>
+											<div class="col-xs-4 card-text">Số điện thoại </div>
+											<div class="col-xs-8"><i class="fa fa-phone"></i>&nbsp;<?=$quote->Phone?></div>
 										</div>
 										<div class="form-group row">
-											<div class="col-sm-4 card-text">Email</div>
-											<div class="col-sm-8"><i class="fa fa-mail-bulk"></i>&nbsp;<?=$quote->Email?></div>
+											<div class="col-xs-4 card-text">Email</div>
+											<div class="col-xs-8"><i class="fa fa-mail-bulk"></i>&nbsp;<?=$quote->Email?></div>
 										</div>
 										<div class="form-group row">
-											<div class="col-sm-4 card-text">Địa chỉ</div>
-											<div class="col-sm-8"><?=$quote->Address?></div>
+											<div class="col-xs-4 card-text">Địa chỉ</div>
+											<div class="col-xs-8"><?=$quote->Address?></div>
 										</div>
 										<div class="form-group row">
-											<div class="col-sm-4 card-text">Ghi chú yêu cầu</div>
-											<div class="col-sm-8"><?=$quote->Note?></div>
+											<div class="col-xs-4 card-text">Ghi chú yêu cầu</div>
+											<div class="col-xs-8"><?=$quote->Note?></div>
 										</div>
 									</div>
 								</div>

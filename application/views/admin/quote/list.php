@@ -113,16 +113,19 @@
 									<td><?=number_format($quote->TotalItems)?></td>
 									<td  class="text-center">
 										<a href="<?=base_url('/admin/quote/view-'.$quote->QuotationID.'.html')?>" data-toggle="tooltip" title="Cập nhật báo giá"><i class="glyphicon glyphicon-edit"></i></a>
+
 										<?php
 										if($quote->Status == QUOTE_STATUS_APPROVED) {
 											?>
+											&nbsp;|&nbsp;<a href="#" class="send-mail" data-toggle="tooltip" data-quoteid="<?=$quote->QuotationID?>" title="Gửi mail cho khách"><i class="glyphicon glyphicon glyphicon-envelope"></i></a>
 											&nbsp;|&nbsp;<a
 												href="<?= base_url('/bao-gia/'.$quote->UUID.'/xem-chi-tiet.html') ?>"
 												data-toggle="tooltip" title="Xem file báo giá"><i
-													class="glyphicon glyphicon-file"></i></a>
+													class="glyphicon glyphicon glyphicon-open-file"></i></a>
 											<?php
 										}
 										?>
+										&nbsp;|&nbsp;<a href="#" class="remove-post" data-toggle="tooltip" data-quoteid="<?=$quote->QuotationID?>" title="Xóa"><i class="glyphicon glyphicon glyphicon-remove"></i></a>
 									</td>
 								</tr>
 								<?php
@@ -140,7 +143,7 @@
 		</section>
 		<!-- /.content -->
 		<input type="hidden" id="crudaction" name="crudaction">
-		<input type="hidden" id="productId" name="productId">
+		<input type="hidden" id="quoteId" name="quoteId">
 		<?php echo form_close(); ?>
 
 	</div>
@@ -192,80 +195,35 @@
 		currentSort.attr('data-direction', "ASC").find('i.glyphicon').removeClass('glyphicon-triangle-top').addClass('glyphicon-triangle-bottom active');
 	}
 
-	function updateView(productId, val){
-		$("#pr-" + productId).addClass("process");
-		jQuery.ajax({
-			type: "POST",
-			url: '<?=base_url("/Ajax_controller/updateViewForProductIdManual")?>',
-			dataType: 'json',
-			data: {productId: productId, view: val},
-			success: function(res){
-				if(res == 'success'){
-					/*bootbox.alert("Cập nhật thành công");*/
-					$("#pr-" + productId).addClass("success");
-				}
-			}
-		});
-	}
-	function updateVip(productId, val){
-		jQuery.ajax({
-			type: "POST",
-			url: '<?=base_url("/Ajax_controller/updateVipPackageForProductId")?>',
-			dataType: 'json',
-			data: {productId: productId, vip: val},
-			success: function(res){
-				if(res == 'success'){
-					bootbox.alert("Cập nhật thành công");
-				}
-			}
-		});
-	}
-
-	function pushPostUp(productId){
-		jQuery.ajax({
-			type: "POST",
-			url: '<?=base_url("/admin/ProductManagement_controller/pushPostUp")?>',
-			dataType: 'json',
-			data: {productId: productId},
-			success: function(res){
-				if(res == 'success'){
-					bootbox.alert("Cập nhật thành công");
-				}
-			}
-		});
-	}
-
-	function deleteMultiplePostHandler(){
-		$("#deleteMulti").click(function(){
-			var selectedItems = $("input[name='checkList[]']:checked").length;
-			if(selectedItems > 0) {
-				bootbox.confirm("Bạn đã chắc chắn xóa những tin rao này chưa?", function (result) {
-					if (result) {
-						$("#crudaction").val("delete-multiple");
-						$("#frmPost").submit();
-					}
-				});
-			}else{
-				bootbox.alert("Bạn chưa check chọn tin cần xóa!");
-			}
-		});
-	}
-
-	function deletePostHandler(){
+	function deleteQuotationHandler(){
 		$('.remove-post').click(function(){
-			var prId = $(this).data('post');
-			bootbox.confirm("Bạn đã chắc chắn xóa tin rao này chưa?", function(result){
+			var quoteId = $(this).data('quoteid');
+			bootbox.confirm("Bạn đã chắc chắn xóa báo giá này chưa?", function(result){
 				if(result){
-					$("#productId").val(prId);
+					$("#quoteId").val(quoteId);
 					$("#crudaction").val("delete");
-					$("#frmPost").submit();
+					$("#frmQuote").submit();
 				}
 			});
 		});
 	}
+
+	function sendMailHandler(){
+		$('.send-mail').click(function(){
+			var quoteid = $(this).data('quoteid');
+			bootbox.confirm("Bạn đã chắc chắn gửi mail báo giá này chưa?", function(result){
+				if(result){
+					$("#quoteId").val(quoteid);
+					$("#crudaction").val("send-mail");
+					$("#frmQuote").submit();
+				}
+			});
+		});
+	}
+
 	$(document).ready(function(){
-		deletePostHandler();
-		deleteMultiplePostHandler();
+		deleteQuotationHandler();
+		sendMailHandler();
 	});
 </script>
 </body>
