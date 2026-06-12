@@ -9,10 +9,7 @@
 			<a href="<?=base_url().seo_url($item->ProductName).'-p'.$item->ProductID?>.html"><?=$item->ProductName?></a>
 		</td>
 		<td class="text-left"><?=number_format($item->Quantity)?></td>
-		<td class="text-right">
-			<div class="original-price"><?=number_format($item->ReferencePrice)?></div>
-			<div class="offer-price"><?=number_format($item->OfferPrice)?></div>
-		</td>
+		<td class="text-right"><?=number_format($item->OfferPrice)?></td>
 		<td class="text-right"><?=number_format($item->OfferPrice * $item->Quantity)?></td>
 	</tr>
 <?php } ?>
