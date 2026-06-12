@@ -261,13 +261,16 @@ class ShoppingCart_controller extends CI_Controller
 		}
 
 		$quotation = $this->Quotation_Model->findByUUID($uuid);
-		$data['quote'] = $quotation['quote'];
-		$data['details'] = $quotation['details'];
+		if($quotation == null){
+			$this->load->view('Notfound_view', $data);
+		} else {
+			$data['quote'] = $quotation['quote'];
+			$data['details'] = $quotation['details'];
+			$data['txt_receiver'] = (!isset($data['txt_receiver']) || empty($data['txt_receiver'])) ? $data['quote']->Name : $data['txt_receiver'];
+			$data['txt_phone'] = (!isset($data['txt_phone']) || empty($data['txt_phone'])) ? $data['quote']->Phone : $data['txt_phone'];
 
-		$data['txt_receiver'] = (!isset($data['txt_receiver']) || empty($data['txt_receiver'])) ? $data['quote']->Name : $data['txt_receiver'];
-		$data['txt_phone'] = (!isset($data['txt_phone']) || empty($data['txt_phone'])) ? $data['quote']->Phone : $data['txt_phone'];
-
-		$this->load->view('cart/Cart_checkout_from_quote', $data);
+			$this->load->view('cart/Cart_checkout_from_quote', $data);
+		}
 	}
 
 	public function addItemToCart(){

@@ -98,6 +98,11 @@ class Quotation_Model extends CI_Model
 		$this->db->where(array("UUID" => $uuid));
 		$query = $this->db->get("quotation");
 		$quote = $query->row();
+
+		if($quote == null || empty($quote)){
+			return null;
+		}
+
 		$quoteId = $quote->QuotationID;
 
 		$query = $this->db->select('qd.QuotationDetailID, qd.Quantity, qd.OfferPrice, qd.ProductID, qd.Note, p.Title as ProductName, p.Thumb, p.ProductID, p.Code as ProductCode, p.Price as ReferencePrice, q.ValidDate')
