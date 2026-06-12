@@ -26,6 +26,7 @@ class ShoppingCart_controller extends CI_Controller
 		$this->load->model('OrderShipping_Model');
 		$this->load->model('ShippingFee_Model');
 		$this->load->model('Promotion_Model');
+		$this->load->model('Quotation_Model');
 		$this->load->helper('my_email');
 		$this->load->helper('telegram');
 	}
@@ -162,6 +163,111 @@ class ShoppingCart_controller extends CI_Controller
 			$data['districts'] = $districts;
 		}
 		$this->load->view('cart/Cart_checkout', $data);
+	}
+
+	public function checkOutFromQuote($uuid){
+		$data['categories'] = $this->Category_Model->getActiveCategories();
+
+		$crudaction = $this->input->post('crudaction');
+		if($crudaction == 'insert'){
+			$data['txt_receiver'] = $this->input->post("txt_receiver");
+			$data['txt_phone'] = $this->input->post("txt_phone");
+			$data['txt_city'] = $this->input->post("txt_city");
+			$data['txt_district'] = $this->input->post("txt_district");
+			$data['street'] = $this->input->post("txt_street");
+			$data['note'] = $this->input->post("note");
+
+			$this->form_validation->set_rules("txt_receiver", "Người nhận hàng", "trim|required");
+			$this->form_validation->set_rules("txt_phone", "Số điện thoại", "required|regex_match[/^[0-9]{10}$/]");
+			$this->form_validation->set_rules("txt_city", "Thành phố", "numeric|required");
+			$this->form_validation->set_rules("txt_district", "Quận", "numeric|required");
+			$this->form_validation->set_rules("txt_street", "Số nhà/căn hộ/đường", "required|min_length[10]");
+			$validateResult = $this->form_validation->run();
+			if($validateResult == TRUE){
+				// shipping
+				$shippingInfo = array(
+					'Receiver' => $data['txt_receiver'],
+					'Phone' => $data['txt_phone'],
+					'CityID' => $data['txt_city'],
+					'DistrictID' => $data['txt_district'],
+					'Street' => $data['street']
+				);
+				$quotation = $this->Quotation_Model->findByUUID($uuid);
+
+				$newOrder = [];
+				$newOrder['Status'] = ORDER_STATUS_NEW;
+				$newOrder['ShippingFee'] = $quotation['quote']->ShippingFee;
+				$newOrder['TotalItems'] =  $quotation['quote']->TotalItems;
+				$newOrder['Note'] = $data['note'];
+				$newOrder['Payment'] = 'COD';
+				$newOrder['CreatedDate'] = date('Y-m-d H:i:s');
+				$newOrder['UpdatedDate'] = date('Y-m-d H:i:s');
+				$newOrder['Code'] = $this->MyOrder_Model->getNewOrderCode();
+				$newOrder['Discount'] =  $quotation['quote']->Discount;
+				$newOrder['TotalPrice'] =  $quotation['quote']->TotalPrice;
+
+				// order items
+				$orderItems = [];
+				foreach ($quotation['details'] as $item){
+					$options = [];
+					// property
+//					if($this->cart->has_options($item['rowid']) == TRUE) {
+//						foreach ($this->cart->product_options($item['rowid']) as $option_attr => $option_val) {
+//							$option = [];
+//							$option[$option_val['key']] = $option_val['attr'];
+//							array_push($options, $option);
+//						}
+//					}
+
+					$orderItem = array(
+						'ProductID' => $item->ProductID,
+						'Price' => $item->OfferPrice,
+						'Quantity' => $item->Quantity,
+						'Options' => $options
+					);
+					array_push($orderItems, $orderItem);
+				}
+
+				// tracking
+				$trackingMessage = '<b>'.$data['txt_receiver']. '</b> tạo đơn hàng từ báo giá: '.$quotation['quote']->Code;
+				if (isset($note) && strlen($note) > 0) {
+					$trackingMessage .= ' với ghi chú: <i>'. $note .'</i>';
+				}
+				$orderTracking = array(
+					'CreatedDate' => date('Y-m-d H:i:s'),
+					'Message' => $trackingMessage
+				);
+
+				$orderId = $this->MyOrder_Model->createOrder($newOrder, $orderItems, $shippingInfo, $orderTracking);
+
+				//Notify via Telegram
+				notify_new_order([
+					'order_code'    => $newOrder['Code'],
+					'customer_name' => $data['txt_receiver'],
+					'phone'         => $data['txt_phone'],
+					'total'         => $newOrder['TotalPrice']
+				]);
+
+				//return;
+				redirect('/check-out/success?orderId=' . $orderId);
+			}
+		}
+
+		$cities = $this->City_Model->getAllActive();
+		$data['cities'] = $cities;
+		if(isset($data['txt_city']) && $data['txt_city'] != null){
+			$districts = $this->District_Model->findByCityId($data['txt_city']);
+			$data['districts'] = $districts;
+		}
+
+		$quotation = $this->Quotation_Model->findByUUID($uuid);
+		$data['quote'] = $quotation['quote'];
+		$data['details'] = $quotation['details'];
+
+		$data['txt_receiver'] = $data['quote']->Name;
+		$data['txt_phone'] = $data['quote']->Phone;
+
+		$this->load->view('cart/Cart_checkout_from_quote', $data);
 	}
 
 	public function addItemToCart(){
