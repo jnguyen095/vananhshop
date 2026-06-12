@@ -100,7 +100,7 @@ class Quotation_Model extends CI_Model
 		$quote = $query->row();
 		$quoteId = $quote->QuotationID;
 
-		$query = $this->db->select('qd.QuotationDetailID, qd.Quantity, qd.OfferPrice, qd.ProductID, qd.Note, p.Title as ProductName, p.Code as ProductCode, p.Price as ReferencePrice, q.ValidDate')
+		$query = $this->db->select('qd.QuotationDetailID, qd.Quantity, qd.OfferPrice, qd.ProductID, qd.Note, p.Title as ProductName, p.Thumb, p.ProductID, p.Code as ProductCode, p.Price as ReferencePrice, q.ValidDate')
 			->from('quotationdetail qd')
 			->join('quotation q', 'q.QuotationID = qd.QuotationID', 'inner')
 			->join('product p', 'p.ProductID = qd.ProductID', 'inner')
