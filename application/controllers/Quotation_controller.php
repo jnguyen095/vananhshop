@@ -24,6 +24,7 @@ class Quotation_controller extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->library('pdf');
 		$this->load->helper('my_email');
+		$this->load->library('ciqrcode');
 	}
 
 	// Bao gia quang cao
@@ -101,6 +102,13 @@ class Quotation_controller extends CI_Controller
 		// $this->pdf->loadHtml("<h2>OK</h2>");
 		$quotation = $this->Quotation_Model->findByUUID($uuid);
 		$code = $quotation['quote']->Code;
+		$params['data'] = base_url('/check-out/'.$uuid.'.html');
+		$params['level'] = 'H';
+		$params['size'] = 5;
+		$params['savename'] = FCPATH.'/img/qrcode/quote/'.$uuid .'.png';
+		$this->ciqrcode->generate($params);
+		$quotation['qrcode'] = base_url('/img/qrcode/quote/'.$uuid .'.png');
+
 		$this->pdf->load_view('/quote/Quote_detail', $quotation);
 		$this->pdf->stream("Bao_gia_".$code.".pdf", array("Attachment"=>0));
 	}
