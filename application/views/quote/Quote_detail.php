@@ -97,7 +97,7 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 150px; text-align: center;vertical-align: middle">
-					<a href="<?=base_url('/check-out/'.$quote->UUID.'.html')?>">Đặt Hàng</a> <img src="<?=base_url($qrcode)?>" alt="qrcode mua hàng" style="width: 160px"/>
+					<a href="<?=base_url('/check-out/quote/'.$quote->UUID.'.html')?>">Đặt Hàng</a> <img src="<?=base_url($qrcode)?>" alt="qrcode mua hàng" style="width: 160px"/>
 				</td>
 				<td class="text-right" style="vertical-align: top;"><i>Lưu ý: Báo giá này chỉ có hiệu lực đến ngày <?=date('d/m/Y', strtotime($quote->ValidDate))?></i></td>
 			</tr>

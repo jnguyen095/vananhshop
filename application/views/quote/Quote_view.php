@@ -115,42 +115,42 @@
 
 					<div class="block-body">
 						<div class="form-group row text-left">
-							<label class="col-sm-4 col-form-label text-left">Họ Tên <span class="required">*</span></label>
-							<div class="col-sm-8">
+							<label class="col-xs-4 col-form-label text-left">Họ Tên <span class="required">*</span></label>
+							<div class="col-xs-8">
 								<input id="txtName" class="form-control" type="text" placeholder="Tên người mua hàng" name="name" value="<?php echo set_value('name'); ?>"/>
 								<span class="text-danger text-left"><?php echo form_error('name'); ?></span>
 							</div>
 						</div>
 						<div class="form-group row text-left">
-							<label for="example-text-input" class="text-left col-sm-4 col-form-label">Số ĐT/Zalo <span class="required">*</span></label>
-							<div class="col-sm-8">
+							<label for="example-text-input" class="text-left col-xs-4 col-form-label">Số ĐT/Zalo <span class="required">*</span></label>
+							<div class="col-xs-8">
 								<input id="txtPhone" class="form-control" type="text" placeholder="Số điện thoại" name="phone" value="<?php echo set_value('phone'); ?>"/>
 								<span class="text-danger text-left"><?php echo form_error('phone'); ?></span>
 							</div>
 						</div>
 						<div class="form-group row text-left">
-							<label for="example-text-input" class="text-left col-sm-4 col-form-label">Email <span class="required">*</span></label>
-							<div class="col-sm-8">
+							<label for="example-text-input" class="text-left col-xs-4 col-form-label">Email <span class="required">*</span></label>
+							<div class="col-xs-8">
 								<input id="txtEmail" class="form-control" type="text" placeholder="Email nhận báo giá" name="email" value="<?php echo set_value('email'); ?>"/>
 								<span class="text-danger text-left"><?php echo form_error('email'); ?></span>
 							</div>
 						</div>
 						<div class="form-group row text-left">
-							<label for="example-text-input" class="col-sm-4 text-left col-form-label">Địa chỉ</label>
-							<div class="col-sm-8">
+							<label for="example-text-input" class="col-xs-4 text-left col-form-label">Địa chỉ</label>
+							<div class="col-xs-8">
 								<input id="txtAddress" class="form-control" type="text" placeholder="Địa chỉ" name="address" value="<?php echo set_value('address'); ?>"/>
 							</div>
 						</div>
 						<div class="form-group row text-left">
-							<label for="example-text-input" class="col-sm-4 text-left col-form-label">Ghi chú</label>
-							<div class="col-sm-8">
+							<label for="example-text-input" class="col-xs-4 text-left col-form-label">Ghi chú</label>
+							<div class="col-xs-8">
 								<input id="txtNote" class="form-control" type="text" placeholder="Ghi chú" name="note" value="<?php echo set_value('note'); ?>"/>
 							</div>
 						</div>
 
 						<div class="form-group row">
-							<label for="example-text-input" class="col-sm-4 text-left col-form-label"></label>
-							<div class="col-sm-8 text-left">
+							<label for="example-text-input" class="col-xs-4 text-left col-form-label"></label>
+							<div class="col-xs-8 text-left">
 								<a id="btnQuote" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Yêu Cầu Báo Giá</a>
 							</div>
 						</div>
