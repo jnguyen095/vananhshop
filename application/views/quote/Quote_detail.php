@@ -22,7 +22,7 @@
 		<table style="width: 100%;margin-bottom: 10px">
 			<tr>
 				<td style="width: 150px; text-align: center"><a href="<?=base_url('/')?>"><img style="width: 80px" src="<?=base_url('/img/vananh_logo_trans.png')?>" alt="Vân Anh Shop Logo"/><br/>https://vananhshop.com</a></td>
-				<td style="font-size: 28px;text-align: center;vertical-align: top;">Báo Giá</td>
+				<td style="font-size: 28px;text-align: center;vertical-align: middle;">Báo Giá</td>
 			</tr>
 		</table>
 
@@ -94,11 +94,11 @@
 
 		<table style="width: 100%;">
 			<tr>
-				<td class="text-right"><i>Lưu ý: Báo giá này chỉ có hiệu lực đến ngày <?=date('d/m/Y', strtotime($quote->ValidDate))?></i></td>
+				<td style="width: 150px; text-align: center;vertical-align: middle">
+					<a href="<?=base_url('/check-out/'.$quote->UUID.'.html')?>">Đặt Hàng<img src="<?=$qrcode?>" alt="qrcode mua hàng" style="width: 150px"/></a>
+				</td>
+				<td class="text-right" style="vertical-align: top;"><i>Lưu ý: Báo giá này chỉ có hiệu lực đến ngày <?=date('d/m/Y', strtotime($quote->ValidDate))?></i></td>
 			</tr>
-<!--			<tr>-->
-<!--				<td><a class="btn btn-primary" href="--><?//=base_url('/bao-gia/dat-hang-'.$quote->Code.'.html')?><!--">Đặt Hàng</a></td>-->
-<!--			</tr>-->
 		</table>
 	</div>
 
