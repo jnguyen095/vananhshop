@@ -102,6 +102,7 @@ $route['bao-gia/(:any)/xem-chi-tiet'] = "Quotation_controller/view/$1";
 $route['tuyen-dung'] = "StaticPage_controller/carer";
 $route['cau-hoi-thuong-gap'] = "StaticPage_controller/qna";
 $route['bao-gia-dich-vu'] = "StaticPage_controller/payment";
+$route['huong-dan-mua-hang'] = "StaticPage_controller/userGuide";
 $route['ve-chung-toi'] = "StaticPage_controller/about";
 $route['doi-tra-hang'] = "StaticPage_controller/returnRefund";
 $route['khong-tim-thay'] = "Notfound_controller";
@@ -174,6 +175,7 @@ $route['admin/city/import'] = "admin/CityManagement_controller";
 $route['pos/index'] = "POS_controller";
 // Cart
 $route['check-out'] = "ShoppingCart_controller/checkOut";
+$route['check-out/quote/(:any)'] = "ShoppingCart_controller/checkOutFromQuote/$1";
 $route['check-out/address'] = "ShoppingCart_controller/shippingAddress";
 $route['check-out/review'] = "ShoppingCart_controller/review";
 $route['check-out/success'] = "ShoppingCart_controller/success";
