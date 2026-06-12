@@ -40,7 +40,7 @@ class QuotationManagement_controller extends MY_Controller
 
 			if($customerEmail != null && strlen($customerEmail) > 0){
 				$html_message = $this->load->view('admin/templates/quotation_view', $quotation, TRUE);
-				my_send_email($customerEmail, "Vân Anh Shop - Báo Giá - ".$code, $html_message );
+				my_send_email($customerEmail, "Vân Anh Shop - Báo Giá: ".$code, $html_message );
 				$data['message_response'] = 'Gửi báo giá thành công.';
 			}
 		} else if($crucation != null && $crucation == 'delete'){
