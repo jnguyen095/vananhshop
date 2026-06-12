@@ -56,18 +56,18 @@ class Quotation_Model extends CI_Model
 		$productCodes = $this->db->query($sql);
 		$code = $productCodes->row();
 		if($code != null){
-			$newCode = (int)str_replace('Q-', '', $code->Code) + 1;
+			$newCode = (int)str_replace('VAQ-', '', $code->Code) + 1;
 			if($newCode < 10){
-				return "Q-0000".$newCode;
+				return "VAQ-0000".$newCode;
 			} else if($newCode < 100){
-				return "Q-000".$newCode;
+				return "VAQ-000".$newCode;
 			} else if($newCode < 1000){
-				return "Q-0".$newCode;
+				return "VAQ-0".$newCode;
 			} else if($newCode < 10000){
-				return "Q-".$newCode;
+				return "VAQ-".$newCode;
 			}
 		}else {
-			return "Q-00001";
+			return "VAQ-00001";
 		}
 	}
 
@@ -127,6 +127,11 @@ class Quotation_Model extends CI_Model
 
 
 		return ["quote" => $quote, "details" => $quoteDetail];
+	}
+
+	function deleteById($quoteId){
+		$this->db->delete('quotationdetail', array('QuotationID' => $quoteId));
+		$this->db->delete('quotation', array('QuotationID' => $quoteId));
 	}
 
 	function updateQuote($quoteId, $loginId, $shippingFee, $discount, $validDate, $quoteItems){
