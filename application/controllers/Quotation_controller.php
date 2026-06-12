@@ -87,7 +87,7 @@ class Quotation_controller extends CI_Controller
 					$data['categories'] = $categories;
 					$data['message_response'] = "Đã gửi báo giá thành công, bạn vui lòng đợi chúng tôi sẻ phản hồi qua Đt/Zalo hoặc email";
 				} else {
-					$data['error_response'] = "Chưa có sản phẩm nào, bạn vui lòng sản phẩm";
+					$data['error_response'] = "Chưa có sản phẩm nào, bạn vui lòng chọn sản phẩm";
 				}
 			} else if($productMap != null && count($productMap) > 0) {
 				$data['products'] = $this->Product_Model->findMoreProductByMapID($productMap);
@@ -102,7 +102,7 @@ class Quotation_controller extends CI_Controller
 		// $this->pdf->loadHtml("<h2>OK</h2>");
 		$quotation = $this->Quotation_Model->findByUUID($uuid);
 		$code = $quotation['quote']->Code;
-		$params['data'] = base_url('/check-out/'.$uuid.'.html');
+		$params['data'] = base_url('/check-out/quote/'.$uuid.'.html');
 		$params['level'] = 'H';
 		$params['size'] = 5;
 		$params['savename'] = FCPATH.'/img/qrcode/quote/'.$uuid .'.png';
