@@ -107,7 +107,7 @@ class Quotation_controller extends CI_Controller
 		$params['size'] = 5;
 		$params['savename'] = FCPATH.'/img/qrcode/quote/'.$uuid .'.png';
 		$this->ciqrcode->generate($params);
-		$quotation['qrcode'] = base_url('/img/qrcode/quote/'.$uuid .'.png');
+		$quotation['qrcode'] = '/img/qrcode/quote/'.$uuid .'.png';
 
 		$this->pdf->load_view('/quote/Quote_detail', $quotation);
 		$this->pdf->stream("Bao_gia_".$code.".pdf", array("Attachment"=>0));

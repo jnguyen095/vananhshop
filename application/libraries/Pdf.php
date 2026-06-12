@@ -18,6 +18,16 @@ class Pdf extends Dompdf
 		$this->loadHtml($html, 'UTF-8');
 		$this->setPaper('A4', 'portrait');
 		$this->getOptions()->setIsRemoteEnabled(TRUE);
+		// Thêm đoạn này để cấu hình bỏ qua xác thực SSL context --> hiễn thị đc hình ảnh trên https
+		$contxt = stream_context_create([
+			'ssl' => [
+				'verify_peer' => FALSE,
+				'verify_peer_name' => FALSE,
+				'allow_self_signed' => TRUE
+			]
+		]);
+		$this->setHttpContext($contxt);
+
 		$this->render();
 	}
 

@@ -3,6 +3,8 @@
 <meta charset="UTF-8">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" sizes="48x48" href="<?=base_url('/img/favicon_short.ico')?>">
 	<title>Báo giá cho yêu cầu: <?=$quote->Code?></title>
 	<link rel="stylesheet" href="<?php echo base_url('/css/bootstrap.min.css')?>">
 	<style rel="stylesheet">
@@ -21,7 +23,7 @@
 	<div style="margin-top:10px" >
 		<table style="width: 100%;margin-bottom: 10px">
 			<tr>
-				<td style="width: 150px; text-align: center"><a href="<?=base_url('/')?>"><img style="width: 80px" src="<?=base_url('/img/vananh_logo_trans.png')?>" alt="Vân Anh Shop Logo"/><br/>https://vananhshop.com</a></td>
+				<td style="width: 150px; text-align: center"><a href="<?=base_url('/')?>"><img style="width: 120px" src="<?=base_url('/img/vananh_logo_trans.png')?>" alt="Vân Anh Shop Logo"/><br/>https://vananhshop.com</a></td>
 				<td style="font-size: 28px;text-align: center;vertical-align: middle;">Báo Giá</td>
 			</tr>
 		</table>
@@ -44,7 +46,7 @@
 				<td><?=date('d/m/Y', strtotime($quote->RequestedDate))?></td>
 			</tr>
 		</table>
-		<table class="table table-bordered table-responsive">
+		<table class="table table-bordered" style="width: 100%;margin-bottom: 10px">>
 			<thead>
 			<tr style="background-color: #00c0ef ">
 				<td>#</td>
@@ -95,7 +97,7 @@
 		<table style="width: 100%;">
 			<tr>
 				<td style="width: 150px; text-align: center;vertical-align: middle">
-					<a href="<?=base_url('/check-out/'.$quote->UUID.'.html')?>">Đặt Hàng<img src="<?=$qrcode?>" alt="qrcode mua hàng" style="width: 150px"/></a>
+					<a href="<?=base_url('/check-out/'.$quote->UUID.'.html')?>">Đặt Hàng <img src="<?=base_url($qrcode)?>" alt="qrcode mua hàng" style="width: 150px"/></a>
 				</td>
 				<td class="text-right" style="vertical-align: top;"><i>Lưu ý: Báo giá này chỉ có hiệu lực đến ngày <?=date('d/m/Y', strtotime($quote->ValidDate))?></i></td>
 			</tr>

@@ -20,7 +20,7 @@
       page. However, you can choose any other skin. Make sure you
       apply the skin class to the body tag so the changes take effect. -->
 <link rel="stylesheet" href="<?=base_url('/theme/admin/css/skin-blue.min.css')?>">
-<link rel="icon" sizes="48x48" href="<?=base_url('/img/favicon.ico')?>">
+<link rel="icon" sizes="48x48" href="<?=base_url('/img/favicon_short.ico')?>">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
