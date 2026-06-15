@@ -62,14 +62,18 @@ class ShoppingCart_controller extends CI_Controller
 				}
 			}
 			$data['discount'] = $discount;
-
+			$totalItems = count($this->cart->contents());
+			if($totalItems < 1){
+				$data['error_response'] = "Phải mua ít nhất một sản phẩm";
+			}
 			$this->form_validation->set_rules("txt_receiver", "Người nhận hàng", "trim|required");
 			$this->form_validation->set_rules("txt_phone", "Số điện thoại", "required|regex_match[/^[0-9]{10}$/]");
 			$this->form_validation->set_rules("txt_city", "Thành phố", "numeric|required");
 			$this->form_validation->set_rules("txt_district", "Quận", "numeric|required");
 			$this->form_validation->set_rules("txt_street", "Số nhà/căn hộ/đường", "required|min_length[10]");
 			$validateResult = $this->form_validation->run();
-			if($validateResult == TRUE){
+
+			if($validateResult == TRUE && $totalItems > 0){
 				// shipping
 				$shippingInfo = array(
 					'Receiver' => $data['txt_receiver'],
@@ -118,7 +122,7 @@ class ShoppingCart_controller extends CI_Controller
 				if (isset($note) && strlen($note) > 0) {
 					$trackingMessage .= ' với ghi chú: <i>'. $note .'</i>';
 				}
-				if ($appliedPromotion) {
+				if (isset($appliedPromotion) && $appliedPromotion) {
 					$trackingMessage .= ' (Mua khuyến mãi: ' . $appliedPromotion->Name . ', giảm giá: ' . number_format($discount) . 'đ)';
 				}
 				$orderTracking = array(

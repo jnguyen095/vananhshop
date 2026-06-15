@@ -27,7 +27,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12 mobile-hide ">
+		<div class="col-lg-12 ">
 			<div class="container-fluid text-center border-bottom">
 				<div class="place-order-header">Tạo Đơn Hàng</div>
 			</div>
@@ -37,6 +37,13 @@
 		$attributes = array("id" => "frmShippingAddress", "class" => "form-horizontal");
 		echo form_open("check-out", $attributes);
 		?>
+		<?php if(!empty($error_response)){
+			echo '<div class="col-lg-12 ">';
+			echo '<div class="col-lg-12 alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>';
+			echo $error_response;
+			echo '</div></div>';
+		}?>
+
 		<div class="col-lg-12">
 			<div class="col-lg-5 col-sm-12">
 				<div class="form-group">
@@ -156,7 +163,7 @@
 
 		<div class="col-lg-12 text-center margin-bottom-20 margin-top-20">
 			<a class="btn btn-default" href="<?=base_url('/')?>"><i class="glyphicon glyphicon-menu-left"></i> Tiếp tục mua hàng </a>
-			<button class="btn btn-primary" type="submit"> <i class="glyphicon glyphicon-shopping-cart"></i> Tạo Đơn</button>
+			<button class="btn btn-primary" type="submit" onclick="this.disabled=true; this.form.submit();"> <i class="glyphicon glyphicon-shopping-cart"></i> Tạo Đơn</button>
 		</div>
 
 		<input type="hidden" name="crudaction" value="insert" >
