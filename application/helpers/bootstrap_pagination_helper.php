@@ -8,7 +8,7 @@
 // application/config/bootstrap_pagination_helper.php
 if( ! function_exists('pagination'))
 {
-	function pagination(){
+	function pagination($container){
 		$config['full_tag_open'] = '<ul class="pagination">';
 		$config['full_tag_close'] = '</ul>';
 		$config['first_tag_open'] = '<li>';
@@ -23,6 +23,12 @@ if( ! function_exists('pagination'))
 		$config['cur_tag_close'] = '</span></li>';
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
+		$config['per_page'] = MAX_PAGE_ITEM;
+		$config['enable_query_strings'] = TRUE;
+		$config['page_query_string'] = TRUE;
+		$config['reuse_query_string'] = TRUE;
+		$config['page'] = ($container->input->get('per_page')) ? $container->input->get('per_page') : 0;
+
 		return $config;
 	}
 }
