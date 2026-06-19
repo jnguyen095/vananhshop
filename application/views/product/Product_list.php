@@ -100,7 +100,7 @@
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<div class="product-thumb transition">
 								<div class="image">
-									<a href="<?=base_url().seo_url($product->Title).'-p'.$product->ProductID?>.html"><img src="<?=base_url($product->Thumb)?>" class="img-responsive" ></a>
+									<a href="<?=base_url().seo_url($product->Title).'-p'.$product->ProductID?>.html"><img src="<?=base_url($product->Thumb)?>" alt="<?=$product->Title?>"  class="img-responsive" ></a>
 								</div>
 								<div class="caption">
 									<h3><a href="<?=base_url().seo_url($product->Title).'-p'.$product->ProductID?>.html"><?=$product->Title?></a></h3>

@@ -67,7 +67,7 @@
 				}
 				?>
 			<div class="main-image">
-				<img src="<?=base_url(str_replace('_thumb', '', $product->Thumb))?>" class="img-responsive-large" >
+				<img src="<?=base_url(str_replace('_thumb', '', $product->Thumb))?>" alt="<?=$product->Title?>"  class="img-responsive-large" >
 			</div>
 			<div class="clear-both"></div>
 		</div>
