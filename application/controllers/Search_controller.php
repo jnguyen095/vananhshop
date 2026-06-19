@@ -31,41 +31,24 @@ class Search_controller extends CI_Controller
 		// begin file cached
 		$data['categories'] = $this->Category_Model->getActiveCategories();
 
-		$keyword = $this->input->post("keyword");
 		$query = $this->input->get("query");
-		$type = $this->input->get("type");
-		if($query){
-			$keyword = $query;
-		}
+		$catId = $this->input->get("category");
 
-		if($offset == 0){
-			$catId = $this->input->post("cmCatId");
-
-			$searchFilters = array(
-				'cmCatId' => $catId,
-			);
-			$this->session->set_userdata($searchFilters);
-		}else{
-			$catId = $this->session->userdata("cmCatId");
-		}
-
-
-		$data['keyword'] = $keyword;
-		$data['cmCatId'] = $catId;
-
-		$search_data = $this->Product_Model->searchByProperties($keyword, $catId, $offset, MAX_PAGE_ITEM);
-		$data = array_merge($data, $search_data);
-		$config = pagination();
+		$config = pagination($this);
 		$config['base_url'] = base_url('tim-kiem.html');
-		$config['total_rows'] = $data['total'];
-		$config['per_page'] = MAX_PAGE_ITEM;
+		$config['per_page'] = 18;
 
+		$search_data = $this->Product_Model->searchByProperties($query, $catId, $config['page'], $config['per_page']);
+		$data = array_merge($data, $search_data);
+
+		$data['query'] = $query;
+		$data['categoryId'] = $catId;
 		if($catId != null && $catId > 0){
 			$category = $this->Category_Model->findByNotChildId($catId);
 			$data['category'] = $category;
 		}
 
-
+		$config['total_rows'] = $data['total'];
 		$this->pagination->initialize($config);
 		$data['pagination'] = $this->pagination->create_links();
 		$this->load->helper('url');

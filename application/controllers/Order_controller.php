@@ -103,7 +103,7 @@ class Order_controller extends CI_Controller
 		$callmebacks = $this->CallMeBack_Model->findByUserId($userId, $page);
 		$data['callmebacks'] = $callmebacks['callmebacks'];
 
-		$config = pagination();
+		$config = pagination($this);
 		$config['base_url'] = base_url('yeu-cau-goi-lai.html');
 		$config['total_rows'] = $callmebacks['total'];
 		$config['per_page'] = 10;

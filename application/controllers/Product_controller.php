@@ -25,8 +25,9 @@ class Product_controller extends CI_Controller
 	}
 
 	public function listItem($catId, $offset=0) {
+		$config = pagination($this);
 		$data['categories'] = $this->Category_Model->getActiveCategories();
-		$search_data = $this->Product_Model->findByCatIdFetchChildren($catId, $offset, MAX_PAGE_ITEM);
+		$search_data = $this->Product_Model->findByCatIdFetchChildren($catId, $config['page'], $config['per_page']);
 		$data = array_merge($data, $search_data);
 
 		$thisCat = $this->Category_Model->findById($catId);
@@ -36,7 +37,7 @@ class Product_controller extends CI_Controller
 			$data['category'] = $thisCat;
 			$data['sameLevels'] = $this->Category_Model->findByParentId($thisCat->ParentID, $catId);
 
-			$config = pagination();
+
 			$config['base_url'] = base_url(seo_url($data['category']->CatName).'-c'.$catId.'.html');
 			$config['total_rows'] = $data['total'];
 			$config['per_page'] = MAX_PAGE_ITEM;
@@ -93,7 +94,7 @@ class Product_controller extends CI_Controller
 		$justUpdateItems = $this->Product_Model->findJustUpdate($offset, MAX_PAGE_ITEM);
 		$data['products'] = $justUpdateItems;
 
-		$config = pagination();
+		$config = pagination($this);
 		$config['base_url'] = base_url('/bat-dong-san-moi-cap-nhat.html');
 		$config['total_rows'] = $totalProduct;
 		$config['per_page'] = MAX_PAGE_ITEM;
@@ -129,7 +130,7 @@ class Product_controller extends CI_Controller
 		$underOneBillionItems = $this->Product_Model->findUnderOneBillion($offset, MAX_PAGE_ITEM);
 		$data['products'] = $underOneBillionItems;
 
-		$config = pagination();
+		$config = pagination($this);
 		$config['base_url'] = base_url('/nha-dat-duoi-mot-ty.html');
 		$config['total_rows'] = $totalProduct;
 		$config['per_page'] = MAX_PAGE_ITEM;
