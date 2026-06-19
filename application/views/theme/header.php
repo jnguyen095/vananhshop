@@ -33,8 +33,18 @@
 					<div class="top-header-hotline text-left">
 						<div>Miễn phí giao hàng</div>
 					</div>
-					<div class="clear-both"></div>
+
+					<div class="quickTopSearch pull-right visible-lg visible-md">
+						<form class="navbar-form" action="<?=base_url('/tim-kiem.html')?>" role="search">
+							<div class="right-inner-addon ">
+								<i class="glyphicon glyphicon-search"></i>
+								<input type="search" name="query" class="form-control" placeholder="Tìm kiếm" />
+							</div>
+						</form>
+					</div>
+
 				</div>
+
 				<div class="clear-both"></div>
 			</div>
 
@@ -60,6 +70,22 @@
 				</div>
 
 				<div class="clear-both"></div>
+
+
+				<div class="header-search visible-sm visible-xs">
+					<div class="search-input-wrapper" id="searchInputWrapper">
+						<input
+							type="text"
+							class="form-control"
+							id="searchInput"
+							placeholder="Tìm kiếm..."
+							autocomplete="off"
+						>
+					</div>
+					<button class="search-toggle-btn" id="searchToggleBtn" type="button" aria-label="Mở tìm kiếm">
+						<i class="glyphicon glyphicon-search" id="searchIcon"></i>
+					</button>
+				</div>
 			</div>
 
 		</div>
