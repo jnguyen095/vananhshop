@@ -37,7 +37,6 @@
 			}
 		?>
 		<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="active"><span itemprop="item"><span itemprop="name"><?php echo $category->CatName?></span></span><meta itemprop="position" content="<?=$position++?>" /></li>
-		<?php $this->load->view('/common/quick-search')?>
 		</div>
 	</ul>
 
