@@ -18,8 +18,67 @@ $(document).ready(function(){
 	callMeBackHandler();
 	bindingAdd2Cart();
 	bindingLoadCart();
-
+	bindingSearchIcon();
 });
+
+function bindingSearchIcon() {
+	var $wrapper = $('#searchInputWrapper');
+	var $input = $('#searchInput');
+	var $btn = $('#searchToggleBtn');
+	var $icon = $('#searchIcon');
+
+	function openSearch() {
+		$wrapper.addClass('open');
+		$icon.removeClass('glyphicon-search').addClass('glyphicon-remove');
+		$btn.attr('aria-label', 'Đóng tìm kiếm');
+		// focus sau khi animation chạy 1 chút để input đã hiện
+		setTimeout(function () {
+			$input.trigger('focus');
+		}, 150);
+	}
+
+	function closeSearch() {
+		$wrapper.removeClass('open');
+		$icon.removeClass('glyphicon-remove').addClass('glyphicon-search');
+		$btn.attr('aria-label', 'Mở tìm kiếm');
+		$input.val('');
+	}
+
+	function isOpen() {
+		return $wrapper.hasClass('open');
+	}
+
+	// click vào icon: toggle mở/đóng
+	$btn.on('click', function (e) {
+		e.stopPropagation();
+		isOpen() ? closeSearch() : openSearch();
+	});
+
+	// click ra ngoài thì đóng lại
+	$(document).on('click', function (e) {
+		if (isOpen() && !$(e.target).closest('.header-search').length) {
+			closeSearch();
+		}
+	});
+
+	// nhấn Esc để đóng
+	$(document).on('keydown', function (e) {
+		if (e.key === 'Escape' && isOpen()) {
+			closeSearch();
+		}
+	});
+
+	// nhấn Enter trong input để submit tìm kiếm (demo)
+	$input.on('keydown', function (e) {
+		if (e.key === 'Enter') {
+			var keyword = $input.val().trim();
+			if (keyword) {
+				window.location.href = urls.base_url + '/tim-kiem.html?query=' + encodeURIComponent(keyword);
+				// window.location.href = '/search?q=' + encodeURIComponent(keyword);
+			}
+		}
+	});
+}
 
 function showAdd2CartToast(){
 	var $toast = $('#myToast');
@@ -207,7 +266,7 @@ function submitSearchForm(){
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
-	if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+	if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
 		$("#myBtn").show(1000);
 	} else {
 		$("#myBtn").hide(1000);
