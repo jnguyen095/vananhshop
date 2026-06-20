@@ -151,7 +151,6 @@
 			filebrowserBrowseUrl: "<?=base_url('/index.php/admin/ImageUpload_controller/browse_images')?>",
 			// Compact Single-Row Toolbar Setup
 			removePlugins: 'elementspath', // Removes bottom path bar
-			resize_enabled: false,         // Disables manual resizing
 			toolbar: [
 				{
 					name: 'essential_tools',
