@@ -11,7 +11,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Chon Hình Ảnh | Vân Anh Shop</title>
+	<title>Chọn Hình Ảnh | Vân Anh Shop</title>
 	<link rel="icon" sizes="48x48" href="<?=base_url('/img/favicon_short.ico')?>">
 	<style>
 		body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
