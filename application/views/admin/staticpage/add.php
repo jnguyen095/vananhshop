@@ -142,17 +142,48 @@
 
 <script>
 	$(function () {
-		// Replace the <textarea id="editor1"> with a CKEditor
-		// instance, using default configuration.
-		//CKEDITOR.replace('editor1')
-		CKEDITOR.replace('editor1',{
+		// 1. Replace the <textarea id="editor1"> with a CKEditor
+		CKEDITOR.replace('editor1', {
+			// Change this line to route through the framework, not the raw folder path
+			filebrowserUploadUrl: "<?=base_url('/index.php/admin/ImageUpload_controller/ckeditor_image')?>",
+			filebrowserUploadMethod: 'form',
+			// NEW: Adds the browse server endpoint
+			filebrowserBrowseUrl: "<?=base_url('/index.php/admin/ImageUpload_controller/browse_images')?>",
+			// Compact Single-Row Toolbar Setup
+			removePlugins: 'elementspath', // Removes bottom path bar
+			resize_enabled: false,         // Disables manual resizing
 			toolbar: [
+				{
+					name: 'essential_tools',
+					items: [
+						'Bold', 'Italic', 'Underline', '-',
+						'TextColor', 'BGColor', '-',
+						'NumberedList', 'BulletedList', '-',
+						'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-',
+						'Link', 'Unlink', '-',
+						'RemoveFormat', 'Maximize'
+					]
+				},
+				{name : 'attachment', items:['Image']},
 				{ name: 'document', items: [ 'Source', '-', 'Preview', '-', 'Templates' ] },	// Defines toolbar group with name (used to create voice label) and items in 3 subgroups.
-				[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
-				{ name: 'basicstyles', items: [ 'Bold', 'Italic' ] },
-				{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
+				[ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ],			// Defines toolbar group without name.
+				{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'Outdent', 'Indent', '-', 'Blockquote' ] },
 				{ name: 'styles', items: [ 'Styles', 'Format' ] }
 			]
+		});
+
+		// 2. Intercept the dialog box creation to remove the Link and Advanced tabs
+		CKEDITOR.on('dialogDefinition', function(ev) {
+			var dialogName = ev.data.name;
+			var dialogDefinition = ev.data.definition;
+
+			// Target the image dialog component specifically
+			if (dialogName === 'image') {
+				// Remove the 'Link' tab
+				dialogDefinition.removeContents('Link');
+				// Remove the 'advanced' tab
+				dialogDefinition.removeContents('advanced');
+			}
 		});
 
 		//iCheck for checkbox and radio inputs
