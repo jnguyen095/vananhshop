@@ -172,7 +172,9 @@ img.middleHorizontalBanner {
 }
 
 .product-thumb:hover {
-	border: 1px solid #0190db;
+	/*border: 1px solid #0190db;*/
+	transform: scale(1.02);
+	box-shadow: 0 4px 10px rgba(1, 144, 219, 0.2);
 }
 
 .product-list .product-content{
