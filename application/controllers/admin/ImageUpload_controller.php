@@ -113,5 +113,29 @@ class ImageUpload_controller extends CI_Controller {
 
 		$this->load->view('admin/common/browse_images_view', $data);
 	}
+
+	public function delete_image($file_name = NULL) {
+		// Basic file validation checklist framework
+		if (empty($file_name)) {
+			echo json_encode(['status' => 'error', 'message' => 'No filename provided.']);
+			return;
+		}
+
+		// Security check: Sanitizes directory traversal attacks like ../../
+		$file_name = basename($file_name);
+		$file_path = './uploads/' . $file_name;
+
+		// Verify file physical placement location details on storage framework disk
+		if (file_exists($file_path)) {
+			if (unlink($file_path)) {
+				echo json_encode(['status' => 'success', 'message' => 'File deleted successfully.']);
+			} else {
+				echo json_encode(['status' => 'error', 'message' => 'Permission issue: Unable to delete asset file.']);
+			}
+		} else {
+			echo json_encode(['status' => 'error', 'message' => 'File tracking asset location not found.']);
+		}
+	}
+
 }
 
