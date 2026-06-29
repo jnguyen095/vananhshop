@@ -11,7 +11,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Cập nhật đơn hàng</title>
+	<title>Xử lý đơn hàng | Vân Anh Shop</title>
 	<?php $this->load->view('/admin/common/header-js') ?>
 	<link rel="stylesheet" href="<?=base_url('/theme/admin/css/bootstrap-datepicker.min.css')?>">
 	<link rel="stylesheet" href="<?=base_url('/theme/admin/css/madmin.css')?>">
@@ -251,10 +251,12 @@
 								} else if($order->Status == ORDER_STATUS_CONFIRM){
 									?>
 									<a class="btn btn-info" data-new_action="<?=ORDER_STATUS_SHIPPING?>" id="changeStatus">Đang giao hàng</a>
+									<a class="btn btn-danger" data-new_action="<?=ORDER_STATUS_CANCELLED?>" id="cancelOrder">Hủy ĐH</a>
 									<?php
 								} else if($order->Status == ORDER_STATUS_SHIPPING){
 									?>
 									<a class="btn btn-success" data-new_action="<?=ORDER_STATUS_COMPLETED?>" id="changeStatus">Hoàn thành</a>
+									<a class="btn btn-danger" data-new_action="<?=ORDER_STATUS_CANCELLED?>" id="cancelOrder">Hủy ĐH</a>
 									<?php
 								}
 								?>
