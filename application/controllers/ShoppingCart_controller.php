@@ -68,8 +68,8 @@ class ShoppingCart_controller extends CI_Controller
 			}
 			$this->form_validation->set_rules("txt_receiver", "Người nhận hàng", "trim|required");
 			$this->form_validation->set_rules("txt_phone", "Số điện thoại", "required|regex_match[/^[0-9]{10}$/]");
-			$this->form_validation->set_rules("txt_city", "Thành phố", "numeric|required");
-			$this->form_validation->set_rules("txt_district", "Quận", "numeric|required");
+			$this->form_validation->set_rules("txt_city", "Thành phố/tỉnh", "numeric|required");
+			$this->form_validation->set_rules("txt_district", "Phường/xã", "numeric|required");
 			$this->form_validation->set_rules("txt_street", "Số nhà/căn hộ/đường", "required|min_length[10]");
 			$validateResult = $this->form_validation->run();
 
@@ -183,8 +183,8 @@ class ShoppingCart_controller extends CI_Controller
 
 			$this->form_validation->set_rules("txt_receiver", "Người nhận hàng", "trim|required");
 			$this->form_validation->set_rules("txt_phone", "Số điện thoại", "required|regex_match[/^[0-9]{10}$/]");
-			$this->form_validation->set_rules("txt_city", "Thành phố", "numeric|required");
-			$this->form_validation->set_rules("txt_district", "Quận", "numeric|required");
+			$this->form_validation->set_rules("txt_city", "Thành phố/tỉnh", "numeric|required");
+			$this->form_validation->set_rules("txt_district", "Phường/xã", "numeric|required");
 			$this->form_validation->set_rules("txt_street", "Số nhà/căn hộ/đường", "required|min_length[10]");
 			$validateResult = $this->form_validation->run();
 			if($validateResult == TRUE){

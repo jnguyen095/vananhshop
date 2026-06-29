@@ -60,13 +60,13 @@
 			<div class="col-lg-12">
 				<div class="col-lg-5 col-sm-12">
 					<div class="form-group">
-						<div class="no-padding-mobile col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="no-padding-left-mobile col-lg-6 col-md-6 col-sm-6 col-xs-6">
 							<label>Người nhận hàng <span class="required">*</span></label>
 							<input type="text" class="form-control" name="txt_receiver"
 								   value="<?= isset($txt_receiver) ? $txt_receiver : '' ?>">
 							<span class="text-danger"><?php echo form_error('txt_receiver'); ?></span>
 						</div>
-						<div class="no-padding-mobile col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="no-padding-right-mobile col-lg-6 col-md-6 col-sm-6 col-xs-6">
 							<label>Số điện thoại <span class="required">*</span></label>
 							<input type="text" class="form-control" name="txt_phone"
 								   value="<?= isset($txt_phone) ? $txt_phone : '' ?>">
@@ -76,10 +76,10 @@
 					</div>
 
 					<div class="form-group">
-						<div class="no-padding-mobile col-lg-6 col-md-6 col-sm-6 col-xs-12">
-							<label>Thành phố <span class="required">*</span></label>
+						<div class="no-padding-left-mobile col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<label>Thành phố/tỉnh <span class="required">*</span></label>
 							<select id="txtCity" class="form-control" name="txt_city">
-								<option>Chọn tỉnh/thành phố</option>
+								<option>Chọn thành phố/tỉnh</option>
 								<?php
 								if ($cities != null && count($cities) > 0) {
 									$str = '';
@@ -94,10 +94,10 @@
 							</select>
 							<span class="text-danger"><?php echo form_error('txt_city'); ?></span>
 						</div>
-						<div class="no-padding-mobile col-lg-6 col-md-6 col-sm-6 col-xs-12">
-							<label>Quận/huyện <span class="required">*</span></label>
+						<div class="no-padding-right-mobile col-lg-6 col-md-6 col-sm-6 col-xs-6">
+							<label>Phường/xã <span class="required">*</span></label>
 							<select id="txtDistrict" class="form-control" name="txt_district">
-								<option>Chọn quận/huyện</option>
+								<option>Chọn phường/xã</option>
 								<?php
 								if (isset($districts) && count($districts) > 0) {
 									foreach ($districts as $dt) {
