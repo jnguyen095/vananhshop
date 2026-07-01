@@ -30,6 +30,7 @@ function bindingSearchIcon() {
 	function openSearch() {
 		$wrapper.addClass('open');
 		$icon.removeClass('glyphicon-search').addClass('glyphicon-remove');
+		$btn.addClass('open');
 		$btn.attr('aria-label', 'Đóng tìm kiếm');
 		// focus sau khi animation chạy 1 chút để input đã hiện
 		setTimeout(function () {
@@ -39,6 +40,7 @@ function bindingSearchIcon() {
 
 	function closeSearch() {
 		$wrapper.removeClass('open');
+		$btn.removeClass('open');
 		$icon.removeClass('glyphicon-remove').addClass('glyphicon-search');
 		$btn.attr('aria-label', 'Mở tìm kiếm');
 		$input.val('');

@@ -90,6 +90,139 @@ class Dashboard_Model extends CI_Model
 		return $output;
 	}
 
+	public function getReportSummary($period = 'day'){
+		$period = ($period === 'month') ? 'month' : 'day';
+		$baseWhere = " where m.Status <> '" . ORDER_STATUS_DELETED . "' and m.Status <> '" . ORDER_STATUS_CANCELLED . "'";
+		$currentLabel = 'Hôm nay';
+		$previousLabel = 'Hôm qua';
+		$currentFrom = date('Y-m-d');
+		$currentTo = date('Y-m-d');
+		$previousFrom = date('Y-m-d', strtotime('-1 day'));
+		$previousTo = date('Y-m-d', strtotime('-1 day'));
+
+		if($period === 'month'){
+			$currentLabel = 'Tháng này';
+			$previousLabel = 'Tháng trước';
+			$currentFrom = date('Y-m-01');
+			$currentTo = date('Y-m-t');
+			$previousFrom = date('Y-m-01', strtotime('first day of previous month'));
+			$previousTo = date('Y-m-t', strtotime('last day of previous month'));
+		}
+
+		$currentWhere = $baseWhere . " and date(m.CreatedDate) >= '{$currentFrom}' and date(m.CreatedDate) <= '{$currentTo}'";
+		$previousWhere = $baseWhere . " and date(m.CreatedDate) >= '{$previousFrom}' and date(m.CreatedDate) <= '{$previousTo}'";
+
+		return array(
+			'period' => $period,
+			'title' => $period === 'month' ? 'Report theo tháng' : 'Report theo ngày',
+			'orders' => $this->buildMetricComparison($currentWhere, $previousWhere, 'orders', $currentLabel, $previousLabel),
+			'revenue' => $this->buildMetricComparison($currentWhere, $previousWhere, 'revenue', $currentLabel, $previousLabel),
+			'new_users' => $this->buildCustomerMetricComparison($currentFrom, $currentTo, $previousFrom, $previousTo, 'new_users', $currentLabel, $previousLabel),
+			'repeat_buyers' => $this->buildCustomerMetricComparison($currentFrom, $currentTo, $previousFrom, $previousTo, 'repeat_buyers', $currentLabel, $previousLabel)
+		);
+	}
+
+	private function buildMetricComparison($currentWhere, $previousWhere, $metricType, $currentLabel, $previousLabel){
+		if($metricType === 'orders'){
+			$currentValue = $this->getScalarValue("select count(*) as Total from myorder m {$currentWhere}");
+			$previousValue = $this->getScalarValue("select count(*) as Total from myorder m {$previousWhere}");
+		} else {
+			$currentValue = $this->getScalarValue("select sum(m.TotalPrice) as Total from myorder m {$currentWhere}");
+			$previousValue = $this->getScalarValue("select sum(m.TotalPrice) as Total from myorder m {$previousWhere}");
+		}
+
+		$difference = $currentValue - $previousValue;
+		$percentage = 0;
+		if($previousValue > 0){
+			$percentage = round(($difference / $previousValue) * 100, 1);
+		} else if($currentValue > 0){
+			$percentage = 100;
+		}
+
+		$trendClass = 'info';
+		$trendLabel = 'Không đổi';
+		$comparisonText = 'không thay đổi so với kỳ trước';
+		if($difference > 0){
+			$trendClass = 'success';
+			$trendLabel = 'Tăng';
+			$comparisonText = 'tăng ' . abs($percentage) . '% so với kỳ trước';
+		} else if($difference < 0){
+			$trendClass = 'warning';
+			$trendLabel = 'Giảm';
+			$comparisonText = 'giảm ' . abs($percentage) . '% so với kỳ trước';
+		}
+
+		return array(
+			'current_value' => $currentValue,
+			'previous_value' => $previousValue,
+			'difference' => $difference,
+			'percentage' => $percentage,
+			'trend_class' => $trendClass,
+			'trend_label' => $trendLabel,
+			'comparison_text' => $comparisonText,
+			'current_label' => $currentLabel,
+			'previous_label' => $previousLabel
+		);
+	}
+
+	private function buildCustomerMetricComparison($currentFrom, $currentTo, $previousFrom, $previousTo, $metricType, $currentLabel, $previousLabel){
+		$currentValue = $this->countCustomerMetric($metricType, $currentFrom, $currentTo);
+		$previousValue = $this->countCustomerMetric($metricType, $previousFrom, $previousTo);
+
+		$difference = $currentValue - $previousValue;
+		$percentage = 0;
+		if($previousValue > 0){
+			$percentage = round(($difference / $previousValue) * 100, 1);
+		} else if($currentValue > 0){
+			$percentage = 100;
+		}
+
+		$trendClass = 'info';
+		$trendLabel = 'Không đổi';
+		$comparisonText = 'không thay đổi so với kỳ trước';
+		if($difference > 0){
+			$trendClass = 'success';
+			$trendLabel = 'Tăng';
+			$comparisonText = 'tăng ' . abs($percentage) . '% so với kỳ trước';
+		} else if($difference < 0){
+			$trendClass = 'warning';
+			$trendLabel = 'Giảm';
+			$comparisonText = 'giảm ' . abs($percentage) . '% so với kỳ trước';
+		}
+
+		return array(
+			'current_value' => $currentValue,
+			'previous_value' => $previousValue,
+			'difference' => $difference,
+			'percentage' => $percentage,
+			'trend_class' => $trendClass,
+			'trend_label' => $trendLabel,
+			'comparison_text' => $comparisonText,
+			'current_label' => $currentLabel,
+			'previous_label' => $previousLabel
+		);
+	}
+
+	private function countCustomerMetric($metricType, $from, $to){
+		$baseWhere = " where m.Status <> '" . ORDER_STATUS_DELETED . "' and m.Status <> '" . ORDER_STATUS_CANCELLED . "'";
+		$rangeWhere = $baseWhere . " and date(m.CreatedDate) >= '{$from}' and date(m.CreatedDate) <= '{$to}' and trim(coalesce(sh.Phone, '')) <> ''";
+		$phoneCondition = " sh.Phone = s.Phone ";
+		if($metricType === 'new_users'){
+			$query = "select count(*) as Total from (select sh.Phone from myorder m inner join ordershipping sh on sh.OrderID = m.OrderID {$rangeWhere} and not exists (select 1 from myorder m2 inner join ordershipping s on s.OrderID = m2.OrderID {$baseWhere} and date(m2.CreatedDate) < '{$from}' and trim(coalesce(s.Phone, '')) <> '' and {$phoneCondition}) group by sh.Phone) as t";
+		} else {
+			$query = "select count(*) as Total from (select sh.Phone from myorder m inner join ordershipping sh on sh.OrderID = m.OrderID {$rangeWhere} and exists (select 1 from myorder m2 inner join ordershipping s on s.OrderID = m2.OrderID {$baseWhere} and date(m2.CreatedDate) < '{$from}' and trim(coalesce(s.Phone, '')) <> '' and {$phoneCondition}) group by sh.Phone) as t";
+		}
+		$result = $this->db->query($query);
+		$row = $result->row();
+		return $row && $row->Total !== null ? (int)$row->Total : 0;
+	}
+
+	private function getScalarValue($query){
+		$result = $this->db->query($query);
+		$row = $result->row();
+		return $row && $row->Total !== null ? (float)$row->Total : 0;
+	}
+
 	public function topViewedProducts($limit = 5){
 		$query = "select p.ProductID, p.Title, p.Code, p.View from product p where p.Status = 1 order by p.View desc limit " . intval($limit);
 		$result = $this->db->query($query);

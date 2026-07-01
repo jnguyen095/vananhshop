@@ -39,6 +39,7 @@
 		<ul class="sidebar-menu" data-widget="tree">
 			<li class="header">HEADER</li>
 			<li class="active"><a href="<?=base_url('/admin/dashboard.html')?>"><i class="fa fa-bar-chart"></i> <span>Dashboard</span></a></li>
+			<li><a href="<?=base_url('/admin/report.html')?>"><i class="fa fa-line-chart"></i> <span>Báo cáo</span></a></li>
 			<li><a href="<?=base_url('/admin/order/list.html')?>"><i class="fa fa-shopping-cart"></i> <span>Quản lý đơn hàng</span></a></li>
 			<li><a href="<?=base_url('/admin/product/list.html')?>"><i class="fa fa-product-hunt"></i> <span>Quản lý sản phẩm</span></a></li>
 			<li><a href="<?=base_url('/admin/user/list.html')?>"><i class="fa fa-user-o"></i> <span>Người dùng</span></a></li>
