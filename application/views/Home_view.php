@@ -11,7 +11,7 @@
 
 	<meta property="og:locale" content="vi_VN">
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="Thời Trang, Đồ Lót, Nội Y, Đồ Bộ Mặc Nhà | Vân Anh Shop">
+	<meta property="og:title" itemprop="name" content="Thời Trang, Đồ Lót, Nội Y, Đồ Bộ Mặc Nhà">
 	<meta property="og:description" content="Vân Anh Shop chuyên cung cấp sỉ và lẻ quần lót nữ, áo lót nữ, áo lá học sinh, đồ lót nam chất lượng cao, giá tốt, giao hàng toàn quốc.">
 	<meta property="og:url" content="<?php echo rtrim(base_url(), '/'); ?>">
 	<meta property="og:site_name" content="Vân Anh Shop">
