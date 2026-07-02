@@ -118,10 +118,10 @@
 				</div>
 			</div>
 			<!-- Orders chart (last 7 days) -->
-			<div class="row mobile-hide">
+			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Orders created (last 7 days)</div>
+						<div class="panel-heading">Đơn hàng 7 ngày qua</div>
 						<div class="panel-body">
 							<div id="orders-week-chart" style="height:260px;"></div>
 						</div>
@@ -223,7 +223,7 @@
 			}
 
 			$.plot('#orders-week-chart', [ plotData ], {
-				series: { bars: { show: true, barWidth: 0.6, align: 'center' } },
+				series: { bars: { show: true, barWidth: 0.2, align: 'center' } },
 				xaxis: { mode: 'categories', tickLength: 0 }
 			});
 		} catch(e){
