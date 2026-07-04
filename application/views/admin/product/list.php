@@ -154,10 +154,12 @@
 							?>
 							</tbody>
 						</table>
-						<div class="text-center">
-							<?php echo $pagination; ?>
-						</div>
 					</div>
+
+					<div class="row text-center">
+						<?php echo $pagination; ?>
+					</div>
+
 				</div>
 			</div>
 
