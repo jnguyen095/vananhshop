@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Vân Anh Shop | Quản lý khuyến mãi</title>
+    <title>Thiết Lập Khuyến Mãi | Vân Anh Shop</title>
     <?php $this->load->view('/admin/common/header-js') ?>
 	<link rel="stylesheet" href="<?=base_url('/css/iCheck/all.css')?>">
     <link rel="stylesheet" href="<?=base_url('/theme/admin/css/bootstrap-datepicker.min.css')?>">
@@ -22,11 +22,11 @@
 
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>Thông tin khuyến mãi</h1>
+            <h1>Thiết Lập Khuyến Mãi</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
                 <li><a href="<?=base_url('/admin/promotion/list.html')?>">Quản lý khuyến mãi</a></li>
-                <li class="active">Thông tin khuyến mãi</li>
+                <li class="active">Thiết lập khuyến mãi</li>
             </ol>
         </section>
 
@@ -174,11 +174,8 @@
     <?php $this->load->view('/admin/common/admin-footer')?>
 </div>
 
-<script src="<?=base_url('/theme/admin/js/jquery.min.js')?>"></script>
-<script src="<?=base_url('/theme/admin/js/bootstrap.min.js')?>"></script>
-<script src="<?=base_url('/theme/admin/js/adminlte.min.js')?>"></script>
-<script src="<?=base_url('/theme/admin/js/bootstrap-datepicker.min.js')?>"></script>
-<script src="<?=base_url('/css/iCheck/icheck.min.js')?>"></script>
+<?php $this->load->view('/admin/common/include-javascripts')?>
+
 <script type="text/javascript">
     $(function() {
         $('.datepicker').datepicker({

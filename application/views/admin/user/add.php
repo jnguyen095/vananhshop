@@ -11,7 +11,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Vân Anh Shop | Quản lý Nguời Dùng</title>
+	<title>Chỉnh Sửa Nguời Dùng | Vân Anh Shop</title>
 	<?php $this->load->view('/admin/common/header-js') ?>
 	<link rel="stylesheet" href="<?=base_url('/css/iCheck/all.css')?>">
 	<link rel="stylesheet" href="<?=base_url('/theme/admin/css/madmin.css')?>">
@@ -158,19 +158,7 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 3 -->
-<script src="<?=base_url('/theme/admin/js/jquery.min.js')?>"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?=base_url('/theme/admin/js/bootstrap.min.js')?>"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url('/theme/admin/js/adminlte.min.js')?>"></script>
-
-<script src="<?=base_url('/theme/admin/js/adminlte.min.js')?>"></script>
-
-<script src="<?=base_url('/ckeditor/ckeditor.js')?>"></script>
-
-<script src="<?=base_url('/css/iCheck/icheck.min.js')?>"></script>
+<?php $this->load->view('/admin/common/include-javascripts')?>
 
 <script>
 	$(function () {

@@ -38,9 +38,8 @@
 	<?php $this->load->view('/admin/common/admin-footer') ?>
 </div>
 
-<script src="<?=base_url('/theme/admin/js/jquery.min.js')?>"></script>
-<script src="<?=base_url('/theme/admin/js/bootstrap.min.js')?>"></script>
-<script src="<?=base_url('/theme/admin/js/adminlte.min.js')?>"></script>
+<?php $this->load->view('/admin/common/include-javascripts')?>
+
 <script>
 	$(function () {
 		function loadReport(type) {

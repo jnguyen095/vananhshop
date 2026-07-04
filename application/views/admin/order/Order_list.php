@@ -179,16 +179,7 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 3 -->
-<script src="<?=base_url('/theme/admin/js/jquery.min.js')?>"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?=base_url('/theme/admin/js/bootstrap.min.js')?>"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url('/theme/admin/js/adminlte.min.js')?>"></script>
-<script src="<?=base_url('/js/bootbox.min.js')?>"></script>
-<script src="<?=base_url('/theme/admin/js/bootstrap-datepicker.min.js')?>"></script>
-<script src="<?=base_url('/theme/admin/js/tindatdai_admin.js')?>"></script>
+<?php $this->load->view('/admin/common/include-javascripts')?>
 
 <script type="text/javascript">
 	var sendRequest = function(){

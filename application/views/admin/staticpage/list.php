@@ -11,7 +11,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Vân Anh Shop | Quản lý trang tĩnh</title>
+	<title>Quản Lý Trang Tĩnh | Vân Anh Shop</title>
 	<?php $this->load->view('/admin/common/header-js') ?>
 </head>
 
@@ -105,13 +105,7 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 3 -->
-<script src="<?=base_url('/theme/admin/js/jquery.min.js')?>"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?=base_url('/theme/admin/js/bootstrap.min.js')?>"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url('/theme/admin/js/adminlte.min.js')?>"></script>
+<?php $this->load->view('/admin/common/include-javascripts')?>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

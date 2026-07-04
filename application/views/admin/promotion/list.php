@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Vân Anh Shop | Quản lý khuyến mãi</title>
+    <title>Quản Lý Khuyến Mãi | Vân Anh Shop</title>
     <?php $this->load->view('/admin/common/header-js') ?>
 </head>
 
@@ -134,10 +134,8 @@ echo form_open('admin/promotion/list', array('id' => 'frmPost'));
     <?php $this->load->view('/admin/common/admin-footer')?>
 </div>
 
-<script src="<?=base_url('/theme/admin/js/jquery.min.js')?>"></script>
-<script src="<?=base_url('/theme/admin/js/bootstrap.min.js')?>"></script>
-<script src="<?=base_url('/theme/admin/js/adminlte.min.js')?>"></script>
-<script src="<?=base_url('/js/bootbox.min.js')?>"></script>
+<?php $this->load->view('/admin/common/include-javascripts')?>
+
 <script type="text/javascript">
     var sendRequest = function() {
         var query = $('#searchKey').val() || '';

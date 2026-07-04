@@ -4,6 +4,7 @@
  */
 
 $(document).ready(function(){
+	activeLeftMenu();
 	$('[data-toggle="tooltip"]').tooltip();
 	//Date picker
 	$('.datepicker').datepicker({
@@ -18,9 +19,44 @@ $(document).ready(function(){
 		}
 
 	});
-
-
 });
+
+function activeLeftMenu(){
+	// 1. Định nghĩa URL của trang Dashboard chính (Thay đổi phù hợp với dự án của bạn)
+	var dashboardUrl = window.location.origin + '/dashboard.html';
+	var currentUrl = window.location.href;
+	// 2. Xử lý logic Active khi Tải Trang (Page Load)
+	if (currentUrl === dashboardUrl || currentUrl === window.location.origin + '/') {
+		// Nếu quay lại Dashboard -> Xóa bộ nhớ tạm để tránh lệch trạng thái
+		localStorage.removeItem('activeMenuHref');
+
+		// Active trực tiếp menu Dashboard (Giả định thẻ a của Dashboard có href trùng url)
+		$('ul.sidebar-menu > li > a[href="' + dashboardUrl + '"]').parent('li').addClass('active');
+	} else {
+		// Nếu ở các trang khác -> Kiểm tra bộ nhớ tạm
+		var savedHref = localStorage.getItem('activeMenuHref');
+
+		if (savedHref) {
+			// Nếu có bộ nhớ tạm -> Active menu cha đã lưu trước đó
+			$('ul.sidebar-menu > li > a[href="' + savedHref + '"]').parent('li').addClass('active');
+		} else {
+			// Dự phòng: Nếu mất bộ nhớ tạm, chạy lại tính năng quét URL trùng khớp cũ
+			$('ul.menu > li > a').each(function() {
+				if (this.href === currentUrl) {
+					$(this).parent('li').addClass('active');
+					localStorage.setItem('activeMenuHref', this.href); // Lưu lại luôn
+				}
+			});
+		}
+	}
+
+	// 3. Xử lý logic khi Người Dùng Click vào Menu Chính
+	$('ul.sidebar-menu > li > a').click(function() {
+		// Lưu thuộc tính href của menu chính vừa click vào localStorage
+		var menuHref = $(this).attr('href');
+		localStorage.setItem('activeMenuHref', menuHref);
+	});
+}
 
 var getNamedParameter = function (key) {
 	if (key == undefined) return false;

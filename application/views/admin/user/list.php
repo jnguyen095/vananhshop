@@ -11,7 +11,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Vân Anh Shop | Quản lý người dùng</title>
+	<title>Quản Lý Người Dùng | Vân Anh Shop</title>
 	<?php $this->load->view('/admin/common/header-js') ?>
 </head>
 
@@ -108,15 +108,8 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
+<?php $this->load->view('/admin/common/include-javascripts')?>
 
-<!-- jQuery 3 -->
-<script src="<?=base_url('/theme/admin/js/jquery.min.js')?>"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="<?=base_url('/theme/admin/js/bootstrap.min.js')?>"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url('/theme/admin/js/adminlte.min.js')?>"></script>
-
-<script src="<?=base_url('/theme/admin/js/tindatdai_admin.js')?>"></script>
 
 <script type="text/javascript">
 	var sendRequest = function(){
