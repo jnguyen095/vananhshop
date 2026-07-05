@@ -60,8 +60,13 @@
 						<div class="col-md-4">
 							<select name="txt_usergroup" class="form-control">
 								<option value="">---Chọn nhóm người dùng---</option>
-								<option value="<?=USER_GROUP_ADMIN?>" <?=(isset($txt_usergroup) && $txt_usergroup == USER_GROUP_ADMIN) ? 'selected' : '' ?>>Quản trị</option>
-								<option value="<?=USER_GROUP_CUSTOMER?>" <?=(isset($txt_usergroup) && $txt_usergroup == USER_GROUP_CUSTOMER) ? 'selected' : '' ?>>Người dùng</option>
+								<?php
+								foreach ($userGroups as $userGroup){
+									?>
+									<option value="<?=$userGroup->UserGroupID?>" <?=(isset($txt_usergroup) && $txt_usergroup == $userGroup->UserGroupID) ? "selected": ""?> ><?=$userGroup->GroupName?></option>
+									<?php
+								}
+								?>
 							</select>
 							<span class="text-danger"><?php echo form_error('txt_usergroup'); ?></span>
 						</div>

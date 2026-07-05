@@ -24,6 +24,13 @@ class UserManagement_controller extends MY_Controller
 
 	public function index()
 	{
+		$crudaction = $this->input->post("crudaction");
+		$data = [];
+		if($crudaction == DELETE){
+			$userId = $this->input->post("userId");
+			$this->User_Model->deleteByUserId($userId);
+			$data['message_response'] = 'Xóa người dùng thành công.';
+		}
 		$config = pagination($this);
 		$config['base_url'] = base_url('admin/user/list.html');
 		if(!$config['orderField']){
@@ -130,6 +137,7 @@ class UserManagement_controller extends MY_Controller
 
 	public function addUser($userId = null){
 		$data = [];
+		$data["userGroups"] = $this->UserGroup_Model->getAllUserGroup();
 		$fullname = $this->input->post('txt_fullname');
 		$password = $this->input->post('txt_password');
 		$email = $this->input->post('txt_email');

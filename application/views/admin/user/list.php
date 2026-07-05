@@ -36,8 +36,18 @@
 			</ol>
 		</section>
 
+		<?php
+		$attributes = array("id" => "frmUser");
+		echo form_open("admin/user/list", $attributes);
+		?>
 		<!-- Main content -->
 		<section class="content container-fluid">
+			<?php if(!empty($message_response)){
+				echo '<div class="alert alert-success">';
+				echo '<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>';
+				echo $message_response;
+				echo '</div>';
+			}?>
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">Danh sách người dùng</h3>
@@ -82,6 +92,7 @@
 									<td><?=date('d/m/Y H:i', strtotime($user->LastLogin))?></td>
 									<td>
 										<a data-toggle="tooltip" title="Chỉnh sửa" href="<?=base_url('/admin/user/add-'.$user->Us3rID.'.html')?>"><i class="glyphicon glyphicon-edit"></i></a>
+										&nbsp;|&nbsp;<a class="remove-user" data-userid="<?=$user->Us3rID?>" data-toggle="tooltip" title="Xóa người dùng"><i class="glyphicon glyphicon-remove"></i></a>
 									</td>
 								</tr>
 								<?php
@@ -89,14 +100,20 @@
 							?>
 							</tbody>
 						</table>
-						<div class="text-center">
-							<?php echo $pagination; ?>
-						</div>
+
+					</div>
+
+					<div class="row text-center">
+						<?php echo $pagination; ?>
 					</div>
 				</div>
 			</div>
 
 		</section>
+
+		<input type="hidden" id="crudaction" name="crudaction">
+		<input type="hidden" id="userId" name="userId">
+		<?php echo form_close(); ?>
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
@@ -135,6 +152,24 @@
 	}else{
 		currentSort.attr('data-direction', "ASC").find('i.glyphicon').removeClass('glyphicon-triangle-top').addClass('glyphicon-triangle-bottom active');
 	}
+
+
+	function deleteUserHandler(){
+		$('.remove-user').click(function(){
+			var userId = $(this).data('userid');
+			bootbox.confirm("Bạn đã chắc chắn người dùng này chưa?", function(result){
+				if(result){
+					$("#userId").val(userId);
+					$("#crudaction").val("delete");
+					$("#frmUser").submit();
+				}
+			});
+		});
+	}
+
+	$(document).ready(function(){
+		deleteUserHandler();
+	});
 </script>
 </body>
 </html>
