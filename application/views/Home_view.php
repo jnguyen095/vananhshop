@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Thời Trang, Đồ Lót, Nội Y, Đồ Bộ Mặc Nhà | Vân Anh Shop</title>
-	<meta name="description" content="Vân Anh Shop chuyên cung cấp sỉ và lẻ quần lót nữ, áo lót nữ, áo lá học sinh, đồ lót nam chất lượng cao, giá tốt, giao hàng toàn quốc.">
+	<meta name="description" content="Vân Anh Shop chuyên cung cấp quần lót nữ, áo lót nữ, áo lá học sinh và đồ lót nam chất lượng cao. Hàng chính hãng, nhiều mẫu đẹp, giá hợp lý, giao hàng nhanh toàn quốc.">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="robots" content="index, follow, max-image-preview:large">
 	<link rel="canonical" href="<?php echo rtrim(base_url(), '/'); ?>">
@@ -12,7 +12,7 @@
 	<meta property="og:locale" content="vi_VN">
 	<meta property="og:type" content="website">
 	<meta property="og:title" itemprop="name" content="Thời Trang, Đồ Lót, Nội Y, Đồ Bộ Mặc Nhà">
-	<meta property="og:description" content="Vân Anh Shop chuyên cung cấp sỉ và lẻ quần lót nữ, áo lót nữ, áo lá học sinh, đồ lót nam chất lượng cao, giá tốt, giao hàng toàn quốc.">
+	<meta property="og:description" content="Vân Anh Shop chuyên cung cấp quần lót nữ, áo lót nữ, áo lá học sinh và đồ lót nam chất lượng cao. Hàng chính hãng, nhiều mẫu đẹp, giá hợp lý, giao hàng nhanh toàn quốc.">
 	<meta property="og:url" content="<?php echo rtrim(base_url(), '/'); ?>">
 	<meta property="og:site_name" content="Vân Anh Shop">
 	<meta property="og:image" content="<?php echo rtrim(base_url(), '/'); ?>/img/vananhshop_logo_hr.png">
