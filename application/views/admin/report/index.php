@@ -21,9 +21,10 @@
 		<section class="content">
 			<div class="nav-tabs-custom">
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#" data-report-type="day">Report theo ngày</a></li>
-					<li><a href="#" data-report-type="month">Report theo tháng</a></li>
-					<li><a href="#" data-report-type="customer">Customer Report</a></li>
+					<li class="active"><a href="#" class="report-tab-link" data-report-type="day" title="Report theo ngày"><i class="fa fa-calendar tab-icon"></i><span class="tab-label">Report theo ngày</span></a></li>
+					<li><a href="#" class="report-tab-link" data-report-type="month" title="Report theo tháng"><i class="fa fa-calendar-check-o tab-icon"></i><span class="tab-label">Report theo tháng</span></a></li>
+					<li><a href="#" class="report-tab-link" data-report-type="customer" title="Customer Report"><i class="fa fa-users tab-icon"></i><span class="tab-label">Customer Report</span></a></li>
+					<li><a href="#" class="report-tab-link" data-report-type="product" title="Product Report"><i class="fa fa-cube tab-icon"></i><span class="tab-label">Product Report</span></a></li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="reportContent">

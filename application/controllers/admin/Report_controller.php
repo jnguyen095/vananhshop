@@ -23,6 +23,12 @@ class Report_controller extends MY_Controller
             return;
         }
 
+        if ($type === 'product') {
+            $data = $this->Dashboard_Model->getProductReportData();
+            $this->load->view('admin/report/product_partial', $data);
+            return;
+        }
+
         $period = in_array($type, array('month'), true) ? 'month' : 'day';
         $data = $this->Dashboard_Model->getReportSummary($period);
         $this->load->view('admin/report/partial', $data);

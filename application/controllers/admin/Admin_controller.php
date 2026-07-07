@@ -17,17 +17,15 @@ class Admin_controller extends MY_Controller
 
 	public function index() {
 		$data = [
-			'totalActiveProducts' => $this->Dashboard_Model->countActiveProducts(),
+			//'totalActiveProducts' => $this->Dashboard_Model->countActiveProducts(),
 			'totalOrderToday' => $this->Dashboard_Model->countOrders(true),
 			'totalOrderAll' => $this->Dashboard_Model->countOrders(false),
 			'revenueToday' => $this->Dashboard_Model->sumRevenue(true),
 			'revenueAll' => $this->Dashboard_Model->sumRevenue(false),
-			'quotationToday' => $this->Dashboard_Model->countQuotation(true),
-			'quotationAll' => $this->Dashboard_Model->countQuotation(false),
-			'feedbackToday' => $this->Dashboard_Model->countFeedback(true),
-			'feedbackAll' => $this->Dashboard_Model->countFeedback(false),
-			'topProducts' => $this->Dashboard_Model->topViewedProducts(5),
-			'topOrderedProducts' => $this->Dashboard_Model->topOrderedProducts(5),
+			//'quotationToday' => $this->Dashboard_Model->countQuotation(true),
+			//'quotationAll' => $this->Dashboard_Model->countQuotation(false),
+			//'feedbackToday' => $this->Dashboard_Model->countFeedback(true),
+			//'feedbackAll' => $this->Dashboard_Model->countFeedback(false),
 			// orders chart data for last 7 days (array of [date, count])
 			'ordersChart' => json_encode($this->Dashboard_Model->getOrdersCountByDay(7))
 		];

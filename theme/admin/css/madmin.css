@@ -388,3 +388,21 @@ span.cancel{
 @media (max-width: 768px) {
 	.mobile-hide{ display: none !important; }
 }
+
+.nav-tabs-custom .nav-tabs > li > a.report-tab-link {
+	padding: 10px 12px;
+}
+.nav-tabs-custom .nav-tabs > li > a.report-tab-link .tab-label {
+	margin-left: 6px;
+}
+@media (max-width: 767px) {
+	.nav-tabs-custom .nav-tabs > li > a.report-tab-link {
+		padding: 10px 10px;
+	}
+	.nav-tabs-custom .nav-tabs > li > a.report-tab-link .tab-label {
+		display: none;
+	}
+	.nav-tabs-custom .nav-tabs > li > a.report-tab-link .tab-icon {
+		margin-right: 0;
+	}
+}

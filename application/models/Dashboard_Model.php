@@ -98,6 +98,13 @@ class Dashboard_Model extends CI_Model
 		);
 	}
 
+	public function getProductReportData(){
+		return array(
+			'topProducts' => $this->topViewedProducts(5),
+			'topOrderedProducts' => $this->topOrderedProducts(5)
+		);
+	}
+
 	private function getTopPotentialCustomers($baseWhere){
 		$query = "select coalesce(s.Receiver, '') as CustomerName, coalesce(s.Phone, '') as Phone, count(*) as OrderCount, sum(m.TotalPrice) as TotalValue, max(m.CreatedDate) as LastPurchase from myorder m inner join ordershipping s on s.OrderID = m.OrderID {$baseWhere} group by s.Receiver, s.Phone order by TotalValue desc, OrderCount desc limit 5";
 		$result = $this->db->query($query);
