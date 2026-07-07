@@ -28,7 +28,7 @@
 					</div>
 
 					<div class="top-header-icon-container">
-						<img class="top-header-truck-icon" src="<?=base_url('/img/truck-icon.png')?>" alt="Hotline"/>
+						<img class="top-header-truck-icon" src="<?=base_url('/img/truck-icon.png')?>" alt="Free shipping"/>
 					</div>
 					<div class="top-header-hotline text-left">
 						<div>Miễn phí giao hàng</div>

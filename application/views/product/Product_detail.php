@@ -111,7 +111,7 @@
 						<input type="number" id="quantity" name="quantity" value="1" class="form-control"/>
 						<div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
 					</form>
-					<a id="btnBuy" productId="<?=$product->ProductID?>" href="#" class="btn btn-primary buyableBtn">Thêm<span class="mobile-hide"> Vào</span> Giỏ Hàng</a>
+					<a id="btnBuy" productId="<?=$product->ProductID?>" href="#" class="btn btn-primary buyableBtn">Cho Vào Giỏ<span class="mobile-hide"> Hàng</span></a>
 				</div>
 			</div>
 

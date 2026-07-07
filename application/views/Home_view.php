@@ -15,7 +15,7 @@
 	<meta property="og:description" content="Vân Anh Shop chuyên cung cấp sỉ và lẻ quần lót nữ, áo lót nữ, áo lá học sinh, đồ lót nam chất lượng cao, giá tốt, giao hàng toàn quốc.">
 	<meta property="og:url" content="<?php echo rtrim(base_url(), '/'); ?>">
 	<meta property="og:site_name" content="Vân Anh Shop">
-	<meta property="og:image" content="<?php echo rtrim(base_url(), '/'); ?>/img/vananh-sm-icon.png">
+	<meta property="og:image" content="<?php echo rtrim(base_url(), '/'); ?>/img/vananhshop_logo_hr.png">
 	<meta property="og:image:width" content="152">
 	<meta property="og:image:height" content="147">
 
@@ -29,7 +29,7 @@
 					"name": "Vân Anh Shop",
 					"url": "<?php echo rtrim(base_url(), '/'); ?>",
 					"logo": "<?php echo rtrim(base_url(), '/'); ?>/img/vananh_logo.png",
-					"image": "<?php echo rtrim(base_url(), '/'); ?>/img/vananh-sm-icon.png",
+					"image": "<?php echo rtrim(base_url(), '/'); ?>/img/vananhshop_logo_hr.png",
 					"telephone": "0865.053.849",
 					"email": "contact@vananhshop.com",
 					"priceRange": "$$",
