@@ -90,6 +90,46 @@ class Dashboard_Model extends CI_Model
 		return $output;
 	}
 
+	public function getCustomerReportData(){
+		$baseWhere = " where m.Status <> '" . ORDER_STATUS_DELETED . "' and m.Status <> '" . ORDER_STATUS_CANCELLED . "'";
+		return array(
+			'potential_customers' => $this->getTopPotentialCustomers($baseWhere),
+			'frequent_buyers' => $this->getTopFrequentBuyers($baseWhere)
+		);
+	}
+
+	private function getTopPotentialCustomers($baseWhere){
+		$query = "select coalesce(s.Receiver, '') as CustomerName, coalesce(s.Phone, '') as Phone, count(*) as OrderCount, sum(m.TotalPrice) as TotalValue, max(m.CreatedDate) as LastPurchase from myorder m inner join ordershipping s on s.OrderID = m.OrderID {$baseWhere} group by s.Receiver, s.Phone order by TotalValue desc, OrderCount desc limit 5";
+		$result = $this->db->query($query);
+		$rows = array();
+		foreach($result->result() as $row){
+			$rows[] = array(
+				'customer_name' => $row->CustomerName,
+				'phone' => $row->Phone,
+				'order_count' => (int)$row->OrderCount,
+				'total_value' => (float)$row->TotalValue,
+				'last_purchase' => $row->LastPurchase
+			);
+		}
+		return $rows;
+	}
+
+	private function getTopFrequentBuyers($baseWhere){
+		$query = "select coalesce(s.Receiver, '') as CustomerName, coalesce(s.Phone, '') as Phone, count(*) as OrderCount, sum(m.TotalPrice) as TotalValue, max(m.CreatedDate) as LastPurchase from myorder m inner join ordershipping s on s.OrderID = m.OrderID {$baseWhere} group by s.Receiver, s.Phone order by OrderCount desc, TotalValue desc limit 5";
+		$result = $this->db->query($query);
+		$rows = array();
+		foreach($result->result() as $row){
+			$rows[] = array(
+				'customer_name' => $row->CustomerName,
+				'phone' => $row->Phone,
+				'order_count' => (int)$row->OrderCount,
+				'total_value' => (float)$row->TotalValue,
+				'last_purchase' => $row->LastPurchase
+			);
+		}
+		return $rows;
+	}
+
 	public function getReportSummary($period = 'day'){
 		$period = ($period === 'month') ? 'month' : 'day';
 		$baseWhere = " where m.Status <> '" . ORDER_STATUS_DELETED . "' and m.Status <> '" . ORDER_STATUS_CANCELLED . "'";

@@ -23,6 +23,7 @@
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#" data-report-type="day">Report theo ngày</a></li>
 					<li><a href="#" data-report-type="month">Report theo tháng</a></li>
+					<li><a href="#" data-report-type="customer">Customer Report</a></li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="reportContent">
