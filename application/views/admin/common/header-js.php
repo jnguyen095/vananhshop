@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="<?=base_url('/theme/admin/css/ionicons.min.css')?>">
 <!-- Theme style -->
 <link rel="stylesheet" href="<?=base_url('/theme/admin/css/AdminLTE.min.css')?>">
-<link rel="stylesheet" href="<?=base_url('/theme/admin/css/madmin.css')?>">
+<link rel="stylesheet" href="<?=base_url('/theme/admin/css/madmin_v1.0.css')?>">
 <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
       page. However, you can choose any other skin. Make sure you
       apply the skin class to the body tag so the changes take effect. -->
