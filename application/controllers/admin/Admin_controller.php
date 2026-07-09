@@ -26,8 +26,9 @@ class Admin_controller extends MY_Controller
 			//'quotationAll' => $this->Dashboard_Model->countQuotation(false),
 			//'feedbackToday' => $this->Dashboard_Model->countFeedback(true),
 			//'feedbackAll' => $this->Dashboard_Model->countFeedback(false),
-			// orders chart data for last 7 days (array of [date, count])
-			'ordersChart' => json_encode($this->Dashboard_Model->getOrdersCountByDay(7))
+			// chart data for last 7 days
+			'ordersChart' => json_encode($this->Dashboard_Model->getOrdersCountByDay(7)),
+			'revenueChart' => json_encode($this->Dashboard_Model->getRevenueByDay(7))
 		];
 		$this->load->view('admin/dashboard', $data);
 	}

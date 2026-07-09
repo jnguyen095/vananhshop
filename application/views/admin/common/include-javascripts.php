@@ -12,8 +12,6 @@
 <!-- AdminLTE App -->
 <script src="<?=base_url('/theme/admin/js/adminlte.min.js')?>"></script>
 <script src="<?=base_url('/js/bootbox.min.js')?>"></script>
-<script src="<?=base_url('/theme/admin/js/jquery.flot.js')?>"></script>
-<script src="<?=base_url('/theme/admin/js/jquery.flot.categories.js')?>"></script>
 <script src="<?=base_url('/theme/admin/js/bootstrap-datepicker.min.js')?>"></script>
 <script src="<?=base_url('/theme/admin/js/vananhshop_admin.js')?>"></script>
 <script src="<?=base_url('/js/typeahead.bundle.min.js')?>"></script>

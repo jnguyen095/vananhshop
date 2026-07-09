@@ -117,13 +117,25 @@
 					</div>
 				</div>
 			</div>
-			<!-- Orders chart (last 7 days) -->
+			<!-- Orders and revenue charts (last 7 days) -->
 			<div class="row">
-				<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="col-md-6 col-sm-12 col-xs-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">Đơn hàng 7 ngày qua</div>
 						<div class="panel-body">
-							<div id="orders-week-chart" style="height:260px;"></div>
+							<div class="chart-responsive" style="position: relative; height:260px;">
+								<canvas id="orders-week-chart"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 col-xs-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">Doanh thu 7 ngày qua</div>
+						<div class="panel-body">
+							<div class="chart-responsive" style="position: relative; height:260px;">
+								<canvas id="daily-revenue-chart"></canvas>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -143,21 +155,103 @@
 
 <!-- REQUIRED JS SCRIPTS -->
 <?php $this->load->view('/admin/common/include-javascripts')?>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 
 <script type="text/javascript">
  	$(document).ready(function() {
-		try{
+		try {
 			var ordersChart = <?=$ordersChart?> || [];
-			var plotData = [];
-			for(var i=0;i<ordersChart.length;i++){
-				plotData.push([ordersChart[i][0], ordersChart[i][1]]);
+			var labels = [];
+			var values = [];
+			for (var i = 0; i < ordersChart.length; i++) {
+				labels.push(ordersChart[i][0]);
+				values.push(ordersChart[i][1]);
 			}
 
-			$.plot('#orders-week-chart', [ plotData ], {
-				series: { bars: { show: true, barWidth: 0.2, align: 'center' } },
-				xaxis: { mode: 'categories', tickLength: 0 }
+			var ctx = document.getElementById('orders-week-chart').getContext('2d');
+			new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: labels,
+					datasets: [{
+						label: 'Orders',
+						data: values,
+						backgroundColor: 'rgba(54, 162, 235, 0.7)',
+						borderColor: 'rgba(54, 162, 235, 1)',
+						borderWidth: 1,
+						roundness: 0.4,
+						borderRadius: 6,
+						maxBarThickness: 48
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: { display: false },
+						title: { display: false }
+					},
+					scales: {
+						x: {
+							ticks: { color: '#555' },
+							grid: { display: false }
+						},
+						y: {
+							beginAtZero: true,
+							ticks: { color: '#555', precision: 0 },
+							grid: { color: 'rgba(0,0,0,0.05)' }
+						}
+					}
+				}
 			});
-		} catch(e){
+
+			var revenueChart = <?=$revenueChart?> || [];
+			var revenueLabels = [];
+			var revenueValues = [];
+			for (var j = 0; j < revenueChart.length; j++) {
+				revenueLabels.push(revenueChart[j][0]);
+				revenueValues.push(revenueChart[j][1]);
+			}
+
+			var revenueCtx = document.getElementById('daily-revenue-chart').getContext('2d');
+			new Chart(revenueCtx, {
+				type: 'line',
+				data: {
+					labels: revenueLabels,
+					datasets: [{
+						label: 'Revenue',
+						data: revenueValues,
+						fill: true,
+						backgroundColor: 'rgba(75, 192, 192, 0.15)',
+						borderColor: 'rgba(75, 192, 192, 1)',
+						pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+						pointBorderColor: '#fff',
+						pointRadius: 4,
+						borderWidth: 2,
+						tension: 0.3
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: { display: false },
+						title: { display: false }
+					},
+					scales: {
+						x: {
+							ticks: { color: '#555' },
+							grid: { display: false }
+						},
+						y: {
+							beginAtZero: true,
+							ticks: { color: '#555', callback: function(value) { return value.toLocaleString(); } },
+							grid: { color: 'rgba(0,0,0,0.05)' }
+						}
+					}
+				}
+			});
+		} catch (e) {
 			console.error('Failed to render orders chart', e);
 		}
  	});

@@ -90,6 +90,37 @@ class Dashboard_Model extends CI_Model
 		return $output;
 	}
 
+	public function getRevenueByDay($days = 7){
+		$days = intval($days);
+		if($days < 1) $days = 7;
+		$start = date('Y-m-d', strtotime('-'.($days-1).' days'));
+
+		$dates = array();
+		for($i = 0; $i < $days; $i++){
+			$d = date('Y-m-d', strtotime($start . " +{$i} days"));
+			$dates[$d] = 0;
+		}
+
+		$query = "select date(m.CreatedDate) as Day, sum(m.TotalPrice) as TotalRevenue from myorder m ";
+		$query .= " where m.Status <> '".ORDER_STATUS_DELETED."'";
+		$query .= " and m.Status <> '".ORDER_STATUS_CANCELLED."'";
+		$query .= " and date(m.CreatedDate) >= '".$start."'";
+		$query .= " group by date(m.CreatedDate) order by date(m.CreatedDate) asc";
+		$result = $this->db->query($query);
+		foreach($result->result() as $row){
+			$day = $row->Day;
+			if(array_key_exists($day, $dates)){
+				$dates[$day] = (float)$row->TotalRevenue;
+			}
+		}
+
+		$output = array();
+		foreach($dates as $d => $c){
+			$output[] = array($d, $c);
+		}
+		return $output;
+	}
+
 	public function getCustomerReportData(){
 		$baseWhere = " where m.Status <> '" . ORDER_STATUS_DELETED . "' and m.Status <> '" . ORDER_STATUS_CANCELLED . "'";
 		return array(
