@@ -31,6 +31,12 @@ class Report_controller extends MY_Controller
 
         $period = in_array($type, array('month'), true) ? 'month' : 'day';
         $data = $this->Dashboard_Model->getReportSummary($period);
+        $data['ordersChartData'] = $period === 'month'
+            ? $this->Dashboard_Model->getOrdersCountByMonth(6)
+            : $this->Dashboard_Model->getOrdersCountByDay(7);
+        $data['revenueChartData'] = $period === 'month'
+            ? $this->Dashboard_Model->getRevenueByMonth(6)
+            : $this->Dashboard_Model->getRevenueByDay(7);
         $this->load->view('admin/report/partial', $data);
     }
 }

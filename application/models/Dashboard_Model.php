@@ -121,6 +121,68 @@ class Dashboard_Model extends CI_Model
 		return $output;
 	}
 
+	public function getOrdersCountByMonth($months = 6){
+		$months = intval($months);
+		if($months < 1) $months = 6;
+		$start = date('Y-m-01', strtotime('-'.($months - 1).' months'));
+
+		$dates = array();
+		for($i = 0; $i < $months; $i++){
+			$d = date('Y-m', strtotime($start . " +{$i} months"));
+			$dates[$d] = 0;
+		}
+
+		$query = "select date_format(m.CreatedDate, '%Y-%m') as Month, count(*) as Total from myorder m ";
+		$query .= " where m.Status <> '".ORDER_STATUS_DELETED."'";
+		$query .= " and m.Status <> '".ORDER_STATUS_CANCELLED."'";
+		$query .= " and date(m.CreatedDate) >= '".$start."'";
+		$query .= " group by Month order by Month asc";
+		$result = $this->db->query($query);
+		foreach($result->result() as $row){
+			$month = $row->Month;
+			if(array_key_exists($month, $dates)){
+				$dates[$month] = (int)$row->Total;
+			}
+		}
+
+		$output = array();
+		foreach($dates as $d => $c){
+			$output[] = array($d, $c);
+		}
+		return $output;
+	}
+
+	public function getRevenueByMonth($months = 6){
+		$months = intval($months);
+		if($months < 1) $months = 6;
+		$start = date('Y-m-01', strtotime('-'.($months - 1).' months'));
+
+		$dates = array();
+		for($i = 0; $i < $months; $i++){
+			$d = date('Y-m', strtotime($start . " +{$i} months"));
+			$dates[$d] = 0;
+		}
+
+		$query = "select date_format(m.CreatedDate, '%Y-%m') as Month, sum(m.TotalPrice) as TotalRevenue from myorder m ";
+		$query .= " where m.Status <> '".ORDER_STATUS_DELETED."'";
+		$query .= " and m.Status <> '".ORDER_STATUS_CANCELLED."'";
+		$query .= " and date(m.CreatedDate) >= '".$start."'";
+		$query .= " group by Month order by Month asc";
+		$result = $this->db->query($query);
+		foreach($result->result() as $row){
+			$month = $row->Month;
+			if(array_key_exists($month, $dates)){
+				$dates[$month] = (float)$row->TotalRevenue;
+			}
+		}
+
+		$output = array();
+		foreach($dates as $d => $c){
+			$output[] = array($d, $c);
+		}
+		return $output;
+	}
+
 	public function getCustomerReportData(){
 		$baseWhere = " where m.Status <> '" . ORDER_STATUS_DELETED . "' and m.Status <> '" . ORDER_STATUS_CANCELLED . "'";
 		return array(
