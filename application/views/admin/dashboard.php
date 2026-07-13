@@ -11,7 +11,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Vân Anh Shop | Dashboard</title>
+	<title>Dashboard | Vân Anh Shop</title>
 	<?php $this->load->view('/admin/common/header-js') ?>
 </head>
 
