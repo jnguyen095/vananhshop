@@ -1,5 +1,32 @@
 <div class="row">
 	<div class="col-md-6">
+		<div class="box box-info">
+			<div class="box-header with-border">
+				<h3 class="box-title">Phân bố khách mua lại</h3>
+			</div>
+			<div class="box-body">
+				<div style="height: 320px;">
+					<canvas id="repeat-purchase-chart"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="box box-warning">
+			<div class="box-header with-border">
+				<h3 class="box-title">Phân bố đơn hàng theo thành phố</h3>
+			</div>
+			<div class="box-body">
+				<div style="height: 320px;">
+					<canvas id="city-purchase-chart"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="box-title">Top 5 khách hàng tiềm năng</h3>
@@ -74,3 +101,68 @@
 		</div>
 	</div>
 </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var repeatChartData = <?=json_encode($repeat_purchase_chart)?>;
+		var repeatLabels = repeatChartData.labels || [];
+		var repeatValues = repeatChartData.values || [];
+
+		if (repeatLabels.length && repeatValues.length) {
+			var repeatCtx = document.getElementById('repeat-purchase-chart').getContext('2d');
+			new Chart(repeatCtx, {
+				type: 'pie',
+				data: {
+					labels: repeatLabels,
+					datasets: [{
+						data: repeatValues,
+						backgroundColor: [
+							'#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0', '#9966FF',
+							'#FF9F40', '#C9CBCF', '#66BB6A', '#8D6E63', '#AB47BC'
+						],
+						borderWidth: 1
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: { position: 'bottom' }
+					}
+				}
+			});
+		}
+
+		var cityChartData = <?=json_encode($city_purchase_chart)?>;
+		var cityLabels = cityChartData.labels || [];
+		var cityValues = cityChartData.values || [];
+
+		if (cityLabels.length && cityValues.length) {
+			var cityCtx = document.getElementById('city-purchase-chart').getContext('2d');
+			new Chart(cityCtx, {
+				type: 'pie',
+				data: {
+					labels: cityLabels,
+					datasets: [{
+						data: cityValues,
+						backgroundColor: [
+							'#4BC0C0', '#FF6384', '#36A2EB', '#FFCE56', '#9966FF',
+							'#66BB6A', '#8D6E63', '#AB47BC', '#C9CBCF', '#FF9F40'
+						],
+						borderWidth: 1
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: { position: 'bottom' }
+					}
+				}
+			});
+		}
+	});
+</script>

@@ -187,7 +187,9 @@ class Dashboard_Model extends CI_Model
 		$baseWhere = " where m.Status <> '" . ORDER_STATUS_DELETED . "' and m.Status <> '" . ORDER_STATUS_CANCELLED . "'";
 		return array(
 			'potential_customers' => $this->getTopPotentialCustomers($baseWhere),
-			'frequent_buyers' => $this->getTopFrequentBuyers($baseWhere)
+			'frequent_buyers' => $this->getTopFrequentBuyers($baseWhere),
+			'repeat_purchase_chart' => $this->getRepeatPurchaseChartData($baseWhere),
+			'city_purchase_chart' => $this->getCityPurchaseChartData($baseWhere)
 		);
 	}
 
@@ -230,35 +232,71 @@ class Dashboard_Model extends CI_Model
 		return $rows;
 	}
 
-	public function getReportSummary($period = 'day'){
-		$period = ($period === 'month') ? 'month' : 'day';
-		$baseWhere = " where m.Status <> '" . ORDER_STATUS_DELETED . "' and m.Status <> '" . ORDER_STATUS_CANCELLED . "'";
-		$currentLabel = 'Hôm nay';
-		$previousLabel = 'Hôm qua';
-		$currentFrom = date('Y-m-d');
-		$currentTo = date('Y-m-d');
-		$previousFrom = date('Y-m-d', strtotime('-1 day'));
-		$previousTo = date('Y-m-d', strtotime('-1 day'));
+	private function getRepeatPurchaseChartData($baseWhere){
+		$query = "select count(*) as OrderCount from myorder m inner join ordershipping s on s.OrderID = m.OrderID {$baseWhere} group by s.Receiver, s.Phone having count(*) >= 2";
+		$result = $this->db->query($query);
+		$rows = $result->result();
 
-		if($period === 'month'){
-			$currentLabel = 'Tháng này';
-			$previousLabel = 'Tháng trước';
-			$currentFrom = date('Y-m-01');
-			$currentTo = date('Y-m-t');
-			$previousFrom = date('Y-m-01', strtotime('first day of previous month'));
-			$previousTo = date('Y-m-t', strtotime('last day of previous month'));
+		$distribution = array();
+		foreach ($rows as $row) {
+			$orderCount = (int)$row->OrderCount;
+			if ($orderCount < 2) {
+				continue;
+			}
+			$label = $orderCount >= 3 ? 'Mua lại lần thứ ' . $orderCount : 'Mua lại lần thứ 2';
+			if (!isset($distribution[$label])) {
+				$distribution[$label] = 0;
+			}
+			$distribution[$label]++;
 		}
 
-		$currentWhere = $baseWhere . " and date(m.CreatedDate) >= '{$currentFrom}' and date(m.CreatedDate) <= '{$currentTo}'";
-		$previousWhere = $baseWhere . " and date(m.CreatedDate) >= '{$previousFrom}' and date(m.CreatedDate) <= '{$previousTo}'";
+		$labels = array();
+		$values = array();
+		foreach ($distribution as $label => $count) {
+			$labels[] = $label;
+			$values[] = $count;
+		}
 
 		return array(
+			'labels' => $labels,
+			'values' => $values
+		);
+	}
+
+	private function getCityPurchaseChartData($baseWhere){
+		$query = "select coalesce(s.CityID, 0) as CityID, count(*) as OrderCount from myorder m inner join ordershipping s on s.OrderID = m.OrderID {$baseWhere} group by s.CityID order by OrderCount desc limit 10";
+		$result = $this->db->query($query);
+		$rows = $result->result();
+
+		$labels = array();
+		$values = array();
+		foreach ($rows as $row) {
+			$cityId = (int)$row->CityID;
+			$cityName = $cityId > 0 ? $this->getCityNameById($cityId) : 'Không rõ';
+			$labels[] = $cityName;
+			$values[] = (int)$row->OrderCount;
+		}
+
+		return array(
+			'labels' => $labels,
+			'values' => $values
+		);
+	}
+
+	private function getCityNameById($cityId){
+		$this->db->select('CityName');
+		$this->db->from('city');
+		$this->db->where('CityID', (int)$cityId);
+		$query = $this->db->get();
+		$row = $query->row();
+		return $row && !empty($row->CityName) ? $row->CityName : 'Không rõ';
+	}
+
+	public function getReportSummary($period = 'day'){
+		$period = ($period === 'month') ? 'month' : 'day';
+		return array(
 			'period' => $period,
-			'title' => $period === 'month' ? 'Report theo tháng' : 'Report theo ngày',
-			'orders' => $this->buildMetricComparison($currentWhere, $previousWhere, 'orders', $currentLabel, $previousLabel),
-			'revenue' => $this->buildMetricComparison($currentWhere, $previousWhere, 'revenue', $currentLabel, $previousLabel),
-			'new_users' => $this->buildCustomerMetricComparison($currentFrom, $currentTo, $previousFrom, $previousTo, 'new_users', $currentLabel, $previousLabel),
-			'repeat_buyers' => $this->buildCustomerMetricComparison($currentFrom, $currentTo, $previousFrom, $previousTo, 'repeat_buyers', $currentLabel, $previousLabel)
+			'title' => $period === 'month' ? 'Report theo tháng' : 'Report theo ngày'
 		);
 	}
 
