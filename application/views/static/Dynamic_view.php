@@ -4,19 +4,10 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta http-equiv="audience" content="general" />
 	<meta name="resource-type" content="document" />
-	<meta name="abstract" content="Thông tin nhà đất Việt Nam" />
-	<meta name="classification" content="Bất động sản Việt Nam" />
-	<meta name="area" content="Nhà đất và bất động sản" />
-	<meta name="placename" content="Việt Nam" />
-	<meta name="author" content="lamvuonvui.com" />
-	<meta name="copyright" content="©2025 lamvuonvui.com" />
-	<meta name="owner" content="lamvuonvui.com" />
-	<meta name="distribution" content="Global" />
 	<meta name="description" content="<?=$page->Title?>">
-	<meta name="keywords" content="<?=keyword_maker($page->Title)?>">
 	<meta name="revisit-after" content="1 days" />
 	<meta name="robots" content="follow" />
-	<title><?=$page->Title?></title>
+	<title><?=$page->Title?> | Vân Anh Shop</title>
 	<?php $this->load->view('common_header')?>
 	<?php $this->load->view('/common/googleadsense')?>
 	<?php $this->load->view('/common/facebook-pixel-tracking')?>
