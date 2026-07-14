@@ -13,6 +13,7 @@
 	<meta property="og:title" content="<?php echo htmlspecialchars($product->Title, ENT_QUOTES, 'UTF-8'); ?> | Vân Anh Shop">
 	<meta property="og:description" content="<?php echo htmlspecialchars(strip_tags($product->Title), ENT_QUOTES, 'UTF-8'); ?>">
 	<meta property="og:url" content="<?php echo base_url().seo_url($product->Title).'-p'.$product->ProductID.'.html';?>">
+	<meta property="og:site_name" content="Vân Anh Shop">
 	<meta property="og:image" content="<?php echo base_url(str_replace('_thumb', '', $product->Thumb)); ?>">
 	<meta property="product:price:amount" content="<?php echo $product->Price;?>">
 	<meta property="product:price:currency" content="VND">
