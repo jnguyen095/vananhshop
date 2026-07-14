@@ -7,6 +7,16 @@
 	<meta name="description" content="<?=$page->Title?>">
 	<meta name="revisit-after" content="1 days" />
 	<meta name="robots" content="follow" />
+
+	<meta property="og:locale" content="vi_VN">
+	<meta property="og:type" content="website">
+	<meta property="og:title" itemprop="name" content="<?=$page->Title?> | Vân Anh Shop">
+	<meta property="og:description" content="<?=$page->Title?> | Vân Anh Shop">
+	<meta property="og:url" content="<?php echo rtrim(base_url(seo_url($page->Title).'.html'), '/'); ?>">
+	<meta property="og:site_name" content="Vân Anh Shop">
+	<meta property="og:image" content="<?php echo rtrim(base_url(), '/'); ?>/img/vananhshop_logo_hr.png">
+	<meta property="og:image:width" content="152">
+	<meta property="og:image:height" content="147">
 	<title><?=$page->Title?> | Vân Anh Shop</title>
 	<?php $this->load->view('common_header')?>
 	<?php $this->load->view('/common/googleadsense')?>
