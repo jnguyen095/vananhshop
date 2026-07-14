@@ -126,7 +126,7 @@
 						}
 					}
 					?>
-					<li role="presentation"><a href="<?=base_url('bao-gia-si.html')?>">Báo giá</a> </li>
+					<li role="presentation"><a href="<?=base_url('huong-dan-mua-hang.html')?>">Hướng Dẫn Mua Hàng</a> </li>
 				</ul>
 
 				
