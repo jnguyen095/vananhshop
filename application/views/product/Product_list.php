@@ -11,7 +11,7 @@
 
 	<meta property="og:type" content="object">
 	<meta property="og:title" content="<?php echo $category->CatName?> | Vân Anh Shop">
-	<meta property="og:description" content="<?php echo $category->CatName?> | Vân Anh Shop">
+	<meta property="og:description" content="<?php echo $category->CatName?>">
 	<meta property="og:site_name" content="Vân Anh Shop">
 	<meta property="og:url" content="<?=base_url().seo_url($category->CatName).'-c'.($category->CategoryID).'.html'?>">
 	<meta property="og:image" content="<?=base_url('/img/category/'.$category->Image)?>">
