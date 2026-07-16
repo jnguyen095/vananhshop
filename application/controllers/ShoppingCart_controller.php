@@ -325,16 +325,18 @@ class ShoppingCart_controller extends CI_Controller
 								$html .= '<td><div class="cart-image"><img class="img-thumbnail checkout-imgs" src="'.base_url($item['image']).'"/></div>' . substr_at_middle($item['name'], 120);
 								// property
 								if($this->cart->has_options($item['rowid']) == TRUE){
-									$html .= '<br/>';
+									$html .= '<br/>(';
 									foreach ($this->cart->product_options($item['rowid']) as $option_name => $option_value){
 										$i = 1;
 										foreach ($option_value as $k => $v){
-											$html .= '<i class="text-vsm">'.$v . '</i>';
-											$html .= $i == 1 ? ':' : '';
+											if($i == 2){
+												$html .= '<i class="text-vsm">'.$v . '</i> - ';
+											}
 											$i++;
 										}
-										$html .= '<br/>';
 									}
+									$html = substr($html, 0, -3);
+									$html .= ')';
 								}
 								//
 								$html .= '</td>';
