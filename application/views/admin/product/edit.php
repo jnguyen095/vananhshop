@@ -191,7 +191,7 @@
 							if($properties != null && count($properties) > 0){
 								foreach ($properties['properties'] as $p){
 									?>
-									<div class="parent-property col-lg-2" id="<?=$p->PropertyID?>">
+									<div class="parent-property col-lg-2 col-xs-6" id="<?=$p->PropertyID?>">
 										<div class="form-group parent-property">
 											<div class="col-lg-12"><?=$p->PropertyName?></div>
 										</div>
