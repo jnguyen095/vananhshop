@@ -77,7 +77,12 @@
 				<h1 class="h1Class" itemprop="name"><?php echo $product->Title?></h1>
 			</div>
 			<div class="product-price">
-				<p class="price"><?=number_format($product->Price)?>đ</p>
+				<p class="price">
+					<?php if($product->OrgPrice > 0){?>
+						<span class="original-price"><?=number_format($product->OrgPrice)?></span>
+					<?php } ?>
+					<?=number_format($product->Price)?>đ
+				</p>
 			</div>
 			<div class="product-property">
 				<?php
