@@ -1928,7 +1928,7 @@ input#quantity, input.quantity{
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	margin:0px;
-	width: 40px;
+	width: 42px;
 	height: 37px;
 	display: inline-block;
 	box-shadow: none;
@@ -2100,7 +2100,7 @@ input[type=number]{
 		grid-template-columns: 25% 25% 25% 25%;
 	}
 	div.main-image{
-		width: 1900px
+		width: 190px
 	}
 }
 
@@ -2400,5 +2400,14 @@ input[type=number]{
 	}
 	.search-input-wrapper .form-control {
 		font-size: 16px;
+	}
+	input#quantity, input.quantity{
+		font-size: 16px;
+	}
+	#frmShippingAddress .form-control{
+		font-size: 16px;
+	}
+	.search-panel input[type="text"], .search-panel select{
+		font-size: 16px !important;
 	}
 }

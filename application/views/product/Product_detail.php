@@ -113,9 +113,9 @@
 						Số lượng:
 					</label>
 					<form class="inde-value">
-						<div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
+						<div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value"><i class="glyphicon glyphicon-minus"></i></div>
 						<input type="number" id="quantity" name="quantity" value="1" class="form-control"/>
-						<div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
+						<div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value"><i class="glyphicon glyphicon-plus"></i></div>
 					</form>
 					<a id="btnBuy" productId="<?=$product->ProductID?>" href="#" class="btn btn-primary buyableBtn">Cho Vào Giỏ<span class="mobile-hide"> Hàng</span></a>
 				</div>
