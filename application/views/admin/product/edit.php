@@ -126,6 +126,16 @@
 
 					<div class="form-group">
 						<div class="col-md-2">
+							<label>Giá gốc</label>
+						</div>
+						<div class="col-md-2">
+							<input type="text" name="OrgPrice" placeholder="Giá gốc" class="form-control" value="<?=isset($product->OrgPrice)? $product->OrgPrice : "0"?>" >
+							<span class="text-danger"><?php echo form_error('OrgPrice'); ?></span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-2">
 							<label>Giá bán <span class="required">*</span></label>
 						</div>
 						<div class="col-md-2">
