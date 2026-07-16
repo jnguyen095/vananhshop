@@ -97,6 +97,7 @@ class ProductManagement_controller extends MY_Controller
 			$product['CategoryID'] = $this->input->post('sl_category');
 			$product['Title'] = $this->input->post('Title');
 			$product['Price'] = $this->input->post('Price');
+			$product['OrgPrice'] = $this->input->post('OrgPrice');
 			$product['Brief'] = $this->input->post('Brief');
 			$product['Description'] = $this->input->post('Description');
 			$product['Status'] = $this->input->post('Status');
@@ -108,6 +109,10 @@ class ProductManagement_controller extends MY_Controller
 
 			if($product['Price'] != null) {
 				$this->form_validation->set_rules('Price', 'Giá bán', 'regex_match[/^\d+(\.\d{2})?$/]',
+					array('regex_match' => '{field} phải là số')); //{10} for 10 or 11 digits number
+			}
+			if($product['OrgPrice'] != null) {
+				$this->form_validation->set_rules('OrgPrice', 'Giá gốc', 'callback_greater_than_field[Price]|regex_match[/^\d+(\.\d{2})?$/]',
 					array('regex_match' => '{field} phải là số')); //{10} for 10 or 11 digits number
 			}
 
@@ -150,6 +155,23 @@ class ProductManagement_controller extends MY_Controller
 
 		$data['product'] = (object)$product;
 		$this->load->view("admin/product/edit", $data);
+	}
+
+	public function greater_than_field($val, $field_to_compare)
+	{
+		// Fetch the value of the other field from the POST data
+		$other_val = $this->input->post($field_to_compare);
+
+		// If both values are numeric, compare them
+		if (is_numeric($val) && is_numeric($other_val)) {
+			if ($val == 0 || $val > $other_val) {
+				return TRUE;
+			}
+		}
+
+		// Set a custom error message if the condition fails
+		$this->form_validation->set_message('greater_than_field', '%s bằng 0 hoặc phải lớn hơn giá bán.');
+		return FALSE;
 	}
 
 	private function deleteProductById($productId){
