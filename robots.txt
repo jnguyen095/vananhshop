@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# If you publish to production, add your real sitemap URL here:
+# Sitemap: https://<production url>/sitemap.xml
