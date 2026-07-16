@@ -742,6 +742,7 @@ class Product_Model extends CI_Model
 				'Brief' => $data['Brief'],
 				'Description' => $data['Description'],
 				'Price' => $data['Price'],
+				'OrgPrice' => $data['OrgPrice'],
 				'Thumb' => $data['Thumb'],
 				'PostDate' => date('Y-m-d H:i:s'),
 				'ModifiedDate' => date('Y-m-d H:i:s'),
@@ -758,6 +759,7 @@ class Product_Model extends CI_Model
 			$this->db->set('Code', $data['Code']);
 			$this->db->set('Title', $data['Title']);
 			$this->db->set('Price', $data['Price']);
+			$this->db->set('OrgPrice', $data['OrgPrice']);
 			$this->db->set('Brief', $data['Brief']);
 			$this->db->set('Description', $data['Description']);
 			$this->db->set('Status', $data['Status']);
