@@ -568,7 +568,11 @@ a#btnSubscrible {
 .original-price{
 	text-decoration: line-through;
 	font-size: 12px;
-	color: #ff0000;
+	color: #0190dbab;
+}
+
+.productDetailPage .original-price{
+	font-size: 18px;
 }
 
 .offer-price{
@@ -1405,7 +1409,7 @@ img.imgBrief {
 }
 .price{
 	color: #ff5400;
-
+	white-space: nowrap;
 }
 
 .briefHome .product-info div, .briefHome .product-info span {
@@ -1701,10 +1705,11 @@ h3 {
 	margin: 10px 0 10px;
 }
 .product-thumb .button-group {
-	overflow: auto;
+	overflow: hidden;
+	height: 40px;
 }
 .product-thumb .button-group .button, .product-thumb .button-group a {
-	width: 50%;
+	width: 60%;
 	border: none;
 	display: inline-block;
 	float: left;
@@ -1713,6 +1718,9 @@ h3 {
 	font-weight: bold;
 	text-align: center;
 	text-transform: uppercase;
+}
+.button-group a {
+	width: 40% !important;
 }
 .product-thumb .button-group button + button, .product-thumb .button-group button + a {
 	border-left: 1px solid #ddd;
@@ -2092,7 +2100,7 @@ input[type=number]{
 		grid-template-columns: 25% 25% 25% 25%;
 	}
 	div.main-image{
-		width: 200px
+		width: 1900px
 	}
 }
 
@@ -2373,9 +2381,24 @@ input[type=number]{
 	box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
+.row.tight-gutter {
+	margin-left: -8px;
+	margin-right: -8px;
+}
+
+/* Reduce the inner column padding equally (5px left + 5px right = 10px total space) */
+.row.tight-gutter > [class*="col-"] {
+	padding-left: 8px;
+	padding-right: 8px;
+	margin-bottom: -6px; /* Keeps vertical spacing equal to horizontal spacing */
+}
+
 /* responsive: trên mobile cho input rộng hơn 1 chút */
 @media (max-width: 480px) {
 	.search-input-wrapper.open {
 		width: 180px;
+	}
+	.search-input-wrapper .form-control {
+		font-size: 16px;
 	}
 }
