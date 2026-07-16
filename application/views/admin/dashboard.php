@@ -174,7 +174,7 @@
 				data: {
 					labels: labels,
 					datasets: [{
-						label: 'Orders',
+						label: 'Đơn hàng',
 						data: values,
 						backgroundColor: 'rgba(54, 162, 235, 0.7)',
 						borderColor: 'rgba(54, 162, 235, 1)',
@@ -219,7 +219,7 @@
 				data: {
 					labels: revenueLabels,
 					datasets: [{
-						label: 'Revenue',
+						label: 'Doanh thu',
 						data: revenueValues,
 						fill: true,
 						backgroundColor: 'rgba(75, 192, 192, 0.15)',
