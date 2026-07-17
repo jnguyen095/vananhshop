@@ -2,11 +2,12 @@
 <html lang = "en">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<title>Tìm kiếm sản phẩm | Vân Anh Shop</title>
+	<title>Tìm Kiếm Sản Phẩm | Vân Anh Shop</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php $this->load->view('common_header')?>
 	<?php $this->load->view('/common/googleadsense')?>
 	<?php $this->load->view('/common/facebook-pixel-tracking')?>
+	<link rel="stylesheet" href="<?=base_url('/css/iCheck/all.css')?>">
 </head>
 
 <body>
@@ -123,7 +124,9 @@
 								?>
 							</select>
 						</div>
-
+						<div class="row">
+							<label><input type="checkbox" class="minimal" name="discount" value="1" <?=(isset($discount) && $discount == 1) ? 'checked' : ''?>/> Tìm sản phẩm có giảm giá</label>
+						</div>
 						<div class="row text-center">
 							<button type="submit" class="btn btn-tindatdai btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Tìm Kiếm</button>
 						</div>
@@ -133,6 +136,16 @@
 		</div>
 	</div>
 	<?php echo form_close(); ?>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('input[type="checkbox"].minimal').iCheck({
+				checkboxClass: 'icheckbox_minimal-blue',
+				radioClass   : 'iradio_minimal-blue'
+			})
+		});
+	</script>
+	<script src="<?=base_url('/css/iCheck/icheck.min.js')?>"></script>
 </div>
 <?php $this->load->view('/theme/footer')?>
 </body>

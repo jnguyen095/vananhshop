@@ -33,16 +33,18 @@ class Search_controller extends CI_Controller
 
 		$query = $this->input->get("query");
 		$catId = $this->input->get("category");
+		$discount = $this->input->get("discount");
 
 		$config = pagination($this);
 		$config['base_url'] = base_url('tim-kiem.html');
 		$config['per_page'] = 18;
 
-		$search_data = $this->Product_Model->searchByProperties($query, $catId, $config['page'], $config['per_page']);
+		$search_data = $this->Product_Model->searchByProperties($query, $catId, $discount, $config['page'], $config['per_page']);
 		$data = array_merge($data, $search_data);
 
 		$data['query'] = $query;
 		$data['categoryId'] = $catId;
+		$data['discount'] = $discount;
 		if($catId != null && $catId > 0){
 			$category = $this->Category_Model->findByNotChildId($catId);
 			$data['category'] = $category;

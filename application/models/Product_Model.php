@@ -598,15 +598,20 @@ class Product_Model extends CI_Model
 		}
 	}
 
-	public function searchByProperties($keyword, $catId, $offset, $limit){
+	public function searchByProperties($keyword, $catId, $discount, $offset, $limit){
 		//$this->output->enable_profiler(TRUE);
 		$sql = 'select p.* from product p inner join category c on p.CategoryID = c.CategoryID';
 		$sql .= ' where p.status = '.ACTIVE;
 		if(isset($keyword)){
 			$sql .= ' and p.Title like \'%' . $keyword .'%\'';
 		}
+
 		if(isset($catId) && $catId > -1) {
 			$sql .= ' and (p.CategoryID = ' . $catId . ' OR c.ParentID = ' . $catId . ')';
+		}
+
+		if(isset($discount) && $discount == 1) {
+			$sql .= ' and p.OrgPrice > 0';
 		}
 
 		$sql .= ' order by date(p.modifieddate) desc';
@@ -618,6 +623,9 @@ class Product_Model extends CI_Model
 		}
 		if(isset($catId) && $catId > -1) {
 			$countsql .= ' and (p.CategoryID = ' . $catId . ' OR c.ParentID = ' . $catId . ')';
+		}
+		if(isset($discount) && $discount == 1) {
+			$countsql .= ' and p.OrgPrice > 0';
 		}
 
 		$products = $this->db->query($sql);
