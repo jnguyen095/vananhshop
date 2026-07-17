@@ -21,7 +21,7 @@
 		</div>
 	</ul>
 	<?php
-	$attributes = array("name" => "search", "id" => "search_form", "class" => "custom-input");
+	$attributes = array("name" => "search", "id" => "search_form", "class" => "custom-input", "method" => "get");
 	echo form_open("tim-kiem", $attributes);
 	?>
 	<div class="container">
@@ -98,13 +98,12 @@
 			<div class="col-md-3 no-margin-right no-padding-right no-padding-left-mobile">
 				<div class="search-panel block-panel">
 					<div class="block-header">TÌM KIẾM SẢN PHẨM</div>
-
 					<div class="block-body">
 						<div class="row">
 							<input id="keyword" type="text" placeholder="Từ khóa" value="<?=isset($query) ? $query : ''?>" name="query"/>
 						</div>
 						<div class="row">
-							<select id="cmCatId" name="cmCatId">
+							<select id="cmCatId" name="category">
 								<option value="-1">Tất cả danh mục</option>
 								<?php
 								if($categories != null && count($categories) > 0){
@@ -126,22 +125,14 @@
 						</div>
 
 						<div class="row text-center">
-							<a id="btnDetailSearch" class="btn btn-tindatdai btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Tìm Kiếm</a>
+							<button type="submit" class="btn btn-tindatdai btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Tìm Kiếm</button>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
 	</div>
 	<?php echo form_close(); ?>
-	<script type="text/javascript">
-		$("#btnDetailSearch").click(function () {
-			var searchKey = $('#keyword').val()||"";
-			var catId = $('#cmCatId').val()||"";
-			window.location.href = '<?=base_url('/tim-kiem.html')?>?query='+searchKey + '&category=' + catId;
-		});
-	</script>
 </div>
 <?php $this->load->view('/theme/footer')?>
 </body>
