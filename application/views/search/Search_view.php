@@ -35,13 +35,19 @@
 						$str .= '\''.$query.'\'';
 					}
 					if(isset($category)){
-						if(isset($query)){
+						if(isset($query) && strlen($query) > 0){
 							$str .= ', '.$category->CatName;
 						}else {
 							$str .= $category->CatName;
 						}
 					}
-
+					if(isset($discount) && $discount == 1){
+						if(strlen($str) > 0){
+							$str .= ', sản phẩm có giảm giá';
+						} else {
+							$str .= 'sản phẩm có giảm giá';
+						}
+					}
 					echo $str;
 					?>
 					</span>
